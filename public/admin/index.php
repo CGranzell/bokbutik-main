@@ -1,3 +1,43 @@
+<?php
+if (isset($_POST['deleteButton'])) { 
+    
+    
+    $sql = "
+        DELETE FROM products 
+        WHERE id = :id;
+    ";
+    $stmt = $pdo->prepare($sql); 
+    $stmt->bindParam(":id", $_POST['deleteButton']); 
+    $stmt->execute(); // 
+} 
+
+
+
+// CREATE PRODUCTS
+
+if (isset($_POST['addProduct'])) { 	
+     
+     $sql = "
+        INSERT INTO products (title, description, price, stock) 
+        VALUES (:title, :description, :price, :stock); 
+    ";
+     $stmt = $pdo->prepare($sql);
+	 $stmt->bindParam(":title", $_POST['title']);
+	 $stmt->bindParam(":description", $_POST['description']);
+	 $stmt->bindParam(":price", $_POST['price']);
+	 $stmt->bindParam(":stock", $_POST['stock']);
+	 $stmt->execute(); 
+}
+
+
+//READ PRODUCTS
+
+$stmt = $pdo->query("SELECT * FROM products"); 	
+$products = $stmt->fetchAll(); 
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
