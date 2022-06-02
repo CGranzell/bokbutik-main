@@ -6,5 +6,6 @@
 <body>
 	<h1>Shop page</h1>
 	<p>Christoffer </p>
+	<p>Mattias</p>
 </body>
 </html>
