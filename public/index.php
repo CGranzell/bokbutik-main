@@ -8,5 +8,6 @@
 	<p>Christoffer </p>
 	<p>Mattias</p>
 	<p>Fredrik heter jag</p>
+	<p> Testar synkronisering på min dator </p>
 </body>
 </html>
