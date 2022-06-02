@@ -7,5 +7,6 @@
 	<h1>Shop page</h1>
 	<p>Christoffer </p>
 	<p>Mattias</p>
+	<p>Fredrik heter jag</p>
 </body>
 </html>
