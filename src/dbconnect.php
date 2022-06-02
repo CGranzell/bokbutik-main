@@ -1,8 +1,8 @@
 <?php
 
 $host 	  = '';
-$database = '';
-$user     = '';
+$database = 'e-shop';
+$user     = 'root';
 $password = '';
 $charset  = 'utf8mb4';
 
