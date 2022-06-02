@@ -7,7 +7,7 @@
 	<h1>Admin page</h1>
 	<p>
 	
-	<table id="employees-tbl">
+	<table>
         <thead>
             <tr>
                 <th>Id</th>
