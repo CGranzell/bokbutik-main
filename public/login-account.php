@@ -1,6 +1,7 @@
 <?php
 
 require('../src/config.php');
+include('../public/layout/header.php');
 
 
 ?>
