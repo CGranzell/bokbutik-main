@@ -1,13 +1,26 @@
 <?php
 require('../src/config.php');
+
+// Tar bort användarkonto
+if(isset($_POST['deleteAccountBtn'])) {
+  $sql = "
+  DELETE FROM users 
+  WHERE id = :id;
+  ";
+  $statement = $dbconnect->prepare($sql);
+  $statement->bindParam(':id', $_POST['userID']);
+  $statement->execute();
+}
+
+
 // Hämtar alla användaruppgifter
 $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
 
-// echo "<pre>";
-// print_r($users);
-// echo "</pre>";
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 
 ?>
 
@@ -21,6 +34,7 @@ $users = $statement->fetchAll();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
   <title>Mina Sidor</title>
 </head>
 <body>
@@ -60,7 +74,11 @@ $users = $statement->fetchAll();
           <td scope="row"><?= htmlentities($user['country']) ?></td>
           <td scope="row"><?= htmlentities($user['create_date']) ?></td>
           <td scope="row">
-            <input type="submit" value="Delete">
+            <!-- Delete knapp -->
+            <form action="" method="POST">
+              <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+            <input type="submit" name="deleteAccountBtn" value="Delete">
+            </form>
             <input type="submit" value="Update">
           </td>
         </tr>
