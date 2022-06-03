@@ -1,3 +1,4 @@
+
 <?php 
 require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
 //echo "<pre>";
@@ -41,6 +42,8 @@ echo "</pre>";
 ?>
 
 
+=======
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +54,7 @@ echo "</pre>";
    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 
 <h1>Admin</h1>
 
@@ -107,3 +111,8 @@ echo "</pre>";
 
 
 
+=======
+	
+</body>
+</html>
+>>>>>>> ea5904f4ec821c4cb9301c6808f34dd552932a2a
