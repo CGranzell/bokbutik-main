@@ -1,9 +1,9 @@
 <?php
 
-$host 	  = '';
+$host 	  = 'localhost';
 $database = 'e-shop';
 $user     = 'root';
-$password = '';
+$password = 'root';
 $charset  = 'utf8mb4';
 
 $dns 	  = "mysql:host={$host};dbname={$database};charset={$charset}";
