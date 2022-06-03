@@ -52,6 +52,11 @@ require('../src/config.php');
     <label for="phone" class="form-label">Phone</label>
     <input type="tel" class="form-control" id="phone">
   </div>
+		<!-- Phone -->
+		<div class="mb-3">
+    <label for="street" class="form-label">Street</label>
+    <input type="text" class="form-control" id="street">
+  </div>
 		<!-- Postal Code -->
 		<div class="mb-3">
     <label for="postal_code" class="form-label">Postal Code</label>

@@ -77,9 +77,13 @@ echo "</pre>";
             <!-- Delete knapp -->
             <form action="" method="POST">
               <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
-            <input type="submit" name="deleteAccountBtn" value="Delete">
+              <input type="submit" name="deleteAccountBtn" value="Delete">
             </form>
-            <input type="submit" value="Update">
+            <!-- Updatera knapp -->
+            <form action="update-account.php" method="GET">
+                <input type="submit" value="Update">
+                <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+            </form>
           </td>
         </tr>
         <?php endforeach ?>
