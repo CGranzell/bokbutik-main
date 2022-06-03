@@ -42,7 +42,7 @@ echo "</pre>";
 ?>
 
 
-=======
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,8 +111,8 @@ echo "</pre>";
 
 
 
-=======
+
 	
 </body>
 </html>
->>>>>>> ea5904f4ec821c4cb9301c6808f34dd552932a2a
+
