@@ -1,5 +1,4 @@
-
-<?php 
+<?php
 require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
 //echo "<pre>";
 //print_r($_POST);    
@@ -93,9 +92,7 @@ echo "</pre>";
 			   </tr>
 		   
 	   </tbody>
-
    </table>
-
    
    <form action="" method="POST">
 	   <input type="text" name="title" placeholder="Title"><br>
@@ -115,4 +112,3 @@ echo "</pre>";
 	
 </body>
 </html>
-
