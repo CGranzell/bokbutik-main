@@ -1,6 +1,7 @@
 <?php
 
 require('../src/config.php');
+include('../public/layout/header.php');
 
 
 
@@ -15,15 +16,6 @@ require('../src/config.php');
 
 ?>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-	<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<title>Register </title>
-</head>
-<body>
   <h1>Register Here</h1>
 	<!-- Registrerings formulär -->
 <form>
@@ -52,6 +44,11 @@ require('../src/config.php');
     <label for="phone" class="form-label">Phone</label>
     <input type="tel" class="form-control" id="phone">
   </div>
+		<!-- Phone -->
+		<div class="mb-3">
+    <label for="street" class="form-label">Street</label>
+    <input type="text" class="form-control" id="street">
+  </div>
 		<!-- Postal Code -->
 		<div class="mb-3">
     <label for="postal_code" class="form-label">Postal Code</label>
@@ -72,8 +69,7 @@ require('../src/config.php');
 
 </form>
 
-<!-- Bootstrap JS -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  </body>
-</body>
-</html>
+<?php 
+
+include('../public/layout/footer.php');
+?>

@@ -1,5 +1,6 @@
 <?php
 require('../src/config.php');
+include('../public/layout/header.php');
 
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
@@ -24,20 +25,6 @@ echo "</pre>";
 
 ?>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-  <title>Mina Sidor</title>
-</head>
-<body>
   <h1>Mina sidor</h1>
   <!-- Tabell över Användarens uppgifter -->
   <table class="table">
@@ -77,16 +64,19 @@ echo "</pre>";
             <!-- Delete knapp -->
             <form action="" method="POST">
               <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
-            <input type="submit" name="deleteAccountBtn" value="Delete">
+              <input type="submit" name="deleteAccountBtn" value="Delete">
             </form>
-            <input type="submit" value="Update">
+            <!-- Updatera knapp -->
+            <form action="update-account.php" method="GET">
+                <input type="submit" value="Update">
+                <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+            </form>
           </td>
         </tr>
         <?php endforeach ?>
   </tbody>
 </table>
+<?php 
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</body>
-</html>
+include('../public/layout/footer.php');
+?>
