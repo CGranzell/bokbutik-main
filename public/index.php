@@ -1,7 +1,7 @@
 
 <?php
 
- require('../src/dbconnect.php');
+ require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
 //READ PRODUCTS
 
 $stmt = $dbconnect->query("SELECT * FROM products"); 	
