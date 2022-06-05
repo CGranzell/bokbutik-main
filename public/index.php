@@ -1,7 +1,8 @@
 
 <?php
 
- require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
+ // require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
+ require('../src/config.php');
  
 //READ PRODUCTS
 
