@@ -1,7 +1,10 @@
 
 <?php
 
- require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
+ // require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
+ require('../src/config.php'); //hänvisar till mappen ovanför
+ include('../public/layout/header.php');
+ 
 //READ PRODUCTS
 
 $stmt = $dbconnect->query("SELECT * FROM products"); 	
@@ -17,11 +20,16 @@ $products = $stmt->fetchAll();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop page</title>
+	<!-- Bootstrap CSS -->
+	
     <link rel="stylesheet" href="css/style.css">
 	
 </head>
 <body>
-	<h1>Public page/Shop</h1>
+
+
+    <p>
+	<h1 class="fredriks-huvudrubrik">Public page/Shop</h1>
 	<p>
 	
 	<table id="fredriks-tbl">
@@ -48,8 +56,11 @@ $products = $stmt->fetchAll();
         </tbody>
 
     </table>
-     		
+    
+<?php 
 
-<p>
+include('../public/layout/footer.php');
+?>
 </body>
 </html>
+
