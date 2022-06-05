@@ -22,7 +22,7 @@ $products = $stmt->fetchAll();
     <title>Shop page</title>
 	<!-- Bootstrap CSS -->
 	
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href=".css/style.css">
 	
 </head>
 <body>
