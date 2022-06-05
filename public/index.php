@@ -48,7 +48,22 @@ $products = $stmt->fetchAll();
                 <tr>
                     <td><?=htmlentities($product['id']) ?></td>	 
                     <td><?=htmlentities($product['title']) ?></td>	
-                    <td><?=htmlentities($product['description']) ?></td>
+                    <td> 
+		<?=
+			$string = $product['description'];
+			
+			echo substr($string, 0, 50);
+			?>
+			
+			<form action="" method="POST">
+			<input type="hidden" name="Title" value="<?=$product['title']?>">
+			<input type="hidden" name="Description" value="<?=$product['description']?>">
+			<input type="hidden" name="Price" value="<?=$product['price']?>">
+			<input type="hidden" name="Stock" value="<?=$product['stock']?>">
+		    <input type="submit" name="Readmore" value="Read more"> 
+			</form>
+									
+		</td>
 					<td><?=htmlentities($product['price']) ?></td>
 					<td><?=htmlentities($product['stock']) ?></td>					
                 </tr>
