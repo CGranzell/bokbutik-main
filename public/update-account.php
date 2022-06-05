@@ -1,46 +1,67 @@
 <?php
 require('../src/config.php');
-echo "POST";
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "POST";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
-echo "GET";
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
+// echo "GET";
+// echo "<pre>";
+// print_r($_GET);
+// echo "</pre>";
+
+// Om inte userID är satt eller är ett nummer, skicka användaren till my-account med querystring invalidUser
+if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){
+  header('Location: my-account.php?invalidUser');
+  exit;
+};
 
 
-
+// Felmeddelande sätts till tomt
+$message = "";
 // Uppdatera användaruppgift
 if(isset($_POST['updateAccountBtn'])) {
-  $sql = "
-  UPDATE users 
-  SET 
-    first_name  = :first_name,
-    last_name   = :last_name,
-    email       = :email,
-    password    = :password,
-    phone       = :phone,
-    street      = :street,
-    postal_code = :postal_code,
-    city        = :city,
-    country     = :country
-  
-  WHERE id = :id
-  ";
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':id', $_GET['userID']);
-  $statement->bindParam(':first_name', $_POST['first_name']);
-  $statement->bindParam(':last_name', $_POST['last_name']);
-  $statement->bindParam(':email', $_POST['email']);
-  $statement->bindParam(':password', $_POST['password']);
-  $statement->bindParam(':phone', $_POST['phone']);
-  $statement->bindParam(':street', $_POST['street']);
-  $statement->bindParam(':postal_code', $_POST['postal_code']);
-  $statement->bindParam(':city', $_POST['city']);
-  $statement->bindParam(':country', $_POST['country']);
-  $statement->execute();
+  if($_POST['password'] !== $_POST['confirmPassword']){
+    $message = '
+    <div class="alert alert-danger message mx-auto">
+        The password do not match!
+    </div>
+    ';
+  } else {
+
+    $sql = "
+    UPDATE users 
+    SET 
+      first_name  = :first_name,
+      last_name   = :last_name,
+      email       = :email,
+      password    = :password,
+      phone       = :phone,
+      street      = :street,
+      postal_code = :postal_code,
+      city        = :city,
+      country     = :country
+    
+    WHERE id = :id
+    ";
+    $statement = $dbconnect->prepare($sql);
+    $statement->bindParam(':id', $_GET['userID']);
+    $statement->bindParam(':first_name', $_POST['first_name']);
+    $statement->bindParam(':last_name', $_POST['last_name']);
+    $statement->bindParam(':email', $_POST['email']);
+    $statement->bindParam(':password', $_POST['password']);
+    $statement->bindParam(':phone', $_POST['phone']);
+    $statement->bindParam(':street', $_POST['street']);
+    $statement->bindParam(':postal_code', $_POST['postal_code']);
+    $statement->bindParam(':city', $_POST['city']);
+    $statement->bindParam(':country', $_POST['country']);
+    $statement->execute();
+
+    header('Location: my-account.php?updateSucces');
+    exit;
+  }
+
+
 }
 
 
@@ -55,15 +76,14 @@ $statement->bindParam(':id', $_GET['userID']);
 $statement->execute();
 $user = $statement->fetch();
 
-echo "User";
-echo "<pre>";
-print_r($user);
-echo "</pre>";
+// echo "User";
+// echo "<pre>";
+// print_r($user);
+// echo "</pre>";
 
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,15 +91,21 @@ echo "</pre>";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <title>Updatera mina sidor</title>
+	<!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="./css/style.css">
+
+
+  <title>Header</title>
 </head>
-<body>
+<body id="body">
   <h1>Updatera mina sidor</h1>
 
+  <?=$message ?>
+
   	<!-- Updatering formulär -->
-<form method="POST" action="#">
+  <form method="POST" action="#" class="form mx-auto" >
 		<!-- First Name -->
 		<div class="mb-3">
     <label for="first-name" class="form-label">First Name</label>
@@ -99,6 +125,11 @@ echo "</pre>";
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
     <input type="password" class="form-control" id="password" name="password" value="<?= htmlentities($user['password']) ?>">
+  </div>
+	<!-- Confirm Password -->
+  <div class="mb-3">
+    <label for="confirm-password" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
   </div>
 		<!-- Phone -->
 		<div class="mb-3">
@@ -126,10 +157,15 @@ echo "</pre>";
     <input type="text" class="form-control" id="counrty" name="country" value="<?= htmlentities($user['country']) ?>">
   </div>
   <!-- Update Btn -->
-  <input type="submit" class="btn btn-primary" name="updateAccountBtn" value="Updatera">
+  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Updatera">
 
 </form>
   
+<footer id="footer" class="mt-auto  footer">
+
+
+</footer>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
