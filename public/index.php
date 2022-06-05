@@ -20,16 +20,15 @@ $products = $stmt->fetchAll();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop page</title>
-	<!-- Bootstrap CSS -->
-	
-    <link rel="stylesheet" href=".css/style.css">
+		
+    <link rel="stylesheet" href="css/style.css">
 	
 </head>
 <body>
 
 
     <p>
-	<h1 class="fredriks-huvudrubrik">Public page/Shop</h1>
+	<h1 class="fredriks-huvudrubrik">Shop page</h1>
 	<p>
 	
 	<table id="fredriks-tbl">
@@ -55,12 +54,12 @@ $products = $stmt->fetchAll();
 			echo substr($string, 0, 50);
 			?>
 			
-			<form action="" method="POST">
+			<form action="specific-product.php" method="POST">
 			<input type="hidden" name="Title" value="<?=$product['title']?>">
 			<input type="hidden" name="Description" value="<?=$product['description']?>">
 			<input type="hidden" name="Price" value="<?=$product['price']?>">
 			<input type="hidden" name="Stock" value="<?=$product['stock']?>">
-		    <input type="submit" name="Readmore" value="Read more"> 
+		    <input type="submit" name="Readmore" value="Detailed info"> 
 			</form>
 									
 		</td>
@@ -72,10 +71,14 @@ $products = $stmt->fetchAll();
 
     </table>
     
-<?php 
 
-include('../public/layout/footer.php');
-?>
+
+<footer id="footer" class="mt-auto  footer">
+
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
 
