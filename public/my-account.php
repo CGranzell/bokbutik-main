@@ -1,6 +1,26 @@
 <?php
 require('../src/config.php');
-include('../public/layout/header.php');
+
+// Sätter meddelande till tomma
+$succesMessage = "";
+$message = "";
+
+if(isset($_GET['updateSucces'])){
+  $succesMessage = '
+  <div class="alert alert-success message mx-auto">
+      Succes! The post was updated
+  </div>;
+';
+}
+
+// Om querystring har värdet invalidUser, hantera felmeddelande
+if(isset($_GET['invalidUser'])){
+  $message = '
+  <div class="alert alert-danger message mx-auto">
+      Trying to updated invalid User! PLease try again
+  </div>;
+  ';
+}
 
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
@@ -19,13 +39,32 @@ $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 ?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="./css/style.css">
+
+
+  <title>Header</title>
+</head>
+<body id="body">
+
   <h1>Mina sidor</h1>
+  <?= $message ?>
+  <?= $succesMessage ?>
   <!-- Tabell över Användarens uppgifter -->
   <table class="table">
   <thead>
@@ -76,7 +115,14 @@ echo "</pre>";
         <?php endforeach ?>
   </tbody>
 </table>
-<?php 
 
-include('../public/layout/footer.php');
-?>
+
+<footer id="footer" class="mt-auto  footer">
+
+
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

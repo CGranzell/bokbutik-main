@@ -1,7 +1,11 @@
-#footer {
-  height: 20em;
-  background-color: black;
+/* Christoffer CSS */
+.form {
+width: 40%;
 }
+.btn-form {
+margin-left: 70%;
+}
+
 
  /* Fredriks css */
 #fredriks-tbl { 
