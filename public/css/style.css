@@ -2,3 +2,16 @@
   height: 20em;
   background-color: black;
 }
+
+ /* Fredriks css */
+#fredriks-tbl { 
+	border-collapse: collapse; 
+	margin-bottom: 40px
+}
+
+#fredriks-tbl tr,
+#fredriks-tbl td,
+#fredriks-tbl th {
+	border: 1px solid black;
+	padding: 10px;
+}
