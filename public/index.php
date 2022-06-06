@@ -72,7 +72,7 @@ $products = $stmt->fetchAll();
     </table>
     
 	<?php
-	include('../public/layout/header.php');
+	include('../public/layout/footer.php');
 	?>
 </body>
 </html>
