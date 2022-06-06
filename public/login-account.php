@@ -22,6 +22,30 @@ require('../src/config.php');
 </head>
 <body id="body">
 
+<nav class="navbar-light" style="background-color: #e3f2fd;">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+ 
+  <li class="nav-item">
+    <a class="nav-link" href="./register-account.php">Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./login-account.php">Login</a>
+  </li>
+ 
+</ul>
+</nav>
+  
+
  <h1>Log in</h1>
 	<!-- Inloggningsformulär -->
   <form class="form" class="mx-auto">
