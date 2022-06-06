@@ -39,7 +39,7 @@ $products = $stmt->fetchAll();
 <p>
 <a href="index.php"> Till Shop page </a>
 <?php
-	include('../public/layout/header.php');
+	include('../public/layout/footer.php');
 ?>
 
 </body>
