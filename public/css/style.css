@@ -1,0 +1,34 @@
+/* Christoffer CSS */
+.form {
+width: 40%;
+}
+.btn-form {
+margin-left: 70%;
+}
+
+
+ /* Fredriks css */
+#fredriks-tbl { 
+	border-collapse: collapse; 
+	margin-bottom: 40px;
+	
+}
+
+#fredriks-tbl tr,
+#fredriks-tbl td,
+#fredriks-tbl th {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.fredriks-huvudrubrik {
+text-align: center;
+} 
+
+.fredriks-underrubrik  {
+	text-align: center;
+	} 
+
+div #fredriks-content {
+	text-align: center;
+}
