@@ -24,7 +24,7 @@ include('./layout/header.php');
   $message                = "";
 // Skapa användaruppgift
 if(isset($_POST['createUserBtn'])) {
-  // //Tar bort mellanslag före och efter textsträng
+  //Tar bort mellanslag före och efter textsträng
   $firstname = trim($_POST['first_name']);
   $lastname = trim($_POST['last_name']);
   $email = trim($_POST['email']);
@@ -35,14 +35,7 @@ if(isset($_POST['createUserBtn'])) {
   $city = trim($_POST['city']);
   $country = trim($_POST['country']);
 
-// OM password inte stämmer med confirmpassword, skriv ut felmeddelande
-  if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
-  }
+
 
   // Om något av textfälten är tomma gå in i detta if block
   if (
@@ -167,8 +160,19 @@ if(isset($_POST['createUserBtn'])) {
     $statement->bindParam(':city', $city);
     $statement->bindParam(':country', $country);
     $statement->execute();
+
+    // OM password inte stämmer med confirmpassword, skriv ut felmeddelande
+  if($_POST['password'] !== $_POST['confirmPassword']){
+    $message = '
+    <div class="alert alert-danger message mx-auto">
+        The password do not match!
+    </div>
+    ';
+  } else {
+
     header('Location: login-account.php?registerSuccess');
     exit;
+  }
   }
 
 
