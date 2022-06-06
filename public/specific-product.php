@@ -32,6 +32,7 @@ $products = $stmt->fetchAll();
 <b> Description: </b> <?php echo $_POST["Description"]; ?><p>
 <b> Price: </b> <?php echo $_POST["Price"]; ?><p>
 <b> Stock: </b> <?php echo $_POST["Stock"]; ?><p>
+<!-- Infoga en större bild här på produkten -->
 
 
 <p>
