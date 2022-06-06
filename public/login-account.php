@@ -5,20 +5,26 @@ include('./layout/header.php');
 
 
 // Sätter meddelande till tom
-$succesMessage = "";
-$errorMessage  = "";
-$loginMessage  = "";
+$message = "";
 
 if(isset($_GET['mustLogin'])) {
-$loginMessage = '
+  $message  = '
 <div class="alert alert-danger message mx-auto">
     You must login !
 </div>;
 ';
 }
+
+if(isset($_GET['logout'])) {
+$message  = '
+<div class="alert alert-success message mx-auto">
+    You are now loged out
+</div>;
+';
+}
 // Om användaren lyckades registrera , skriv ut meddelande
 if(isset($_GET['registerSuccess'])){
-  $succesMessage = '
+  $message  = '
   <div class="alert alert-success message mx-auto">
       Succes! You succefully registered a new account! Please login
   </div>;
@@ -54,7 +60,7 @@ if(isset($_POST['loginBtn'])) {
       header('Location: my-account.php');
       exit;
   } else { //OM anändaren inte finns
-    $errorMessage = '
+    $message  = '
     <div class="alert alert-danger message mx-auto">
        Error! Wrong login info, please try again
     </div>;
@@ -75,14 +81,13 @@ echo "</pre>";
 
 
  <h1>Log in</h1>
- <?= $succesMessage ?>
- <?= $errorMessage ?>
- <?= $loginMessage ?>
+ <?= $message  ?>
+
+ <div>
+ <a class="nav-link" href="./my-account.php">My Account</a>
+ </div>
 	<!-- Inloggningsformulär -->
   <form method="POST" action="" class="form mx-auto">
-	<div>
-  <a class="nav-link" href="./my-account.php">My Account</a>
-  </div>
 	
 	<!-- Email -->
   <div class="mb-3">

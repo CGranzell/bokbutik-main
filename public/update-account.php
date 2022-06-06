@@ -11,6 +11,12 @@ include('./layout/header.php');
 // print_r($_GET);
 // echo "</pre>";
 
+// Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
+if(!isset($_SESSION['email'])) {
+  header('Location: login-account.php?mustLogin');
+  exit;
+}
+
 // Om inte userID är satt eller är ett nummer, skicka användaren till my-account med querystring invalidUser
 if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){
   header('Location: my-account.php?invalidUser');

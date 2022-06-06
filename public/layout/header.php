@@ -27,15 +27,32 @@
   <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./register-account.php">Register</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./login-account.php">Login</a>
-  </li>
-  <!-- <li class="nav-item">
-    <a class="nav-link" href="./my-account.php">My Account</a>
-  </li> -->
+  <!-- Om användaren är inloggad -->
+  <?php 
+    if(isset($_SESSION['email'])) {
+      $loggedInUserName = htmlentities($_SESSION['email']);
+      $loggedinNav = "<li class='nav-item nav-link'>
+      {$loggedInUserName}
+    </li>
+    <li class='nav-item'> 
+      <a class='nav-link' href='./logout-account.php'>Log out</a>
+    </li>";
+
+    } else { //Om användaren inte är inloggad
+
+      $loggedinNav = "
+      <li class='nav-item'>
+        <a class='nav-link' href='./register-account.php'>Register</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='./login-account.php'>Login</a>
+      </li>";
+    }
+
+    echo $loggedinNav;
+    ?>
+  
+  
  
 </ul>
 </nav>
