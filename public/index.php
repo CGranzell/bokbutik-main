@@ -1,3 +1,8 @@
+<?php
+
+echo 'dsd';
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
