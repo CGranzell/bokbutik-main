@@ -38,7 +38,9 @@ $products = $stmt->fetchAll();
 <p>
 <p>
 <a href="index.php"> Till Shop page </a>
-
+<?php
+	include('../public/layout/header.php');
+?>
 
 </body>
 </html>
