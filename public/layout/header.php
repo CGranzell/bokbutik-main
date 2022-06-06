@@ -22,7 +22,7 @@
     <a class="nav-link active" aria-current="page" href="#">Active</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="./index.php">Index</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
@@ -33,6 +33,9 @@
   <li class="nav-item">
     <a class="nav-link" href="./login-account.php">Login</a>
   </li>
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="./my-account.php">My Account</a>
+  </li> -->
  
 </ul>
 </nav>

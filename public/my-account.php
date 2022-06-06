@@ -2,6 +2,12 @@
 require('../src/config.php');
 include('./layout/header.php');
 
+// Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
+if(!isset($_SESSION['email'])) {
+  header('Location: login-account.php?mustLogin');
+  exit;
+}
+
 // Sätter meddelande till tomma
 $succesMessage = "";
 $message = "";
@@ -40,9 +46,9 @@ $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
 ?>
 
