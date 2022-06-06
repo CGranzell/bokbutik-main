@@ -52,12 +52,12 @@ $products = $stmt->fetchAll();
   <!-- Här slutar header -->
         <p>
       <h1 class="fredriks-huvudrubrik">Shop page</h1>
-      <h2 class="fredriks-underrubrik"> Specific product </h2>
+      <h2 class="fredriks-huvudrubrik"> Specific product </h2>
         <p>
       
       
-
-<b> Title: </b>: <?php echo $_POST["Title"]; ?><p>
+<div id="fredriks-content">
+<b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
 <b> Description: </b> <?php echo $_POST["Description"]; ?><p>
 <b> Price: </b> <?php echo $_POST["Price"]; ?><p>
 <b> Stock: </b> <?php echo $_POST["Stock"]; ?><p>
@@ -67,7 +67,7 @@ $products = $stmt->fetchAll();
 <p>
 <p>
 <a href="index.php"> Till Shop page </a>
-
+</div>
 
 </body>
 </html>
