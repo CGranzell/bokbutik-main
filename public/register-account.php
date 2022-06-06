@@ -167,6 +167,8 @@ if(isset($_POST['createUserBtn'])) {
     $statement->bindParam(':city', $city);
     $statement->bindParam(':country', $country);
     $statement->execute();
+    header('Location: login-account.php?registerSuccess');
+    exit;
   }
 
 

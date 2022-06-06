@@ -3,6 +3,15 @@
 require('../src/config.php');
 include('./layout/header.php');
 
+// Sätter meddelande till tomma
+$succesMessage = "";
+if(isset($_GET['registerSuccess'])){
+  $succesMessage = '
+  <div class="alert alert-success message mx-auto">
+      Succes! You succefully registered a new account! Please login
+  </div>;
+';
+}
 
 
 ?>
@@ -11,6 +20,7 @@ include('./layout/header.php');
   
 
  <h1>Log in</h1>
+ <?= $succesMessage ?>
 	<!-- Inloggningsformulär -->
   <form class="form" class="mx-auto">
 	
