@@ -1,21 +1,11 @@
 <?php
 require('../src/config.php');
+require('../src/app/functions.php');
 include('./layout/header.php');
-// echo "POST";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 
-// echo "GET";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
-if(!isset($_SESSION['email'])) {
-  header('Location: login-account.php?mustLogin');
-  exit;
-}
+checkLoginSession();
 
 // Om inte userID är satt eller är ett nummer, skicka användaren till my-account med querystring invalidUser
 if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){

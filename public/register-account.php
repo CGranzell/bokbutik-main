@@ -1,15 +1,8 @@
 <?php
 require('../src/config.php');
 include('./layout/header.php');
-// echo "POST";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 
-// echo "GET";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
+
 
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
