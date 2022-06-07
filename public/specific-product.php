@@ -1,7 +1,9 @@
 <?php
 
  // require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
- require('../src/config.php');  //hänvisar till mappen ovanför
+ require('../src/config.php');  //hänvisar till mappen ovanför'
+ include('./layout/header.php');
+
 
  //READ PRODUCTS
 
@@ -10,7 +12,7 @@ $products = $stmt->fetchAll();
 
 ?>
 
-
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +52,7 @@ $products = $stmt->fetchAll();
 
 
   <!-- Här slutar header -->
+  <html>
         <p>
       <h1 class="fredriks-huvudrubrik">Shop page</h1>
       <h2 class="fredriks-huvudrubrik"> Specific product </h2>
