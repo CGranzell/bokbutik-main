@@ -91,7 +91,7 @@ $products = $stmt->fetchAll();
         </tbody>
 
     </table>
-
+Fredrik
 	
 </body>
 </html>
