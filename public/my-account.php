@@ -32,21 +32,10 @@ if(isset($_GET['invalidUser'])){
 
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
-  $sql = "
-  DELETE FROM users 
-  WHERE id = :id;
-  ";
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':id', $_POST['userID']);
-  $statement->execute();
+  deleteUser();
 }
 
-
-// Hämtar alla användaruppgifter
-$sql = "SELECT * FROM users";
-$statement = $dbconnect->query($sql);
-$users = $statement->fetchAll();
-
+$users = fetchAllUsers();
 
 ?>
 

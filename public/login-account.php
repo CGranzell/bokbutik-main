@@ -2,6 +2,8 @@
 
 require('../src/config.php');
 include('./layout/header.php');
+require('../src/app/functions.php');
+
 
 
 // Sätter meddelande till tom
@@ -57,8 +59,7 @@ if(isset($_POST['loginBtn'])) {
   if($user){
       $_SESSION['email'] = $user['email'];
       $_SESSION['id'] = $user['id'];
-      header('Location: my-account.php');
-      exit;
+      redirect("my-account", "");
   } else { //OM anändaren inte finns
     $message  = '
     <div class="alert alert-danger message mx-auto">

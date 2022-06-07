@@ -1,5 +1,6 @@
 <?php
 require('../src/config.php');
+require('../src/app/functions.php');
 include('./layout/header.php');
 
 
@@ -184,9 +185,7 @@ if(isset($_POST['createUserBtn'])) {
     </div>
     ';
   } else {
-
-    header('Location: login-account.php?registerSuccess');
-    exit;
+    redirect("login-account", "registerSuccess");   
   }
   }
 }
