@@ -46,15 +46,16 @@ $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 ?>
 
 
-
+<div class="wrapper-register">
   <h1>Mina sidor</h1>
+  </div>
   <?= $message ?>
   <?= $succesMessage ?>
   <!-- Tabell över Användarens uppgifter -->

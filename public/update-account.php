@@ -92,9 +92,9 @@ $user = $statement->fetch();
 
 ?>
 
-
-  <h1>Updatera mina sidor</h1>
-
+<div class="wrapper-register">
+  <h1>Uppdatera mina sidor</h1>
+  </div>
   <?=$message ?>
 
   	<!-- Updatering formulär -->
@@ -150,7 +150,7 @@ $user = $statement->fetch();
     <input type="text" class="form-control" id="counrty" name="country" value="<?= htmlentities($user['country']) ?>">
   </div>
   <!-- Update Btn -->
-  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Updatera">
+  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
 </form>
   
