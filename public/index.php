@@ -40,7 +40,8 @@ $products = $stmt->fetchAll();
     <p>
 	<h1 class="fredriks-huvudrubrik">Shop page</h1>
 	<p>
-<div class="centrerad-tabell">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	<table id="fredriks-tbl">
         <thead>
             <tr>
@@ -75,7 +76,7 @@ $products = $stmt->fetchAll();
         </tbody>
 
     </table>
-  </div>
+  
 	
 </body>
 </html>
