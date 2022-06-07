@@ -32,6 +32,11 @@ margin-left: 70%;
 .wrapper-login-new-user a {
 	margin-top: 1em;
 }
+/* Register account */
+.wrapper-register {
+	text-align: center;
+	width: 100%;
+}
 
 
  /* Fredriks css */

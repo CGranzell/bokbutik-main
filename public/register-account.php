@@ -203,18 +203,12 @@ if(isset($_POST['createUserBtn'])) {
 
 ?>
 
-
-  
-
-  
-  
- 
-  
   <?= $message ?>
   <?= $errorTakenEmail ?>
- 
 
-  <h1>Register Here</h1>
+ <div class="wrapper-register">
+  <h2>Register Here</h2>
+  </div>
 	<!-- Registrerings formulär -->
 <form method="POST" action="" class="form mx-auto">
 		<!-- First Name -->
