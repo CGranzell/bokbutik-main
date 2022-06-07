@@ -20,7 +20,7 @@ $products = $stmt->fetchAll();
         <p>
       
       
-<div id="fredriks-content">
+
 <b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
 <b> Description: </b> <?php echo $_POST["Description"]; ?><p>
 <b> Price: </b> <?php echo $_POST["Price"]; ?><p>
@@ -31,7 +31,7 @@ $products = $stmt->fetchAll();
 <p>
 <p>
 <a href="index.php"> Till Shop page </a>
-</div>
+
 
 </body>
 </html>
