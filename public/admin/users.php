@@ -1,6 +1,6 @@
 <?php
-error_reporting(1);
-require('/src/dbconnect.php');
+
+require('../../src/dbconnect.php');
 
 
 $stmt = $pdo->query('SELECT * FROM users');
