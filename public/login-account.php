@@ -11,7 +11,7 @@ if(isset($_GET['mustLogin'])) {
   $message  = '
 <div class="alert alert-danger message mx-auto">
     You must login !
-</div>;
+</div>
 ';
 }
 
@@ -19,7 +19,7 @@ if(isset($_GET['logout'])) {
 $message  = '
 <div class="alert alert-success message mx-auto">
     You are now loged out
-</div>;
+</div>
 ';
 }
 // Om användaren lyckades registrera , skriv ut meddelande
@@ -27,14 +27,14 @@ if(isset($_GET['registerSuccess'])){
   $message  = '
   <div class="alert alert-success message mx-auto">
       Succes! You succefully registered a new account! Please login
-  </div>;
+  </div>
 ';
 }
 
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 // Logga in
 if(isset($_POST['loginBtn'])) {
@@ -63,46 +63,48 @@ if(isset($_POST['loginBtn'])) {
     $message  = '
     <div class="alert alert-danger message mx-auto">
        Error! Wrong login info, please try again
-    </div>;
+    </div>
   ';
   }
 
 }
 
-echo "<pre>";
-print_r($user);
-echo "</pre>";
+// echo "<pre>";
+// print_r($user);
+// echo "</pre>";
 
 
 
 
 ?>
 
+<div class="wrapper-login mx-auto">
 
-
- <h1>Log in</h1>
+ <h2>Welcome</h2>
+ 
  <?= $message  ?>
 
- <div>
- <a class="nav-link" href="./my-account.php">My Account</a>
- </div>
-	<!-- Inloggningsformulär -->
-  <form method="POST" action="" class="form mx-auto">
-	
-	<!-- Email -->
-  <div class="mb-3">
-    <label for="email" class="form-label">Email address</label>
-    <input type="email" class="form-control" name="email">
-  </div>
-	<!-- Password -->
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password">
-  </div>
-  <!-- Login Btn -->
-  <input type="submit" class="btn btn-primary btn-form" name="loginBtn" value="Login">
-
-</form>
+      <!-- Inloggningsformulär -->
+      <form method="POST" action="" class="form mx-auto"> 
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="email">
+      </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+      <!-- Login Btn -->
+      <input type="submit" class="btn btn-primary btn-form" name="loginBtn" value="Login">
+    </form>
+</div>
+<hr>
+<div class="wrapper-login-new-user mx-auto">
+    <h3>New User?</h3>
+    <a href="register-account.php" class="btn btn-primary ">Register here</a>
+</div>
 
 <footer id="footer" class="mt-auto  footer">
 
