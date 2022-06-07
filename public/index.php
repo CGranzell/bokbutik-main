@@ -1,6 +1,9 @@
 <?php
+require('../src/config.php');
+//READ 
 
-
+$stmt = $dbconnect->query("SELECT * FROM products"); 	
+$products = $stmt->fetchAll(); 	
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,10 +56,10 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
-				<th>Price</th>
-				<th>Stock</th>
+				        <th>Price</th>
+				        <th>Stock</th>
 
-			</tr>
+		      	</tr>
         </thead>
 		<tbody>
 	<?php foreach ($products as $product) : ?>
@@ -68,19 +71,20 @@
 			$string = $product['description'];
 
 			echo substr($string, 0, 50);
-			?>
+			?>  
 
-			<form action="specific-product.php" method="POST">
+<form action="specific-product.php" method="POST">
 			<input type="hidden" name="Title" value="<?=$product['title']?>">
 			<input type="hidden" name="Description" value="<?=$product['description']?>">
 			<input type="hidden" name="Price" value="<?=$product['price']?>">
 			<input type="hidden" name="Stock" value="<?=$product['stock']?>">
-		    <input type="submit" name="Readmore" value="Detailed info">
-			</form>
-
-		</td>
-					<td><?=htmlentities($product['price']) ?></td>
-					<td><?=htmlentities($product['stock']) ?></td>
+		  <input type="submit" name="Readmore" value="Detailed info">
+</form>
+      </td>
+      <td><?=htmlentities($product['price']) ?></td>
+			<td><?=htmlentities($product['stock']) ?></td>          
+                    
+					
                 </tr>
             <?php endforeach; ?>
         </tbody>

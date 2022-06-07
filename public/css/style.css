@@ -1,9 +1,41 @@
 /* Christoffer CSS */
 .form {
-width: 40%;
+width: 50%;
 }
 .btn-form {
 margin-left: 70%;
+}
+.message{
+	width: 50%;
+}
+/* Login-account */
+.login-nav{
+	margin-left: 50%;
+	display: flex;
+}
+.wrapper-login {
+	border-radius: 5px;
+	margin-top: 1em;
+	width: 50%;
+}
+.wrapper-login h2 {
+	text-align: center;
+}
+.wrapper-login-new-user{
+	margin-top: 3em;
+	height: 100px;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.wrapper-login-new-user a {
+	margin-top: 1em;
+}
+/* Register account */
+.wrapper-register {
+	text-align: center;
+	width: 100%;
 }
 
 
@@ -29,6 +61,3 @@ text-align: center;
 	text-align: center;
 	} 
 
-div #fredriks-content {
-	text-align: center;
-}

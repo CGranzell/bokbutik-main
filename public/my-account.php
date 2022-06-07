@@ -1,12 +1,13 @@
 <?php
 require('../src/config.php');
+require('../src/app/functions.php');
 include('./layout/header.php');
 
+
+
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
-if(!isset($_SESSION['email'])) {
-  header('Location: login-account.php?mustLogin');
-  exit;
-}
+checkLoginSession();
+
 
 // Sätter meddelande till tomma
 $succesMessage = "";
@@ -24,7 +25,7 @@ if(isset($_GET['updateSucces'])){
 if(isset($_GET['invalidUser'])){
   $message = '
   <div class="alert alert-danger message mx-auto">
-      Trying to updated invalid User! PLease try again
+      Trying to updated invalid User! Please try again
   </div>;
   ';
 }
@@ -46,15 +47,13 @@ $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
 
 ?>
 
 
-
+<div class="wrapper-register">
   <h1>Mina sidor</h1>
+  </div>
   <?= $message ?>
   <?= $succesMessage ?>
   <!-- Tabell över Användarens uppgifter -->

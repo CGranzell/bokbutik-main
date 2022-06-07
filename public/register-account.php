@@ -1,15 +1,8 @@
 <?php
 require('../src/config.php');
 include('./layout/header.php');
-// echo "POST";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 
-// echo "GET";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
+
 
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
@@ -21,7 +14,9 @@ include('./layout/header.php');
   $errorMessagePostalcode = "";
   $errorMessageCity       = "";
   $errorMessageCountry    = ""; 
+  $errorTakenEmail        = "";
   $message                = "";
+
 // Skapa användaruppgift
 if(isset($_POST['createUserBtn'])) {
   //Tar bort mellanslag före och efter textsträng
@@ -35,7 +30,27 @@ if(isset($_POST['createUserBtn'])) {
   $city = trim($_POST['city']);
   $country = trim($_POST['country']);
 
+    // Kollar om email är upptagen
+    $sql = '
+    SELECT * FROM users
+    WHERE email = :email
+  ';
+ 
+  $statement = $dbconnect->prepare($sql);
+  $statement->bindParam(':email', $email);
+  $statement->execute();
+  $emailExist = $statement->fetch();
+  // Om Email är upptagen
+  if($emailExist){
+    $errorTakenEmail  = '
+   <div class="alert alert-danger message mx-auto">
+      The email is already taken
+   </div>
+   ';
+   
+ } else {
 
+ 
 
   // Om något av textfälten är tomma gå in i detta if block
   if (
@@ -174,7 +189,7 @@ if(isset($_POST['createUserBtn'])) {
     exit;
   }
   }
-
+}
 
 }
 
@@ -182,16 +197,12 @@ if(isset($_POST['createUserBtn'])) {
 ?>
 
 
-  
 
-  
-  
- 
-  
+ <div class="wrapper-register">
+  <h2>Register Here</h2>
+  </div>
   <?= $message ?>
- 
-
-  <h1>Register Here</h1>
+  <?= $errorTakenEmail ?>
 	<!-- Registrerings formulär -->
 <form method="POST" action="" class="form mx-auto">
 		<!-- First Name -->
@@ -255,6 +266,7 @@ if(isset($_POST['createUserBtn'])) {
   </div>
   <!-- Create User Btn -->
   <input type="submit" class="btn btn-primary btn-form" name="createUserBtn" value="Register">
+
 
 </form>
 
