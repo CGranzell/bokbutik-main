@@ -35,7 +35,7 @@ $products = $stmt->fetchAll();
   <title>All products</title>
 	
 </head>
-<body>
+<body class="fredriks-body">
 
     <p>
 	<h1 class="fredriks-huvudrubrik">Shop page</h1>
@@ -43,8 +43,7 @@ $products = $stmt->fetchAll();
 
 	<table id="fredriks-tbl">
      
-            <tr><thead> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <tr><thead> 
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
