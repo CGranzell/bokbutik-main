@@ -1,63 +1,66 @@
 /* Christoffer CSS */
 .form {
-width: 50%;
-}
-.btn-form {
-margin-left: 70%;
-}
-.message{
 	width: 50%;
-}
-/* Login-account */
-.login-nav{
-	margin-left: 50%;
-	display: flex;
-}
-.wrapper-login {
-	border-radius: 5px;
-	margin-top: 1em;
-	width: 50%;
-}
-.wrapper-login h2 {
-	text-align: center;
-}
-.wrapper-login-new-user{
-	margin-top: 3em;
-	height: 100px;
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.wrapper-login-new-user a {
-	margin-top: 1em;
-}
-/* Register account */
-.wrapper-register {
-	text-align: center;
-	width: 100%;
-}
-
-
- /* Fredriks css */
-#fredriks-tbl { 
-	border-collapse: collapse; 
-	margin-bottom: 40px;
+	}
+	.btn-form {
+	margin-left: 70%;
+	}
+	.message{
+		width: 50%;
+	}
+	/* Login-account */
+	.login-nav{
+		margin-left: 50%;
+		display: flex;
+	}
+	.wrapper-login {
+		border-radius: 5px;
+		margin-top: 1em;
+		width: 50%;
+	}
+	.wrapper-login h2 {
+		text-align: center;
+	}
+	.wrapper-login-new-user{
+		margin-top: 3em;
+		height: 100px;
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.wrapper-login-new-user a {
+		margin-top: 1em;
+	}
+	/* Register account */
+	.wrapper-register {
+		text-align: center;
+		width: 100%;
+	}
 	
-}
-
-#fredriks-tbl tr,
-#fredriks-tbl td,
-#fredriks-tbl th {
-	border: 1px solid black;
-	padding: 10px;
-}
-
-.fredriks-huvudrubrik {
-text-align: center;
-} 
-
-.fredriks-underrubrik  {
+	
+	 /* Fredriks css */
+	#fredriks-tbl { 
+		border-collapse: collapse; 
+		margin-bottom: 40px;
+		
+		
+	}
+	
+	#fredriks-tbl tr,
+	#fredriks-tbl td,
+	#fredriks-tbl th {
+		border: 1px solid rgb(0, 0, 0);
+		padding: 10px;
+		
+	}
+	
+	.fredriks-huvudrubrik {
 	text-align: center;
 	} 
-
+	
+	.fredriks-underrubrik  {
+		text-align: center;
+		} 
+	
+	
