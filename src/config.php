@@ -9,7 +9,7 @@ define('ROOT_PATH', '..' . __DIR__ . '/'); // path to 'bokbutik-main/'
 define('SRC_PATH',  __DIR__ . '/'); // path to 'bokbutik-main/src/'
 define('CSS_PATH', '../public/css/');          // path to "css"-folder
 
- print(ROOT_PATH);
+ //print(ROOT_PATH);
 
 // Include functions and classes
 
