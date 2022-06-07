@@ -27,7 +27,7 @@ $options = [
 // Upprätta en DB koppling
 try {
 	// Försök köra koden i try-blocket
-	$pdo = new PDO($dns, $user, $password, $options);
+	$dbconnect = new PDO($dns, $user, $password, $options);
 } catch (\PDOException $e) {
 	// Catch-blocket körs om något gick fel i try-blocket
 	// echo $e->getMessage();
