@@ -57,24 +57,19 @@ $products = $stmt->fetchAll();
                 <tr>
                     <td><?=htmlentities($product['id']) ?></td>
                     <td><?=htmlentities($product['title']) ?></td>
-                    <td>
-                    <?=
-			                 $string = $product['description'];
-
-		              	   echo substr($string, 0, 100);
-			              ?>  
-                    <form action="specific-product.php" method="POST">
+                    <td><?=htmlentities($product['description']) ?></td> 
+                    <td><?=htmlentities($product['price']) ?></td>
+                    <td><?=htmlentities($product['stock']) ?>
+                   
+                  <form action="specific-product.php" method="POST">
 			            <input type="hidden" name="Title" value="<?=$product['title']?>">
 			            <input type="hidden" name="Description" value="<?=$product['description']?>">
 			          <input type="hidden" name="Price" value="<?=$product['price']?>">
 		          	<input type="hidden" name="Stock" value="<?=$product['stock']?>">
 		           <input type="submit" name="Readmore" value="Specific product">
                 </form>
-                                    
-                   </td>
-                    <td><?=htmlentities($product['price']) ?></td>
-                    <td><?=htmlentities($product['stock']) ?></td>
-	                	      
+              </td>
+                       
                 </tr>
             <?php endforeach; ?>
         </tbody>
