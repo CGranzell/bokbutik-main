@@ -1,6 +1,21 @@
 <?php
 require('../src/config.php');
 include('./layout/header.php');
+
+//CONNECT TO READ-MORE BUTTON
+if (isset($_POST['Readmore'])) {
+    
+    
+  $sql = "
+      SELECT * FROM products
+      WHERE id= :id;
+  ";
+  $stmt = $pdo->prepare($sql); 
+  $stmt->bindParam(":id", $_POST['id']); 
+  $stmt->execute(); 
+} 
+
+
 //READ 
 
 $stmt = $dbconnect->query("SELECT * FROM products"); 	
@@ -59,14 +74,12 @@ $products = $stmt->fetchAll();
                    </td>
                     <td><?=htmlentities($product['price']) ?></td>
                     <td><?=htmlentities($product['stock']) ?></td>
-	                	
-      
+	                	      
                 </tr>
             <?php endforeach; ?>
         </tbody>
 
     </table>
-
 	
 </body>
 </html>
