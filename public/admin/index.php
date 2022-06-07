@@ -1,8 +1,8 @@
 <?php
 require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
-//echo "<pre>";
-//print_r($_POST);    
-//echo "</pre>";
+echo "<pre>";
+print_r($_POST);    
+echo "</pre>";
 if (isset($_POST['updateProductBtn'])) {
   
   $sql = "
@@ -114,17 +114,17 @@ echo "</pre>";
              <input type="hidden" name="productId" value="<?=$product['id'] ?>">
               <input type="submit" name="deleteProductBtn" value="Delete"><br>
           </form>
-          <form action="" method="POST">
-          <input type="hidden" name="productId" value="<?=$product['id'] ?>">
-              <input type="submit" name="updateProductBtn" value="Update">
-                           
+          <form action="update-product.php" method="GET">
+                <input type="submit" value="Update">
+                <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
+          </form>            
 					   
 				   </td>
 			   </tr>
 		   <?php }?>
 	   </tbody>
    </table>
-          </form>
+          
    <form action="" method="POST">
 	   <input type="text" name="title" placeholder="Title"><br>
 	   <input type="text" name="description" placeholder="Description"><br>
