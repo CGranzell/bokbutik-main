@@ -26,7 +26,7 @@ $message  = '
 if(isset($_GET['registerSuccess'])){
   $message  = '
   <div class="alert alert-success message mx-auto">
-      Succes! You succefully registered a new account! Please login
+      You succefully registered a new account! Please login
   </div>
 ';
 }
