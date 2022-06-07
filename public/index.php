@@ -46,7 +46,7 @@ $products = $stmt->fetchAll();
                     <?=
 			                 $string = $product['description'];
 
-		              	   echo substr($string, 0, 50);
+		              	   echo substr($string, 0, 100);
 			              ?>  
                     <form action="specific-product.php" method="POST">
 			            <input type="hidden" name="Title" value="<?=$product['title']?>">
@@ -61,8 +61,7 @@ $products = $stmt->fetchAll();
                     <td><?=htmlentities($product['stock']) ?></td>
 	                	
       
-      
-      </tr>
+                </tr>
             <?php endforeach; ?>
         </tbody>
 
