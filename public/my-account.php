@@ -48,6 +48,14 @@ if(isset($_POST['loginBtn'])) {
     WHERE email = :email AND password = :password
   ';
 
+<<<<<<< HEAD
+// Tar bort användarkonto
+if(isset($_POST['deleteAccountBtn'])) {
+  deleteUser();
+}
+
+$users = fetchAllUsers();
+=======
   $statement = $dbconnect->prepare($sql);
   $statement->bindParam(':email', $email);
   $statement->bindParam(':password', $password);
@@ -75,6 +83,7 @@ if(isset($_POST['loginBtn'])) {
 
 
 
+>>>>>>> eefb04a50c3e9ba029e9122840f63b467bfa547a
 
 ?>
 
