@@ -53,6 +53,8 @@
 	#fredriks-tbl th {
 		border: 1px solid rgb(0, 0, 0);
 		padding: 10px;
+		position: relative;
+		left: 6em;
 		
 		
 	}
@@ -65,8 +67,6 @@
 		text-align: center;
 		} 
 
-		div.centrerad-tabell {
-			text-align: center;
-		}
+		
 	
 	
