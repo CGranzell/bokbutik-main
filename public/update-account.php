@@ -9,8 +9,7 @@ checkLoginSession();
 
 // Om inte userID är satt eller är ett nummer, skicka användaren till my-account med querystring invalidUser
 if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){
-  header('Location: my-account.php?invalidUser');
-  exit;
+  redirect("my-account", "invalidUser");
 };
 
 
@@ -54,8 +53,7 @@ if(isset($_POST['updateAccountBtn'])) {
     $statement->bindParam(':country', $_POST['country']);
     $statement->execute();
 
-    header('Location: my-account.php?updateSucces');
-    exit;
+    redirect("my-account", "updateSucces");
   }
 
 
