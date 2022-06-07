@@ -2,7 +2,7 @@
 // Turn on/off error reporting
 error_reporting(-1);
 
-// Start session
+// Start session 
 session_start();
 
 define('ROOT_PATH', '..' . __DIR__ . '/'); // path to 'bokbutik-main/'
