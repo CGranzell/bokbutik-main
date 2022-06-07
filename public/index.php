@@ -40,11 +40,11 @@ $products = $stmt->fetchAll();
     <p>
 	<h1 class="fredriks-huvudrubrik">Shop page</h1>
 	<p>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
 	<table id="fredriks-tbl">
-        <thead>
-            <tr>
+     
+            <tr><thead> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
