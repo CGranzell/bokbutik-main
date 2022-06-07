@@ -46,7 +46,7 @@ if(isset($_POST['deleteAccountBtn'])) {
 $sql = "SELECT * FROM users";
 $statement = $dbconnect->query($sql);
 $users = $statement->fetchAll();
-
+// fetchAllUsers();
 
 ?>
 
