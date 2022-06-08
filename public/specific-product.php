@@ -35,11 +35,12 @@ $products = $stmt->fetchAll();
         <p>
       
       
-
+<div class="tabell">
 <b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
 <b> Description: </b> <?php echo $_POST["Description"]; ?><p>
 <b> Price: </b> <?php echo $_POST["Price"]; ?><p>
 <b> Stock: </b> <?php echo $_POST["Stock"]; ?><p>
+</div>
 <!-- Infoga en större bild här på produkten -->
 
 
