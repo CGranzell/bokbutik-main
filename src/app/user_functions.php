@@ -1,27 +1,4 @@
 <?php
-// require('../src/config.php');
-
-// Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
-function checkLoginSession(){
-if(!isset($_SESSION['email'])) {
-  header('Location: login-account.php?mustLogin');
-  exit;
-  
-}
-}
-
-// Hanterar utskrift på sidan med valfri kod, Variablar ,Superglobals tex.
-function debug($value) {
-echo"<pre>";
-print_r($value);
-echo"</pre>";
-}
-
-// Hanterar redirect
-function redirect($path, $urlMessage){
-  header("Location: {$path}.php?{$urlMessage}");
-  exit;
-}
 
 // Hämtar alla users
 function fetchAllUsers() {
@@ -30,6 +7,22 @@ function fetchAllUsers() {
   $statement = $dbconnect->query($sql);
   return $statement->fetchAll();
 }
+
+// Hämta en user 
+function fetchOneUser($id){
+  global $dbconnect;
+$sql = "
+SELECT * FROM users 
+WHERE id = :id
+";
+$statement = $dbconnect->prepare($sql);
+$statement->bindParam(':id', $id);
+$statement->execute();
+return $statement->fetch();
+
+}
+
+
 
 // Tar bort user 
 function deleteUser(){
@@ -98,3 +91,34 @@ function addUser($array) {
   $statement->execute();
 }
 
+// Uppdaterar en användare
+function updateUser($id, $array) {
+  global $dbconnect;
+  $sql = "
+    UPDATE users 
+    SET 
+      first_name  = :first_name,
+      last_name   = :last_name,
+      email       = :email,
+      password    = :password,
+      phone       = :phone,
+      street      = :street,
+      postal_code = :postal_code,
+      city        = :city,
+      country     = :country
+    
+    WHERE id = :id
+    ";
+    $statement = $dbconnect->prepare($sql);
+    $statement->bindParam(':id', $id);
+    $statement->bindParam(':first_name', $array[0]);
+    $statement->bindParam(':last_name', $array[1]);
+    $statement->bindParam(':email', $array[2]);
+    $statement->bindParam(':password', $array[3]);
+    $statement->bindParam(':phone', $array[4]);
+    $statement->bindParam(':street',$array[5]);
+    $statement->bindParam(':postal_code', $array[6]);
+    $statement->bindParam(':city', $array[7]);
+    $statement->bindParam(':country', $array[8]);
+    $statement->execute();
+}

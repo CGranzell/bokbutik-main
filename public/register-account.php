@@ -1,6 +1,7 @@
 <?php
 require('../src/config.php');
-require('../src/app/functions.php');
+require('../src/app/user_functions.php');
+require('../src/app/common_functions.php');
 include('./layout/header.php');
 
 
