@@ -22,3 +22,27 @@ function redirect($path, $urlMessage){
   exit;
 }
 
+// Felmeddelande om password inte matchar confirmed password
+function noMatchPassword($message){
+  $message = '
+  <div class="alert alert-danger message mx-auto">
+      The password do not match!
+  </div>
+  ';
+  return $message;
+}
+
+
+// felmeddelande om textfält är tomt 
+function errorRequiredField($name){
+   $name = "
+  <div class='alert alert-danger message mx-auto'>
+     {$name} is required
+  </div>
+";
+  return $name;
+}
+
+
+
+

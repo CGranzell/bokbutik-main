@@ -4,8 +4,6 @@ require('../src/app/user_functions.php');
 require('../src/app/common_functions.php');
 include('./layout/header.php');
 
-
-
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
   $errorMessageLastname   = "";
@@ -45,11 +43,10 @@ if(isset($_POST['createUserBtn'])) {
       The email is already taken
    </div>
    ';
-   
- } else {
-
- 
-
+ } 
+ if($_POST['password'] !== $_POST['confirmPassword']){
+    $message = noMatchPassword($message);
+  } else {
   // Om något av textfälten är tomma gå in i detta if block
   if (
     $firstname  === ""  ||
@@ -64,11 +61,8 @@ if(isset($_POST['createUserBtn'])) {
   ) {
       // Felmeddelande Firstname
     if (empty($firstname)) {
-      $errorMessageFirstname = '
-      <div class="alert alert-danger message mx-auto">
-        Firstname is required
-      </div>
-    ';
+      $errorMessageFirstname = 
+      errorRequiredField("Firstname");
     }
     // Felmeddelande Lastname
     if (empty($lastname)) {
@@ -135,28 +129,13 @@ if(isset($_POST['createUserBtn'])) {
     ';
     }
   } else {
-
     addUser($userInfo);
-
-    // OM password inte stämmer med confirmpassword, skriv ut felmeddelande
-  if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
-  } else {
     redirect("login-account", "registerSuccess");   
-  }
+    }
   }
 }
-
-}
-
 
 ?>
-
-
 
  <div class="wrapper-register">
   <h2>Register Here</h2>

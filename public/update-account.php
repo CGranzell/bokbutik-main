@@ -19,11 +19,7 @@ $message = "";
 // Uppdatera användaruppgift
 if(isset($_POST['updateAccountBtn'])) {
   if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
+    $message = noMatchPassword($message);
   } else {
        // skapar och fyller array med user info
     $userInfo = [
