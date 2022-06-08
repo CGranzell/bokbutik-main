@@ -3,6 +3,13 @@ require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
 //echo "<pre>";
 //print_r($_POST);    
 //echo "</pre>";
+if(isset($_GET['updateSucces'])){
+  $succesMessage = '
+  <div class="alert alert-success message mx-auto">
+      Succes! The product was updated
+  </div>;
+';
+}
 if (isset($_POST['deleteProductBtn'])) {
     
     $sql = "
@@ -91,7 +98,7 @@ echo "</pre>";
                       <input type="submit" name="deleteProductBtn" value="Delete"><br></form>
                   
                       
-            <!-- Updatera knapp -->
+            
             <form action="update-product.php" method="GET">
                 <input type="submit" value="Update">
                 <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
