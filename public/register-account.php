@@ -1,9 +1,6 @@
 <?php
 require('../src/config.php');
-require('../src/app/functions.php');
 include('./layout/header.php');
-
-
 
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
@@ -18,42 +15,35 @@ include('./layout/header.php');
   $errorTakenEmail        = "";
   $message                = "";
 
+
 // Skapa användaruppgift
 if(isset($_POST['createUserBtn'])) {
-  //Tar bort mellanslag före och efter textsträng
-  $firstname = trim($_POST['first_name']);
-  $lastname = trim($_POST['last_name']);
-  $email = trim($_POST['email']);
-  $password = trim($_POST['password']);
-  $phone = trim($_POST['phone']);
-  $street = trim($_POST['street']);
-  $postalcode = trim($_POST['postal_code']);
-  $city = trim($_POST['city']);
-  $country = trim($_POST['country']);
+  // skapar och fyller array med user info
+  $userInfo = [
+    //Tar bort mellanslag före och efter textsträng
+    $firstname  = trim($_POST['first_name']),
+    $lastname   = trim($_POST['last_name']),
+    $email      = trim($_POST['email']),
+    $password   = trim($_POST['password']),
+    $phone      = trim($_POST['phone']),
+    $street     = trim($_POST['street']),
+    $postalcode = trim($_POST['postal_code']),
+    $city       = trim($_POST['city']),
+    $country    = trim($_POST['country']),
+  ];
 
     // Kollar om email är upptagen
-    $sql = '
-    SELECT * FROM users
-    WHERE email = :email
-  ';
+    $emailExist = $userDbHandler->fetchUserByEmail($email);
  
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->execute();
-  $emailExist = $statement->fetch();
-  // Om Email är upptagen
   if($emailExist){
-    $errorTakenEmail  = '
-   <div class="alert alert-danger message mx-auto">
-      The email is already taken
-   </div>
-   ';
-   
- } else {
-
+    $errorTakenEmail  = emailAlreadyTaken($errorTakenEmail);
+  } else if($_POST['password'] !== $_POST['confirmPassword']) {
+    $message = noMatchPassword($message);
+  }
  
-
+  else {
   // Om något av textfälten är tomma gå in i detta if block
+  
   if (
     $firstname  === ""  ||
     $lastname   === ""  ||
@@ -67,135 +57,48 @@ if(isset($_POST['createUserBtn'])) {
   ) {
       // Felmeddelande Firstname
     if (empty($firstname)) {
-      $errorMessageFirstname = '
-      <div class="alert alert-danger message mx-auto">
-        Firstname is required
-      </div>
-    ';
+      $errorMessageFirstname = errorRequiredField("Firstname");
     }
     // Felmeddelande Lastname
     if (empty($lastname)) {
-      $errorMessageLastname = '
-      <div class="alert alert-danger message mx-auto">
-      Lastname is required
-      </div>
-    ';
+      $errorMessageLastname =  errorRequiredField("Lastname");
     }
     // Felmeddelande Email
     if (empty($email)) {
-      $errorMessageEmail = '
-      <div class="alert alert-danger message mx-auto">
-      Email is required
-      </div>
-    ';
+      $errorMessageEmail = errorRequiredField("Email");
     }
     // Felmeddelande Password
     if (empty($password)) {
-      $errorMessagePassword = '
-      <div class="alert alert-danger message mx-auto">
-      Password is required
-      </div>
-    ';
+      $errorMessagePassword = errorRequiredField("Password");
     }
     // Felmeddelande Phone
     if (empty($phone)) {
-      $errorMessagePhone = '
-      <div class="alert alert-danger message mx-auto">
-      Phone is required
-      </div>
-    ';
+      $errorMessagePhone = errorRequiredField("Phone");
     }
     // Felmeddelande Street
     if (empty($street)) {
-      $errorMessageStreet = '
-      <div class="alert alert-danger message mx-auto">
-      Street is required
-      </div>
-    ';
+      $errorMessageStreet = errorRequiredField("Street");
     }
     // Felmeddelande Postal Code
     if (empty($postalcode)) {
-      $errorMessagePostalcode = '
-      <div class="alert alert-danger message mx-auto">
-      Postal code is required
-      </div>
-    ';
+      $errorMessagePostalcode = errorRequiredField("Postal Code");
     }
     // Felmeddelande City 
     if (empty($city)) {
-      $errorMessageCity  = '
-      <div class="alert alert-danger message mx-auto">
-      City  is required
-      </div>
-    ';
+      $errorMessageCity  = errorRequiredField("City");
     }
     // Felmeddelande Country 
     if (empty($country)) {
-      $errorMessageCountry  = '
-      <div class="alert alert-danger message mx-auto">
-      Country is required
-      </div>
-    ';
+      $errorMessageCountry  = errorRequiredField("Country");
     }
   } else {
-
-    $sql = "
-    INSERT INTO users 
-     (
-      first_name, 
-      last_name,
-      email,
-      password,
-      phone,
-      street,
-      postal_code,
-      city,
-      country
-     )
-     VALUES 
-     (
-      :first_name,
-      :last_name,
-      :email,
-      :password,
-      :phone,
-      :street,
-      :postal_code,
-      :city,
-      :country
-     )
-    ";
-    $statement = $dbconnect->prepare($sql);
-    $statement->bindParam(':first_name', $firstname);
-    $statement->bindParam(':last_name', $lastname);
-    $statement->bindParam(':email', $email);
-    $statement->bindParam(':password', $password);
-    $statement->bindParam(':phone', $phone );
-    $statement->bindParam(':street', $street);
-    $statement->bindParam(':postal_code', $postalcode);
-    $statement->bindParam(':city', $city);
-    $statement->bindParam(':country', $country);
-    $statement->execute();
-
-    // OM password inte stämmer med confirmpassword, skriv ut felmeddelande
-  if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
-  } else {
+    $userDbHandler->addUser($userInfo);
     redirect("login-account", "registerSuccess");   
-  }
+    }
   }
 }
-
-}
-
 
 ?>
-
-
 
  <div class="wrapper-register">
   <h2>Register Here</h2>

@@ -1,110 +1,84 @@
 <?php
-
 require('../src/config.php');
 include('./layout/header.php');
 
-
-// Sätter meddelande till tom
+// Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
+checkLoginSession();
+// Sätter meddelande till tomma
+$succesMessage = "";
 $message = "";
-
-if(isset($_GET['mustLogin'])) {
-  $message  = '
-<div class="alert alert-danger message mx-auto">
-    You must login !
-</div>
-';
+// meddelande om uppdatering lyckades
+if(isset($_GET['updateSucces'])){
+  $succesMessage = uppdateSucces($succesMessage);
 }
-
-if(isset($_GET['logout'])) {
-$message  = '
-<div class="alert alert-success message mx-auto">
-    You are now loged out
-</div>
-';
+// Om querystring har värdet invalidUser, hantera felmeddelande
+if(isset($_GET['invalidUser'])){
+  $message = invalidUser($message);
 }
-// Om användaren lyckades registrera , skriv ut meddelande
-if(isset($_GET['registerSuccess'])){
-  $message  = '
-  <div class="alert alert-success message mx-auto">
-      You succefully registered a new account! Please login
-  </div>
-';
+// Tar bort användarkonto
+if(isset($_POST['deleteAccountBtn'])) {
+  $userDbHandler->deleteUser(); 
 }
-
-
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-
-// Logga in
-if(isset($_POST['loginBtn'])) {
-  //Tar bort mellanslag före och efter textsträng
-  $email    = trim($_POST['email']);
-  $password = trim($_POST['password']);
-
-  // Hämtar användare som har rätt email och password
-  $sql = '
-    SELECT * FROM users
-    WHERE email = :email AND password = :password
-  ';
-
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->bindParam(':password', $password);
-  $statement->execute();
-  $user = $statement->fetch();
-  // Om användaren finns
-  if($user){
-      $_SESSION['email'] = $user['email'];
-      $_SESSION['id'] = $user['id'];
-      header('Location: my-account.php');
-      exit;
-  } else { //OM anändaren inte finns
-    $message  = '
-    <div class="alert alert-danger message mx-auto">
-       Error! Wrong login info, please try again
-    </div>
-  ';
-  }
-
-}
-
-// echo "<pre>";
-// print_r($user);
-// echo "</pre>";
-
-
-
-
+// Hämtar alla användaruppgifter
+$users = $userDbHandler->fetchAllUsers();
 ?>
 
-<div class="wrapper-login mx-auto">
+<div class="wrapper-register">
+  <h1>Mina sidor</h1>
+  </div>
+  <?= $message ?>
+  <?= $succesMessage ?>
+  <!-- Tabell över Användarens uppgifter -->
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Street</th>
+      <th scope="col">Postal Code</th>
+      <th scope="col">City</th>
+      <th scope="col">country</th>
+      <th scope="col">Create date</th>
+      <th scope="col">Manage</th>
 
- <h2>Welcome</h2>
- 
- <?= $message  ?>
+    </tr>
+  </thead>
+  <tbody>
+     <!-- Loopar igenom users -->
+       <?php foreach($users as $user) : ?>
+        <tr>
+          <td scope="row"><?= htmlentities($user['id']) ?></td>
+          <td scope="row"><?= htmlentities($user['first_name']) ?></td>
+          <td scope="row"><?= htmlentities($user['last_name']) ?></td>
+          <td scope="row"><?= htmlentities($user['email']) ?></td>
+          <td scope="row"><?= htmlentities($user['password']) ?></td>
+          <td scope="row"><?= htmlentities($user['phone']) ?></td>
+          <td scope="row"><?= htmlentities($user['street']) ?></td>
+          <td scope="row"><?= htmlentities($user['postal_code']) ?></td>
+          <td scope="row"><?= htmlentities($user['city']) ?></td>
+          <td scope="row"><?= htmlentities($user['country']) ?></td>
+          <td scope="row"><?= htmlentities($user['create_date']) ?></td>
+          <td scope="row">
+            <!-- Delete knapp -->
+            <form action="" method="POST">
+              <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+              <input type="submit" name="deleteAccountBtn" value="Delete">
+            </form>
+            <!-- Uppdatera knapp -->
+            <form action="update-account.php" method="GET">
+                <input type="submit" value="Update">
+                <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+            </form>
+          </td>
+        </tr>
+        <?php endforeach ?>
+  </tbody>
+</table>
 
-      <!-- Inloggningsformulär -->
-      <form method="POST" action="" class="form mx-auto"> 
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" name="email">
-      </div>
-      <!-- Password -->
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
-      </div>
-      <!-- Login Btn -->
-      <input type="submit" class="btn btn-primary btn-form" name="loginBtn" value="Login">
-    </form>
-</div>
-<hr>
-<div class="wrapper-login-new-user mx-auto">
-    <h3>New User?</h3>
-    <a href="register-account.php" class="btn btn-primary ">Register here</a>
-</div>
 
 <footer id="footer" class="mt-auto  footer">
 

@@ -45,6 +45,7 @@
 		margin-bottom: 40px;
 		
 		
+		
 	}
 	
 	#fredriks-tbl tr,
@@ -53,6 +54,8 @@
 		border: 1px solid rgb(0, 0, 0);
 		padding: 10px;
 		
+		
+		
 	}
 	
 	.fredriks-huvudrubrik {
@@ -60,7 +63,17 @@
 	} 
 	
 	.fredriks-underrubrik  {
-		text-align: right;
+		text-align: center;
 		} 
+
+	.fredriks-body {
+		margin: auto;
+		width: 40%;
+		height: 40%;
+
+
+	}
 	
-	
+	.tabell{
+		text-align: center;
+	}

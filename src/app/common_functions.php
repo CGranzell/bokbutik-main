@@ -1,5 +1,4 @@
 <?php
-// require('../src/config.php');
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
 function checkLoginSession(){
@@ -23,22 +22,7 @@ function redirect($path, $urlMessage){
   exit;
 }
 
-// Hämtar alla users
-function fetchAllUsers() {
-  global $dbconnect;
-  $sql = "SELECT * FROM users";
-  $statement = $dbconnect->query($sql);
-  return $statement->fetchAll();
-}
 
-// Tar bort user 
-function deleteUser(){
-  global $dbconnect;
-  $sql = "
-  DELETE FROM users 
-  WHERE id = :id;
-  ";
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':id', $_POST['userID']);
-  $statement->execute();
-}
+
+
+
