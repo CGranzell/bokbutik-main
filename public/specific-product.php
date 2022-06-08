@@ -26,7 +26,7 @@ $products = $stmt->fetchAll();
 </head>
 
 
-<body class="fredriks-body">
+<body>
 
 
         <p>
