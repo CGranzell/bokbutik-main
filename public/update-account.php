@@ -71,12 +71,6 @@ $statement->bindParam(':id', $_GET['userID']);
 $statement->execute();
 $user = $statement->fetch();
 
-// echo "User";
-// echo "<pre>";
-// print_r($user);
-// echo "</pre>";
-
-
 
 ?>
 

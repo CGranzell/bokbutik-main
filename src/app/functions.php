@@ -42,3 +42,59 @@ function deleteUser(){
   $statement->bindParam(':id', $_POST['userID']);
   $statement->execute();
 }
+
+// Hämta användare efter email
+function fetchUserByEmail($email){
+   global $dbconnect;
+   $sql = '
+   SELECT * FROM users
+   WHERE email = :email
+ ';
+ $statement = $dbconnect->prepare($sql);
+ $statement->bindParam(':email', $email);
+ $statement->execute();
+ return $statement->fetch();
+}
+
+// Skapa en användare
+function addUser($array) {
+  global $dbconnect;
+  $sql = "
+  INSERT INTO users 
+   (
+    first_name, 
+    last_name,
+    email,
+    password,
+    phone,
+    street,
+    postal_code,
+    city,
+    country
+   )
+   VALUES 
+   (
+    :first_name,
+    :last_name,
+    :email,
+    :password,
+    :phone,
+    :street,
+    :postal_code,
+    :city,
+    :country
+   )
+  ";
+  $statement = $dbconnect->prepare($sql);
+  $statement->bindParam(':first_name', $array[0]);
+  $statement->bindParam(':last_name', $array[1]);
+  $statement->bindParam(':email', $array[2]);
+  $statement->bindParam(':password', $array[3]);
+  $statement->bindParam(':phone', $array[4]);
+  $statement->bindParam(':street', $array[5]);
+  $statement->bindParam(':postal_code', $array[6]);
+  $statement->bindParam(':city', $array[7]);
+  $statement->bindParam(':country', $array[8]);
+  $statement->execute();
+}
+
