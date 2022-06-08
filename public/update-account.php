@@ -106,6 +106,8 @@ $user = fetchOneUser($_GET['userID']);
   <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
 </form>
+
+
   
 <footer id="footer" class="mt-auto  footer">
 

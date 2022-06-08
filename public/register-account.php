@@ -66,11 +66,8 @@ if(isset($_POST['createUserBtn'])) {
     }
     // Felmeddelande Lastname
     if (empty($lastname)) {
-      $errorMessageLastname = '
-      <div class="alert alert-danger message mx-auto">
-      Lastname is required
-      </div>
-    ';
+      $errorMessageLastname = 
+      errorRequiredField("Lastname");
     }
     // Felmeddelande Email
     if (empty($email)) {
