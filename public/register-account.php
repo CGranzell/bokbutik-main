@@ -2,6 +2,7 @@
 require('../src/config.php');
 require('../src/app/user_functions.php');
 require('../src/app/common_functions.php');
+require('../src/app/messages_functions.php');
 include('./layout/header.php');
 
 // Felmeddelanden sätts till tomt
@@ -36,18 +37,16 @@ if(isset($_POST['createUserBtn'])) {
 
     // Kollar om email är upptagen
     $emailExist = fetchUserByEmail($email);
-  // Om Email är upptagen
+ 
   if($emailExist){
-    $errorTakenEmail  = '
-   <div class="alert alert-danger message mx-auto">
-      The email is already taken
-   </div>
-   ';
- } 
- if($_POST['password'] !== $_POST['confirmPassword']){
+    $errorTakenEmail  = emailAlreadyTaken($errorTakenEmail);
+  } else if($_POST['password'] !== $_POST['confirmPassword']) {
     $message = noMatchPassword($message);
-  } else {
+  }
+ 
+  else {
   // Om något av textfälten är tomma gå in i detta if block
+  
   if (
     $firstname  === ""  ||
     $lastname   === ""  ||
@@ -61,69 +60,39 @@ if(isset($_POST['createUserBtn'])) {
   ) {
       // Felmeddelande Firstname
     if (empty($firstname)) {
-      $errorMessageFirstname = 
-      errorRequiredField("Firstname");
+      $errorMessageFirstname = errorRequiredField("Firstname");
     }
     // Felmeddelande Lastname
     if (empty($lastname)) {
-      $errorMessageLastname = 
-      errorRequiredField("Lastname");
+      $errorMessageLastname =  errorRequiredField("Lastname");
     }
     // Felmeddelande Email
     if (empty($email)) {
-      $errorMessageEmail = '
-      <div class="alert alert-danger message mx-auto">
-      Email is required
-      </div>
-    ';
+      $errorMessageEmail = errorRequiredField("Email");
     }
     // Felmeddelande Password
     if (empty($password)) {
-      $errorMessagePassword = '
-      <div class="alert alert-danger message mx-auto">
-      Password is required
-      </div>
-    ';
+      $errorMessagePassword = errorRequiredField("Password");
     }
     // Felmeddelande Phone
     if (empty($phone)) {
-      $errorMessagePhone = '
-      <div class="alert alert-danger message mx-auto">
-      Phone is required
-      </div>
-    ';
+      $errorMessagePhone = errorRequiredField("Phone");
     }
     // Felmeddelande Street
     if (empty($street)) {
-      $errorMessageStreet = '
-      <div class="alert alert-danger message mx-auto">
-      Street is required
-      </div>
-    ';
+      $errorMessageStreet = errorRequiredField("Street");
     }
     // Felmeddelande Postal Code
     if (empty($postalcode)) {
-      $errorMessagePostalcode = '
-      <div class="alert alert-danger message mx-auto">
-      Postal code is required
-      </div>
-    ';
+      $errorMessagePostalcode = errorRequiredField("Postal Code");
     }
     // Felmeddelande City 
     if (empty($city)) {
-      $errorMessageCity  = '
-      <div class="alert alert-danger message mx-auto">
-      City  is required
-      </div>
-    ';
+      $errorMessageCity  = errorRequiredField("City");
     }
     // Felmeddelande Country 
     if (empty($country)) {
-      $errorMessageCountry  = '
-      <div class="alert alert-danger message mx-auto">
-      Country is required
-      </div>
-    ';
+      $errorMessageCountry  = errorRequiredField("Country");
     }
   } else {
     addUser($userInfo);

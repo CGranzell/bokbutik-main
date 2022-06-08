@@ -2,6 +2,7 @@
 require('../src/config.php');
 require('../src/app/user_functions.php');
 require('../src/app/common_functions.php');
+require('../src/app/messages_functions.php');
 include('./layout/header.php');
 
 
@@ -107,8 +108,7 @@ $user = fetchOneUser($_GET['userID']);
 
 </form>
 
-<h1>Visar gruppen hahahahahah hahahahaha </h1>
-<p>skirver mer kod för att testa</p>  
+
 <footer id="footer" class="mt-auto  footer">
 
 
