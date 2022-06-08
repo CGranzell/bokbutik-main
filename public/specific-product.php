@@ -7,8 +7,8 @@
 
  //READ PRODUCTS
 
-$stmt = $dbconnect->query("SELECT * FROM products"); 	
-$products = $stmt->fetchAll(); 
+$stmt = $dbconnect->query("SELECT * FROM products");
+$products = $stmt->fetchAll();
 
 ?>
 
@@ -23,11 +23,11 @@ $products = $stmt->fetchAll();
     <link rel="stylesheet" href="<?=CSS_PATH . 'style.css'?>">
 	<link rel="stylesheet" href="css/style.css">
     <title>Specific product</title>
-	
+
 </head>
 
 <body id="body">
-  
+
   <nav class="navbar-light" style="background-color: #e3f2fd;">
   <ul class="nav justify-content-center">
     <li class="nav-item">
@@ -45,7 +45,7 @@ $products = $stmt->fetchAll();
     <li class="nav-item">
       <a class="nav-link" href="./login-account.php">Login</a>
     </li>
-   
+
   </ul>
   </nav>
 
@@ -57,8 +57,8 @@ $products = $stmt->fetchAll();
       <h1 class="fredriks-huvudrubrik">Shop page</h1>
       <h2 class="fredriks-huvudrubrik"> Specific product </h2>
         <p>
-      
-      
+
+
 <div id="fredriks-content">
 <b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
 <b> Description: </b> <?php echo $_POST["Description"]; ?><p>
@@ -74,4 +74,3 @@ $products = $stmt->fetchAll();
 
 </body>
 </html>
-    

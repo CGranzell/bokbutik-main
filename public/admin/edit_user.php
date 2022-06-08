@@ -62,14 +62,12 @@ if (array_key_exists('submitBtn', $_POST)) {
 
 
     <div class="container">
-        <br />
-        <br />
-        <div>
-            <a href="users.php"> Admin </a>
+
+        <div class="mt-5 mb-5">
+            <a class="btn btn-primary" href="users.php" role="button"> Admin dashboard </a>
         </div>
 
-        <br />
-        <br />
+
 
         <form method="POST">
             <div class="row">

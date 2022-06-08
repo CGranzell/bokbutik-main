@@ -63,7 +63,7 @@ if (array_key_exists('submitBtn', $_POST)) {
         <br />
         <br />
         <div>
-            <a href="users.php"> Admin </a>
+            <a class="btn btn-primary" href="users.php" role="button"> Admin dashboard </a>
         </div>
 
         <br />
