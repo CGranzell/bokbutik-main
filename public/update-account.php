@@ -107,7 +107,7 @@ $user = fetchOneUser($_GET['userID']);
 
 </form>
 
-
+<h1>Visar gruppen</h1>
   
 <footer id="footer" class="mt-auto  footer">
 
