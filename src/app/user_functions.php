@@ -48,6 +48,21 @@ function fetchUserByEmail($email){
  $statement->execute();
  return $statement->fetch();
 }
+// Hämta användare efter email OCH password
+function fetchUserByEmailAndPassword($email, $password){
+   global $dbconnect;
+  // Hämtar användare som har rätt email och password
+  $sql = '
+    SELECT * FROM users
+    WHERE email = :email AND password = :password
+  ';
+
+  $statement = $dbconnect->prepare($sql);
+  $statement->bindParam(':email', $email);
+  $statement->bindParam(':password', $password);
+  $statement->execute();
+  return $statement->fetch();
+}
 
 // Skapa en användare
 function addUser($array) {
