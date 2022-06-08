@@ -21,5 +21,13 @@ define('CSS_PATH', '../public/css/');          // path to "css"-folder
 
 // path till dbconnect
 require(SRC_PATH . '/dbconnect.php');
-// path to css
-// include(CSS_PATH . 'style.css');
+// path till common_functions
+require(SRC_PATH . 'app/common_functions.php');
+// path till messages_functions
+require(SRC_PATH . 'app/messages_functions.php');
+// path till messages_functions
+require(SRC_PATH . 'app/user_functions.php');
+// path till classes
+require(SRC_PATH . 'app/classes.php');
+$userDbHandler = new UserDbHandler($dbconnect);
+

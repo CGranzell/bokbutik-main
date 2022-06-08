@@ -1,24 +1,29 @@
 <?php
 
 
+class UserDbHandler {
 
+public function __construct($dbconnect)
+{
+  $this->dbconnect = $dbconnect;
+}
 
 // Hämtar alla users
-function fetchAllUsers() {
-  global $dbconnect;
+public function fetchAllUsers() {
+ 
   $sql = "SELECT * FROM users";
-  $statement = $dbconnect->query($sql);
+  $statement = $this->dbconnect->query($sql);
   return $statement->fetchAll();
 }
 
 // Hämta en user 
-function fetchOneUser($id){
-  global $dbconnect;
+public function fetchOneUser($id){
+ 
 $sql = "
 SELECT * FROM users 
 WHERE id = :id
 ";
-$statement = $dbconnect->prepare($sql);
+$statement = $this->dbconnect->prepare($sql);
 $statement->bindParam(':id', $id);
 $statement->execute();
 return $statement->fetch();
@@ -28,39 +33,39 @@ return $statement->fetch();
 
 
 // Tar bort user 
-function deleteUser(){
-  global $dbconnect;
+public function deleteUser(){
+ 
   $sql = "
   DELETE FROM users 
   WHERE id = :id;
   ";
-  $statement = $dbconnect->prepare($sql);
+  $statement = $this->dbconnect->prepare($sql);
   $statement->bindParam(':id', $_POST['userID']);
   $statement->execute();
 }
 
 // Hämta användare efter email
-function fetchUserByEmail($email){
-   global $dbconnect;
+public function fetchUserByEmail($email){
+  
    $sql = '
    SELECT * FROM users
    WHERE email = :email
  ';
- $statement = $dbconnect->prepare($sql);
+ $statement = $this->dbconnect->prepare($sql);
  $statement->bindParam(':email', $email);
  $statement->execute();
  return $statement->fetch();
 }
 // Hämta användare efter email OCH password
-function fetchUserByEmailAndPassword($email, $password){
-   global $dbconnect;
+public function fetchUserByEmailAndPassword($email, $password){
+  
   // Hämtar användare som har rätt email och password
   $sql = '
     SELECT * FROM users
     WHERE email = :email AND password = :password
   ';
 
-  $statement = $dbconnect->prepare($sql);
+  $statement = $this->dbconnect->prepare($sql);
   $statement->bindParam(':email', $email);
   $statement->bindParam(':password', $password);
   $statement->execute();
@@ -68,8 +73,8 @@ function fetchUserByEmailAndPassword($email, $password){
 }
 
 // Skapa en användare
-function addUser($array) {
-  global $dbconnect;
+public function addUser($array) {
+ 
   $sql = "
   INSERT INTO users 
    (
@@ -96,7 +101,7 @@ function addUser($array) {
     :country
    )
   ";
-  $statement = $dbconnect->prepare($sql);
+  $statement = $this->dbconnect->prepare($sql);
   $statement->bindParam(':first_name', $array[0]);
   $statement->bindParam(':last_name', $array[1]);
   $statement->bindParam(':email', $array[2]);
@@ -110,8 +115,8 @@ function addUser($array) {
 }
 
 // Uppdaterar en användare
-function updateUser($id, $array) {
-  global $dbconnect;
+public function updateUser($id, $array) {
+ 
   $sql = "
     UPDATE users 
     SET 
@@ -127,7 +132,7 @@ function updateUser($id, $array) {
     
     WHERE id = :id
     ";
-    $statement = $dbconnect->prepare($sql);
+    $statement = $this->dbconnect->prepare($sql);
     $statement->bindParam(':id', $id);
     $statement->bindParam(':first_name', $array[0]);
     $statement->bindParam(':last_name', $array[1]);
@@ -139,4 +144,6 @@ function updateUser($id, $array) {
     $statement->bindParam(':city', $array[7]);
     $statement->bindParam(':country', $array[8]);
     $statement->execute();
+}
+
 }

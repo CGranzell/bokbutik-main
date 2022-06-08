@@ -1,8 +1,5 @@
 <?php
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
-require('../src/app/messages_functions.php');
 include('./layout/header.php');
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
@@ -20,10 +17,10 @@ if(isset($_GET['invalidUser'])){
 }
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
-  deleteUser(); 
+  $userDbHandler->deleteUser(); 
 }
 // Hämtar alla användaruppgifter
-$users = fetchAllUsers();
+$users = $userDbHandler->fetchAllUsers();
 ?>
 
 <div class="wrapper-register">

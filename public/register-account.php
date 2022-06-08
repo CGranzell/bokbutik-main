@@ -1,8 +1,5 @@
 <?php
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
-require('../src/app/messages_functions.php');
 include('./layout/header.php');
 
 // Felmeddelanden sätts till tomt
@@ -36,7 +33,7 @@ if(isset($_POST['createUserBtn'])) {
   ];
 
     // Kollar om email är upptagen
-    $emailExist = fetchUserByEmail($email);
+    $emailExist = $userDbHandler->fetchUserByEmail($email);
  
   if($emailExist){
     $errorTakenEmail  = emailAlreadyTaken($errorTakenEmail);
@@ -95,7 +92,7 @@ if(isset($_POST['createUserBtn'])) {
       $errorMessageCountry  = errorRequiredField("Country");
     }
   } else {
-    addUser($userInfo);
+    $userDbHandler->addUser($userInfo);
     redirect("login-account", "registerSuccess");   
     }
   }

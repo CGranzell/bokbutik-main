@@ -1,9 +1,6 @@
 <?php
 
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
-require('../src/app/messages_functions.php');
 include('./layout/header.php');
 
 
@@ -27,7 +24,7 @@ if(isset($_POST['loginBtn'])) {
   $email    = trim($_POST['email']);
   $password = trim($_POST['password']);
 
-  $user = fetchUserByEmailAndPassword($email, $password);
+  $user = $userDbHandler->fetchUserByEmailAndPassword($email, $password);
   // Om användaren finns
   if($user){
       $_SESSION['email'] = $user['email'];
