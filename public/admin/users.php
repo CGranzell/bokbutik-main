@@ -1,7 +1,7 @@
 <?php
 
 require('../../src/dbconnect.php');
-
+include('../layout/header.php');
 
 $stmt = $pdo->query('SELECT * FROM users');
 $users = $stmt->fetchAll();
@@ -31,11 +31,9 @@ if (array_key_exists('deleteBtn', $_POST)) {
 </head>
 
 <body>
-    <br />
-    <br />
-    <div class="container">
+    <div class="mt-5 container">
         <div>
-            <a href="create_user.php"> Create new user </a>
+            <a class="btn btn-primary" href="create_user.php" role="button"> Create new user </a>
         </div>
 
 
@@ -75,10 +73,10 @@ if (array_key_exists('deleteBtn', $_POST)) {
                         <td> <?= htmlentities($user['country']) ?> </td>
                         <td> <?= htmlentities($user['create_date']) ?> </td>
                         <td>
-                            <div class="row">
-                                <div class="col"> <a href="edit_user.php?id=<?= $user['id'] ?> "> Edit </a> </div>
-                                <div class="col">
-                                    <form method="POST"><button type="submit" name="deleteBtn" value="<?= $user['id'] ?> "> Delete </button></form>
+                            <div class="d-flex flex-row">
+                                <div class="p-2"> <a class="btn btn-primary" href="edit_user.php?id=<?= $user['id'] ?> "> Edit </a> </div>
+                                <div class="p-2">
+                                    <form method="POST"><button type="submit" class="btn btn-danger" name="deleteBtn" value="<?= $user['id'] ?> "> Delete </button></form>
                                 </div>
                             </div>
                         </td>

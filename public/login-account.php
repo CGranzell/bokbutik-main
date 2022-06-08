@@ -1,8 +1,6 @@
 <?php
 
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
 include('./layout/header.php');
 
 
@@ -11,33 +9,14 @@ include('./layout/header.php');
 $message = "";
 
 if(isset($_GET['mustLogin'])) {
-  $message  = '
-<div class="alert alert-danger message mx-auto">
-    You must login !
-</div>
-';
+  $message  = mustLogin($message);
 }
-
 if(isset($_GET['logout'])) {
-$message  = '
-<div class="alert alert-success message mx-auto">
-    You are now loged out
-</div>
-';
+  $message = isLoggedOut($message);
 }
-// Om användaren lyckades registrera , skriv ut meddelande
 if(isset($_GET['registerSuccess'])){
-  $message  = '
-  <div class="alert alert-success message mx-auto">
-      You succefully registered a new account! Please login
-  </div>
-';
+  $message  = registerSucces($message);
 }
-
-
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 
 // Logga in
 if(isset($_POST['loginBtn'])) {
@@ -45,39 +24,16 @@ if(isset($_POST['loginBtn'])) {
   $email    = trim($_POST['email']);
   $password = trim($_POST['password']);
 
-  // Hämtar användare som har rätt email och password
-  $sql = '
-    SELECT * FROM users
-    WHERE email = :email AND password = :password
-  ';
-
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->bindParam(':password', $password);
-  $statement->execute();
-  $user = $statement->fetch();
+  $user = $userDbHandler->fetchUserByEmailAndPassword($email, $password);
   // Om användaren finns
   if($user){
       $_SESSION['email'] = $user['email'];
       $_SESSION['id'] = $user['id'];
       redirect("my-account", "");
   } else { //OM anändaren inte finns
-    $message  = '
-    <div class="alert alert-danger message mx-auto">
-       Error! Wrong login info, please try again
-    </div>
-  ';
+    $message  = userNotExists($message);
   }
-
 }
-
-// echo "<pre>";
-// print_r($user);
-// echo "</pre>";
-
-
-
-
 ?>
 
 <div class="wrapper-login mx-auto">

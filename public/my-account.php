@@ -1,56 +1,27 @@
 <?php
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
 include('./layout/header.php');
-
-
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
 checkLoginSession();
-
-
 // Sätter meddelande till tomma
 $succesMessage = "";
 $message = "";
-
+// meddelande om uppdatering lyckades
 if(isset($_GET['updateSucces'])){
-  $succesMessage = '
-  <div class="alert alert-success message mx-auto">
-      Succes! The post was updated
-  </div>;
-';
+  $succesMessage = uppdateSucces($succesMessage);
 }
-
 // Om querystring har värdet invalidUser, hantera felmeddelande
 if(isset($_GET['invalidUser'])){
-  $message = '
-  <div class="alert alert-danger message mx-auto">
-      Trying to updated invalid User! Please try again
-  </div>;
-  ';
+  $message = invalidUser($message);
 }
-
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
-  $sql = "
-  DELETE FROM users 
-  WHERE id = :id;
-  ";
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':id', $_POST['userID']);
-  $statement->execute();
+  $userDbHandler->deleteUser(); 
 }
-
-
 // Hämtar alla användaruppgifter
-$sql = "SELECT * FROM users";
-$statement = $dbconnect->query($sql);
-$users = $statement->fetchAll();
-// fetchAllUsers();
-
+$users = $userDbHandler->fetchAllUsers();
 ?>
-
 
 <div class="wrapper-register">
   <h1>Mina sidor</h1>
@@ -97,7 +68,7 @@ $users = $statement->fetchAll();
               <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
               <input type="submit" name="deleteAccountBtn" value="Delete">
             </form>
-            <!-- Updatera knapp -->
+            <!-- Uppdatera knapp -->
             <form action="update-account.php" method="GET">
                 <input type="submit" value="Update">
                 <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">

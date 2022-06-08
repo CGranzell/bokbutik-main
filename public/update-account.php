@@ -1,7 +1,5 @@
 <?php
 require('../src/config.php');
-require('../src/app/user_functions.php');
-require('../src/app/common_functions.php');
 include('./layout/header.php');
 
 
@@ -34,14 +32,14 @@ if(isset($_POST['updateAccountBtn'])) {
     $city       = trim($_POST['city']),
     $country    = trim($_POST['country']),
   ];
-    updateUser($_GET['userID'], $userInfo);
+  $userDbHandler->updateUser($_GET['userID'], $userInfo);
     redirect("my-account", "updateSucces");
   }
 
 
 }
 // Hämtar en user
-$user = fetchOneUser($_GET['userID']);
+$user = $userDbHandler->fetchOneUser($_GET['userID']);
 
 ?>
 
@@ -106,7 +104,8 @@ $user = fetchOneUser($_GET['userID']);
   <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
 </form>
-  
+
+
 <footer id="footer" class="mt-auto  footer">
 
 
