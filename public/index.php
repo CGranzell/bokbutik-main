@@ -49,6 +49,8 @@ $products = $stmt->fetchAll();
                 <th>Description</th>
 				        <th>Price</th>
 				        <th>Stock</th>
+                <th> Image </th>
+
 
 		      	</tr>
         </thead>
@@ -66,15 +68,57 @@ $products = $stmt->fetchAll();
 			            <input type="hidden" name="Description" value="<?=$product['description']?>">
 			          <input type="hidden" name="Price" value="<?=$product['price']?>">
 		          	<input type="hidden" name="Stock" value="<?=$product['stock']?>">
+                <input type="hidden" name="Image" value="<?=$product['img_url']?>">
 		           <input type="submit" name="Readmore" value="Specific product">
                 </form>
               </td>
+              <td> <?=htmlentities($product['img_url']) ?> </td>
                        
                 </tr>
             <?php endforeach; ?>
         </tbody>
+        </table>
+        <?php 
+   echo "<pre>";
+	print_r($_POST);
+	echo "</pre>";
 
-    </table>
+  echo "<p>";
+  echo "<p>";
+
+  if (isset($_POST['uploadBtn'])) { 
+    echo "<pre>";
+    print_r($_FILES);	/*Lyssnar efter de filer som skickats via FILES, 
+    dvs. när jag  valt fil och laddat upp. 
+    
+     print_r($_FILES[uploadedFile]); Nu är förälderarrayen uploadedFile borta.*/ 
+    //Målet är att flytta filen från den temporära platsen till mappen uploads, när jag  hämtat och laddat upp filen. 
+    echo "</pre>";}
+
+    if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) { //har filen laddadts upp? uploadedFile
+    //är förälderarrayen, tmp_name är barnarrayen
+      
+      $fileName 	    = $_FILES['uploadedFile']['name']; //// This is the name of the file
+      $fileType 	    = $_FILES['uploadedFile']['type'];
+      $fileTempPath   = $_FILES['uploadedFile']['tmp_name'];
+      $path 		    = "uploads/";
+      // uploads/dummy-profile.png  :mappen som jag vill spara den nedladdade filen i
+      $newFilePath = $path . $fileName; }
+     
+  ?>
+
+        <p>
+        <form action="" method="POST" enctype="multipart/form-data"> <!--enctype för att $_FILES ska funka -->
+        <label>File:</label> 
+		  <input type="file" name="uploadedFile"><br> <!-- Type=file gör att man får en fil-knapp-->
+		  <input type="submit" value="upload" name="uploadBtn">
+	  </form>
+
+    
+    <p>
+    
+
+    
   
 	
 </body>
