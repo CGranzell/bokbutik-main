@@ -1,10 +1,10 @@
 <?php require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
-require('')
+require('C:\MAMP\htdocs\bokbutik-main\src\app\common_functions.php');
 
 
 
 // Felmeddelande sätts till tomt
-$message = "";
+
 // Uppdatera användaruppgift
 if(isset($_POST['updateProductBtn'])) {
   
@@ -24,20 +24,13 @@ if(isset($_POST['updateProductBtn'])) {
     $statement = $dbconnect->prepare($sql);
     $statement->bindParam(':id', $_GET['productId']);
     $statement->bindParam(':title', $_POST['title']);
+    $statement->bindParam(':description', $_POST['description']);
     $statement->bindParam(':price', $_POST['price']);
     $statement->bindParam(':stock', $_POST['stock']);
     $statement->bindParam(':img_url', $_POST['img_url']);
     $statement->execute();
+}
 
-    redirect("http://localhost/bokbutik-main/public/admin/index.php", "updateSucces");
-  }
-
-
-
-
-
-
-// Hämtar en användaruppgift
 $sql = "
       SELECT * FROM products 
       WHERE id = :id
@@ -47,21 +40,12 @@ $statement->bindParam(':id', $_GET['productId']);
 $statement->execute();
 $product = $statement->fetch();
 
- //echo "Product";
- //echo "<pre>";
- //print_r($product);
- //echo "</pre>";
-
-
-
 ?>
 
 <div class="wrapper-register">
   <h1>Uppdatera </h1>
   </div>
-  <?=$message ?>
-
-  	
+  
   <form method="POST" action="" class="form mx-auto" >
 		
 		<div class="mb-3">
@@ -86,10 +70,13 @@ $product = $statement->fetch();
   <div class="mb-3">
     <label for="img_url" class="form-label">Img_url</label>
     <input type="img_url" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
-  </div>
-	
+  </div></form>
+	 
 		
-  <!-- Update Btn -->
-  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
+  <form action="http://localhost/bokbutik-main/public/admin/index.php" method="GET">
+                        <input type="hidden" name="productId" value="<?=$product['id'] ?>">
+                        <button> Update</button></form>
 
-</form>
+</body>
+</html>
+                    
