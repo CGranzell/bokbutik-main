@@ -5,7 +5,6 @@ require('../../src/dbconnect.php');
 
 $productId = $_GET['productId'];
 // Felmeddelande sätts till tomt
-// $message = "";
 // Uppdatera användaruppgift
 if (array_key_exists('updateAccountBtn', $_POST)) {
 
@@ -72,7 +71,6 @@ $product = $statement->fetch();
   <div class="wrapper-register">
     <h1>Uppdatera </h1>
   </div>
-  <?= $message ?>
 
 
   <form method="POST" class="form mx-auto">

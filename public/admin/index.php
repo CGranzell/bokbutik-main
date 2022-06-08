@@ -2,15 +2,35 @@
 //require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
 require('../../src/dbconnect.php');
 //echo "<pre>";
-//print_r($_POST);
+//print_r($_GET['productId']);
 //echo "</pre>";
-if(isset($_GET['updateSucces'])){
-  $succesMessage = '
-  <div class="alert alert-success message mx-auto">
-      Succes! The product was updated
-  </div>;
-';
-}
+
+// if(isset($_POST['updateProductBtn'])) {
+
+
+//   $sql = "
+//   UPDATE products
+//   SET
+//     title  = :title,
+//     description   = :description,
+//     price       = :price,
+//     stock    = :stock,
+//     img_url       = :img_url,
+
+
+//   WHERE id = :id
+//   ";
+//   $statement = $dbconnect->prepare($sql);
+//   $statement->bindParam(':id', $_GET['productId']);
+//   $statement->bindParam(':title', $_POST['title']);
+//   $statement->bindParam(':description', $_POST['description']);
+//   $statement->bindParam(':price', $_POST['price']);
+//   $statement->bindParam(':stock', $_POST['stock']);
+//   $statement->bindParam(':img_url', $_POST['img_url']);
+//   $statement->execute();
+
+//  }
+
 if (isset($_POST['deleteProductBtn'])) {
 
     $sql = "
@@ -118,13 +138,6 @@ echo "</pre>";
      <input type="text" name="img_url" placeholder="Img_url"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
-
-
-</body>
-</html>
-
-
-
 
 
 </body>
