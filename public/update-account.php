@@ -1,6 +1,7 @@
 <?php
 require('../src/config.php');
-require('../src/app/functions.php');
+require('../src/app/user_functions.php');
+require('../src/app/common_functions.php');
 include('./layout/header.php');
 
 
@@ -18,65 +19,29 @@ $message = "";
 // Uppdatera användaruppgift
 if(isset($_POST['updateAccountBtn'])) {
   if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
+    $message = noMatchPassword($message);
   } else {
-
-    $sql = "
-    UPDATE users 
-    SET 
-      first_name  = :first_name,
-      last_name   = :last_name,
-      email       = :email,
-      password    = :password,
-      phone       = :phone,
-      street      = :street,
-      postal_code = :postal_code,
-      city        = :city,
-      country     = :country
-    
-    WHERE id = :id
-    ";
-    $statement = $dbconnect->prepare($sql);
-    $statement->bindParam(':id', $_GET['userID']);
-    $statement->bindParam(':first_name', $_POST['first_name']);
-    $statement->bindParam(':last_name', $_POST['last_name']);
-    $statement->bindParam(':email', $_POST['email']);
-    $statement->bindParam(':password', $_POST['password']);
-    $statement->bindParam(':phone', $_POST['phone']);
-    $statement->bindParam(':street', $_POST['street']);
-    $statement->bindParam(':postal_code', $_POST['postal_code']);
-    $statement->bindParam(':city', $_POST['city']);
-    $statement->bindParam(':country', $_POST['country']);
-    $statement->execute();
-
+       // skapar och fyller array med user info
+    $userInfo = [
+    //Tar bort mellanslag före och efter textsträng
+    $firstname  = trim($_POST['first_name']),
+    $lastname   = trim($_POST['last_name']),
+    $email      = trim($_POST['email']),
+    $password   = trim($_POST['password']),
+    $phone      = trim($_POST['phone']),
+    $street     = trim($_POST['street']),
+    $postalcode = trim($_POST['postal_code']),
+    $city       = trim($_POST['city']),
+    $country    = trim($_POST['country']),
+  ];
+    updateUser($_GET['userID'], $userInfo);
     redirect("my-account", "updateSucces");
   }
 
 
 }
-
-
-
-// Hämtar en användaruppgift
-$sql = "
-      SELECT * FROM users 
-      WHERE id = :id
-";
-$statement = $dbconnect->prepare($sql);
-$statement->bindParam(':id', $_GET['userID']);
-$statement->execute();
-$user = $statement->fetch();
-
-// echo "User";
-// echo "<pre>";
-// print_r($user);
-// echo "</pre>";
-
-
+// Hämtar en user
+$user = fetchOneUser($_GET['userID']);
 
 ?>
 

@@ -1,9 +1,8 @@
 <?php
 require('../src/config.php');
-require('../src/app/functions.php');
+require('../src/app/user_functions.php');
+require('../src/app/common_functions.php');
 include('./layout/header.php');
-
-
 
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
@@ -18,29 +17,25 @@ include('./layout/header.php');
   $errorTakenEmail        = "";
   $message                = "";
 
+
 // Skapa användaruppgift
 if(isset($_POST['createUserBtn'])) {
-  //Tar bort mellanslag före och efter textsträng
-  $firstname = trim($_POST['first_name']);
-  $lastname = trim($_POST['last_name']);
-  $email = trim($_POST['email']);
-  $password = trim($_POST['password']);
-  $phone = trim($_POST['phone']);
-  $street = trim($_POST['street']);
-  $postalcode = trim($_POST['postal_code']);
-  $city = trim($_POST['city']);
-  $country = trim($_POST['country']);
+  // skapar och fyller array med user info
+  $userInfo = [
+    //Tar bort mellanslag före och efter textsträng
+    $firstname  = trim($_POST['first_name']),
+    $lastname   = trim($_POST['last_name']),
+    $email      = trim($_POST['email']),
+    $password   = trim($_POST['password']),
+    $phone      = trim($_POST['phone']),
+    $street     = trim($_POST['street']),
+    $postalcode = trim($_POST['postal_code']),
+    $city       = trim($_POST['city']),
+    $country    = trim($_POST['country']),
+  ];
 
     // Kollar om email är upptagen
-    $sql = '
-    SELECT * FROM users
-    WHERE email = :email
-  ';
- 
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->execute();
-  $emailExist = $statement->fetch();
+    $emailExist = fetchUserByEmail($email);
   // Om Email är upptagen
   if($emailExist){
     $errorTakenEmail  = '
@@ -48,11 +43,10 @@ if(isset($_POST['createUserBtn'])) {
       The email is already taken
    </div>
    ';
-   
- } else {
-
- 
-
+ } 
+ if($_POST['password'] !== $_POST['confirmPassword']){
+    $message = noMatchPassword($message);
+  } else {
   // Om något av textfälten är tomma gå in i detta if block
   if (
     $firstname  === ""  ||
@@ -67,11 +61,8 @@ if(isset($_POST['createUserBtn'])) {
   ) {
       // Felmeddelande Firstname
     if (empty($firstname)) {
-      $errorMessageFirstname = '
-      <div class="alert alert-danger message mx-auto">
-        Firstname is required
-      </div>
-    ';
+      $errorMessageFirstname = 
+      errorRequiredField("Firstname");
     }
     // Felmeddelande Lastname
     if (empty($lastname)) {
@@ -138,64 +129,13 @@ if(isset($_POST['createUserBtn'])) {
     ';
     }
   } else {
-
-    $sql = "
-    INSERT INTO users 
-     (
-      first_name, 
-      last_name,
-      email,
-      password,
-      phone,
-      street,
-      postal_code,
-      city,
-      country
-     )
-     VALUES 
-     (
-      :first_name,
-      :last_name,
-      :email,
-      :password,
-      :phone,
-      :street,
-      :postal_code,
-      :city,
-      :country
-     )
-    ";
-    $statement = $dbconnect->prepare($sql);
-    $statement->bindParam(':first_name', $firstname);
-    $statement->bindParam(':last_name', $lastname);
-    $statement->bindParam(':email', $email);
-    $statement->bindParam(':password', $password);
-    $statement->bindParam(':phone', $phone );
-    $statement->bindParam(':street', $street);
-    $statement->bindParam(':postal_code', $postalcode);
-    $statement->bindParam(':city', $city);
-    $statement->bindParam(':country', $country);
-    $statement->execute();
-
-    // OM password inte stämmer med confirmpassword, skriv ut felmeddelande
-  if($_POST['password'] !== $_POST['confirmPassword']){
-    $message = '
-    <div class="alert alert-danger message mx-auto">
-        The password do not match!
-    </div>
-    ';
-  } else {
+    addUser($userInfo);
     redirect("login-account", "registerSuccess");   
-  }
+    }
   }
 }
-
-}
-
 
 ?>
-
-
 
  <div class="wrapper-register">
   <h2>Register Here</h2>
