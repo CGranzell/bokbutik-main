@@ -4,32 +4,33 @@ require('../../src/dbconnect.php');
 //echo "<pre>";
 //print_r($_GET['productId']);
 //echo "</pre>";
+$imgUrl= "";
+$error = "";
+$messages = "";
 
-// if(isset($_POST['updateProductBtn'])) {
+if (isset($_POST['uploadBtn'])) {
+	echo "<pre>";
+	print_r($_FILES['uploadedFile']);
+	echo "</pre>";
 
+  if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
+    $fileName = $_FILES['uploadedFile']['name'];
+    $fileType = $_FILES['uploadedFile']['type'];
+    $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+    $path ="img/";
+    $newFilePath = $path . $fileName;
 
-//   $sql = "
-//   UPDATE products
-//   SET
-//     title  = :title,
-//     description   = :description,
-//     price       = :price,
-//     stock    = :stock,
-//     img_url       = :img_url,
+    
+    $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
+    if ($isTheFileUploaded) {
+        $imgUrl = $newFilePath;
+    } else {
 
-//   WHERE id = :id
-//   ";
-//   $statement = $dbconnect->prepare($sql);
-//   $statement->bindParam(':id', $_GET['productId']);
-//   $statement->bindParam(':title', $_POST['title']);
-//   $statement->bindParam(':description', $_POST['description']);
-//   $statement->bindParam(':price', $_POST['price']);
-//   $statement->bindParam(':stock', $_POST['stock']);
-//   $statement->bindParam(':img_url', $_POST['img_url']);
-//   $statement->execute();
+    }
 
-//  }
+  }
+}
 
 if (isset($_POST['deleteProductBtn'])) {
 
@@ -60,57 +61,15 @@ if (isset($_POST['addProductBtn'])) {
 
 
 
-
-$sql = "SELECT * FROM products";
-$statement = $dbconnect->query($sql);
-$products = $statement->fetchAll(); 
-                   
-
 $stmt       = $dbconnect->query("SELECT * FROM products");
 $products  = $stmt->fetchAll();
+//echo "<pre>";
+//print_r($products);
+//echo "</pre>";
 
-echo "<pre>";
-print_r($products);
-echo "</pre>";
-?> <?php $sql = "
-SELECT * FROM products 
-WHERE id = :id
-";
-$statement = $dbconnect->prepare($sql);
-$statement->bindParam(':id', $_GET['productId']);
-$statement->execute();
-$product = $statement->fetch();
 
 ?>
-<div class="wrapper-register">
-  <h1>Uppdaterad produkt </h1>
-  </div>
-  
-  <form method="GET" action="" class="form mx-auto" >
-		
-		<div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
-  </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
-  </div>
-		
-		<div class="mb-3">
-    <label for="price" class="form-label">Price</label>
-    <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
-  </div>
-	
-  <div class="mb-3">
-    <label for="stock" class="form-label">Stock</label>
-    <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
-  </div>
-	
-  <div class="mb-3">
-    <label for="img_url" class="form-label">Img_url</label>
-    <input type="img_url" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
-  </div></form>
+
 
 
 
@@ -180,7 +139,12 @@ $product = $statement->fetch();
      <input type="text" name="img_url" placeholder="Img_url"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
+   <form action="" method="POST" enctype="multipart/form-data">
+	
+		<input type="file" name="uploadedFile"><br>
 
-
+		<input type="submit" value="upload" name="uploadBtn">
+	</form>
+  <img src="<?=$imgUrl?>">
 </body>
 </html>

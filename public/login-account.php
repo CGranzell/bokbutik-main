@@ -1,7 +1,6 @@
 <?php
-
 require('../src/config.php');
-include('./layout/header.php');
+include(LAYOUT_PATH . 'header.php');
 
 
 
@@ -63,13 +62,6 @@ if(isset($_POST['loginBtn'])) {
     <h3>New User?</h3>
     <a href="register-account.php" class="btn btn-primary ">Register here</a>
 </div>
-
-<footer id="footer" class="mt-auto  footer">
-
-
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>

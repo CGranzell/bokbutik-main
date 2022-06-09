@@ -1,6 +1,6 @@
 <?php
 require('../src/config.php');
-include('./layout/header.php');
+include(LAYOUT_PATH . 'header.php');
 
 // Felmeddelanden sätts till tomt
   $errorMessageFirstname  = "";
@@ -168,16 +168,8 @@ if(isset($_POST['createUserBtn'])) {
   </div>
   <!-- Create User Btn -->
   <input type="submit" class="btn btn-primary btn-form" name="createUserBtn" value="Register">
-
-
 </form>
+<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>
 
-<footer id="footer" class="mt-auto  footer">
-
-
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</body>
-</html>

@@ -72,39 +72,6 @@ $product = $statement->fetch();
     <h1>Uppdatera </h1>
   </div>
 
-  
-  <form method="POST" action="" class="form mx-auto" >
-		
-		<div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
-  </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
-  </div>
-		
-		<div class="mb-3">
-    <label for="price" class="form-label">Price</label>
-    <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
-  </div>
-	
-  <div class="mb-3">
-    <label for="stock" class="form-label">Stock</label>
-    <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
-  </div>
-	
-  <div class="mb-3">
-    <label for="img_url" class="form-label">Img_url</label>
-    <input type="img_url" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
-  </div></form>
-	 
-		
-  <form action="http://localhost/bokbutik-main/public/admin/index.php" method="GET">
-                        <input type="hidden" name="productId" value="<?=$product['id'] ?>">
-                        <button> Update</button></form> 
-
-
 
   <form method="POST" class="form mx-auto">
 
@@ -137,7 +104,6 @@ $product = $statement->fetch();
     <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
   </form>
->>>>>>> e3f2c165f679db891ef6be0451a4775b241c4625
 
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 require('../src/config.php');
-include('./layout/header.php');
+include(LAYOUT_PATH . 'header.php');
 
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan
@@ -104,14 +104,6 @@ $user = $userDbHandler->fetchOneUser($_GET['userID']);
   <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
 </form>
-
-
-<footer id="footer" class="mt-auto  footer">
-
-
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>
