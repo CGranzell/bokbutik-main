@@ -135,7 +135,7 @@ if (isset($_POST['uploadBtn'])) {
 
 
 
-		/** KOMMENTAR: Sibars kod funkade inte, min gör det! 
+		/** 
 		 * File size error handling
 		 */
 		if ($_FILES['uploadedFile']['size'] > 1000000) {  // Allows only files under 1 mbyte, 1 miljon byte
