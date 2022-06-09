@@ -66,14 +66,13 @@
 		text-align: center;
 		} 
 
-	.fredriks-body {
-		margin: auto;
-		width: 40%;
-		height: 40%;
-
-
-	}
-	
+		
 	.tabell{
 		text-align: center;
 	}
+
+	table.fredriks-centrering {
+		margin-left:auto; 
+    	margin-right:auto;
+  }
+	
