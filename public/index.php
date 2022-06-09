@@ -35,7 +35,7 @@ $products = $stmt->fetchAll();
   <title>All products</title>
 	
 </head>
-<body class="fredriks-body">
+<body>
 
     <p>
 	<h1 class="fredriks-huvudrubrik">Shop page</h1>
