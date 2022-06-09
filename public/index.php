@@ -78,6 +78,9 @@ $products = $stmt->fetchAll();
             <?php endforeach; ?>
         </tbody>
         </table>
+
+
+        <!--Bildhantering nedan-->
         <?php 
    echo "<pre>";
 	print_r($_POST);
@@ -101,7 +104,7 @@ $products = $stmt->fetchAll();
       $fileName 	    = $_FILES['uploadedFile']['name']; //// This is the name of the file
       $fileType 	    = $_FILES['uploadedFile']['type'];
       $fileTempPath   = $_FILES['uploadedFile']['tmp_name'];
-      $path 		    = "uploads/";
+      $path 		    = "img/";
       // uploads/dummy-profile.png  :mappen som jag vill spara den nedladdade filen i
       $newFilePath = $path . $fileName; }
      
