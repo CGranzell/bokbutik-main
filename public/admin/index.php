@@ -97,7 +97,7 @@ $products  = $stmt->fetchAll();
 			   <th>Stock</th>
          <th>Img_url</th>
 
-
+<p>test</p>
 		   </tr>
 	   </thead>
 
