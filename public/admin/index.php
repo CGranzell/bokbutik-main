@@ -59,14 +59,50 @@ if (isset($_POST['addProductBtn'])) {
 
 $sql = "SELECT * FROM products";
 $statement = $dbconnect->query($sql);
-$products = $statement->fetchAll();                    
+$products = $statement->fetchAll(); 
+                   
 echo "<pre>";
 print_r($products);
 echo "</pre>";
-
+?> <?php $sql = "
+SELECT * FROM products 
+WHERE id = :id
+";
+$statement = $dbconnect->prepare($sql);
+$statement->bindParam(':id', $_GET['productId']);
+$statement->execute();
+$product = $statement->fetch();
 
 ?>
-
+<div class="wrapper-register">
+  <h1>Uppdaterad produkt </h1>
+  </div>
+  
+  <form method="GET" action="" class="form mx-auto" >
+		
+		<div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
+  </div>
+		
+		<div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
+  </div>
+	
+  <div class="mb-3">
+    <label for="stock" class="form-label">Stock</label>
+    <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
+  </div>
+	
+  <div class="mb-3">
+    <label for="img_url" class="form-label">Img_url</label>
+    <input type="img_url" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
+  </div></form>
 
 
 

@@ -75,7 +75,7 @@ $product = $statement->fetch();
 		
   <form action="http://localhost/bokbutik-main/public/admin/index.php" method="GET">
                         <input type="hidden" name="productId" value="<?=$product['id'] ?>">
-                        <button> Update</button></form>
+                        <button> Update</button></form> 
 
 </body>
 </html>
