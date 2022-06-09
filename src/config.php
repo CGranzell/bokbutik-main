@@ -8,6 +8,7 @@ session_start();
 define('ROOT_PATH', '..' . __DIR__ . '/'); // path to 'bokbutik-main/'
 define('SRC_PATH',  __DIR__ . '/'); // path to 'bokbutik-main/src/'
 define('CSS_PATH', '../public/css/');          // path to "css"-folder
+define('LAYOUT_PATH', '../public/layout/');          // path to "layout"-folder
 
  //print(ROOT_PATH);
 
@@ -17,6 +18,7 @@ define('CSS_PATH', '../public/css/');          // path to "css"-folder
 // print_r(ROOT_PATH);
 // print_r(SRC_PATH);
 // print_r(CSS_PATH . 'style.css');
+// print_r(LAYOUT_PATH . 'footer.php');
 
 
 // path till dbconnect
