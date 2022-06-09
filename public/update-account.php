@@ -16,26 +16,27 @@ if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){
 $message = "";
 // Uppdatera användaruppgift
 if(isset($_POST['updateAccountBtn'])) {
-  if(password_verify($_POST['password'], $_POST['confirmPassword'])){
-    $message = noMatchPassword($message);
-  } else {
-       // skapar och fyller array med user info
-    $userInfo = [
-    //Tar bort mellanslag före och efter textsträng
-    $firstname  = trim($_POST['first_name']),
-    $lastname   = trim($_POST['last_name']),
-    $email      = trim($_POST['email']),
-    $password   = trim($_POST['password']),
-    $phone      = trim($_POST['phone']),
-    $street     = trim($_POST['street']),
-    $postalcode = trim($_POST['postal_code']),
-    $city       = trim($_POST['city']),
-    $country    = trim($_POST['country']),
-  ];
-  $userDbHandler->updateUser($_GET['userID'], $userInfo);
-    redirect("my-account", "updateSucces");
-  }
 
+    // skapar och fyller array med user info
+    $userInfo = [
+      //Tar bort mellanslag före och efter textsträng
+      $firstname  = trim($_POST['first_name']),
+      $lastname   = trim($_POST['last_name']),
+      $email      = trim($_POST['email']),
+      $password   = trim($_POST['password']),
+      $phone      = trim($_POST['phone']),
+      $street     = trim($_POST['street']),
+      $postalcode = trim($_POST['postal_code']),
+      $city       = trim($_POST['city']),
+      $country    = trim($_POST['country']),
+    ];
+    $userId = $userDbHandler->fetchOneUser($_GET['userID']);
+  if(password_verify($userInfo[3], $userId['password'])){
+    $userDbHandler->updateUser($_GET['userID'], $userInfo);
+    redirect("my-account", "updateSucces");
+} else { 
+  $message = noMatchPassword($message);
+}
 
 }
 // Hämtar en user
@@ -68,13 +69,14 @@ $user = $userDbHandler->fetchOneUser($_GET['userID']);
 	<!-- Password -->
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password" value="<?= htmlentities($user['password']) ?>">
+    <input type="password" class="form-control" id="password" name="password">
   </div>
-	<!-- Confirm Password -->
+	<!-- Confirm Password
+   value="<?= htmlentities($user['password']) ?>"
   <div class="mb-3">
     <label for="confirm-password" class="form-label">Confirm Password</label>
     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-  </div>
+  </div> -->
 		<!-- Phone -->
 		<div class="mb-3">
     <label for="phone" class="form-label">Phone</label>
