@@ -16,6 +16,9 @@ if(isset($_GET['logout'])) {
 if(isset($_GET['registerSuccess'])){
   $message  = registerSucces($message);
 }
+if(isset($_GET['succesDelete'])){
+  $message  = deleteSucces($message);
+}
 
 // Logga in
 if(isset($_POST['loginBtn'])) {
