@@ -41,7 +41,7 @@ $products = $stmt->fetchAll();
 	<h1 class="fredriks-huvudrubrik">Shop page</h1>
 	<p>
 
-	<table id="fredriks-tbl">
+	<table id="fredriks-tbl" class="fredriks-centrering">
      
             <tr><thead> 
                 <th>Id</th>
