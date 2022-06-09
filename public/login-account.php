@@ -16,6 +16,9 @@ if(isset($_GET['logout'])) {
 if(isset($_GET['registerSuccess'])){
   $message  = registerSucces($message);
 }
+if(isset($_GET['succesDelete'])){
+  $message  = deleteSucces($message);
+}
 
 // Logga in
 if(isset($_POST['loginBtn'])) {
@@ -23,9 +26,9 @@ if(isset($_POST['loginBtn'])) {
   $email    = trim($_POST['email']);
   $password = trim($_POST['password']);
 
-  $user = $userDbHandler->fetchUserByEmailAndPassword($email, $password);
-  // Om användaren finns
-  if($user){
+  $user = $userDbHandler->fetchUserByEmail($email);
+  // Om användaren finns och stämmer med krypterade lösenord
+  if($user && password_verify($password, $user['password'])){
       $_SESSION['email'] = $user['email'];
       $_SESSION['id'] = $user['id'];
       redirect("my-account", "");

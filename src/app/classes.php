@@ -56,21 +56,7 @@ public function fetchUserByEmail($email){
  $statement->execute();
  return $statement->fetch();
 }
-// Hämta användare efter email OCH password
-public function fetchUserByEmailAndPassword($email, $password){
-  
-  // Hämtar användare som har rätt email och password
-  $sql = '
-    SELECT * FROM users
-    WHERE email = :email AND password = :password
-  ';
 
-  $statement = $this->dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->bindParam(':password', $password);
-  $statement->execute();
-  return $statement->fetch();
-}
 
 // Skapa en användare
 public function addUser($array) {
@@ -101,11 +87,12 @@ public function addUser($array) {
     :country
    )
   ";
+  $encryptedPassword = password_hash($array[3], PASSWORD_BCRYPT);
   $statement = $this->dbconnect->prepare($sql);
   $statement->bindParam(':first_name', $array[0]);
   $statement->bindParam(':last_name', $array[1]);
   $statement->bindParam(':email', $array[2]);
-  $statement->bindParam(':password', $array[3]);
+  $statement->bindParam(':password',$encryptedPassword);
   $statement->bindParam(':phone', $array[4]);
   $statement->bindParam(':street', $array[5]);
   $statement->bindParam(':postal_code', $array[6]);
@@ -132,12 +119,13 @@ public function updateUser($id, $array) {
     
     WHERE id = :id
     ";
+    $encryptedPassword = password_hash($array[3], PASSWORD_BCRYPT);
     $statement = $this->dbconnect->prepare($sql);
     $statement->bindParam(':id', $id);
     $statement->bindParam(':first_name', $array[0]);
     $statement->bindParam(':last_name', $array[1]);
     $statement->bindParam(':email', $array[2]);
-    $statement->bindParam(':password', $array[3]);
+    $statement->bindParam(':password', $encryptedPassword);
     $statement->bindParam(':phone', $array[4]);
     $statement->bindParam(':street',$array[5]);
     $statement->bindParam(':postal_code', $array[6]);

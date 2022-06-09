@@ -9,5 +9,12 @@ require('../src/app/common_functions.php');
 session_start();
 $_SESSION = [];
 session_destroy();
-redirect("login-account", "logout");
+
+// Om användaren har raderat sitt konto
+if(isset($_GET['succesDelete'])){
+  redirect("login-account", "succesDelete");
+  // Om användaren har loggat ut
+} else if (isset($_GET['logout'])){
+  redirect("login-account", "logout");
+}
 ?>

@@ -18,66 +18,45 @@ if(isset($_GET['invalidUser'])){
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
   $userDbHandler->deleteUser(); 
+  redirect("logout-account", "succesDelete");
 }
-// Hämtar alla användaruppgifter
-$users = $userDbHandler->fetchAllUsers();
+// // Hämtar en användares uppgifter
+$user = $userDbHandler->fetchOneUser($_SESSION['id']);
 ?>
-
+ 
 <div class="wrapper-register">
   <h1>Mina sidor</h1>
   </div>
   <?= $message ?>
   <?= $succesMessage ?>
-  <!-- Tabell över Användarens uppgifter -->
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Email</th>
-      <th scope="col">Password</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Street</th>
-      <th scope="col">Postal Code</th>
-      <th scope="col">City</th>
-      <th scope="col">country</th>
-      <th scope="col">Create date</th>
-      <th scope="col">Manage</th>
+<!-- Visar Användarens uppgifter -->
+  <div class="card form mx-auto">
+  <div class="card-body">
+    <h5 class="card-title">Mina uppgifter</h5>
+    
+      <p class="card-text"><?= htmlentities($user['first_name']) ?> <?= htmlentities($user['last_name']) ?></p>
+      <p class="card-text"><?= htmlentities($user['email']) ?></p>
+      <p class="card-text"><?= htmlentities($user['phone']) ?></p>
+      <p class="card-text"><?= htmlentities($user['street']) ?></p>
+      <p class="card-text"><?= htmlentities($user['postal_code']) ?></p>
+      <p class="card-text"><?= htmlentities($user['city']) ?></p>
+      <p class="card-text"><?= htmlentities($user['country']) ?></p>
+      <p class="card-text"><?= htmlentities($user['create_date']) ?></p>
+   
+    <!-- Delete knapp -->
+      <form action="" method="POST">
+        <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+        <input type="submit" name="deleteAccountBtn" value="Delete" class="btn btn-primary">
+      </form>
+    <!-- Uppdatera knapp -->
+      <form action="update-account.php" method="GET">
+        <input type="submit" value="Update" class="btn btn-primary">
+        <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
+      </form>
+      
+  </div>
+</div>
 
-    </tr>
-  </thead>
-  <tbody>
-     <!-- Loopar igenom users -->
-       <?php foreach($users as $user) : ?>
-        <tr>
-          <td scope="row"><?= htmlentities($user['id']) ?></td>
-          <td scope="row"><?= htmlentities($user['first_name']) ?></td>
-          <td scope="row"><?= htmlentities($user['last_name']) ?></td>
-          <td scope="row"><?= htmlentities($user['email']) ?></td>
-          <td scope="row"><?= htmlentities($user['password']) ?></td>
-          <td scope="row"><?= htmlentities($user['phone']) ?></td>
-          <td scope="row"><?= htmlentities($user['street']) ?></td>
-          <td scope="row"><?= htmlentities($user['postal_code']) ?></td>
-          <td scope="row"><?= htmlentities($user['city']) ?></td>
-          <td scope="row"><?= htmlentities($user['country']) ?></td>
-          <td scope="row"><?= htmlentities($user['create_date']) ?></td>
-          <td scope="row">
-            <!-- Delete knapp -->
-            <form action="" method="POST">
-              <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
-              <input type="submit" name="deleteAccountBtn" value="Delete">
-            </form>
-            <!-- Uppdatera knapp -->
-            <form action="update-account.php" method="GET">
-                <input type="submit" value="Update">
-                <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
-            </form>
-          </td>
-        </tr>
-        <?php endforeach ?>
-  </tbody>
-</table>
 
 <?php 
 include(LAYOUT_PATH . 'footer.php');
