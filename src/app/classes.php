@@ -56,21 +56,7 @@ public function fetchUserByEmail($email){
  $statement->execute();
  return $statement->fetch();
 }
-// Hämta användare efter email OCH password
-public function fetchUserByEmailAndPassword($email, $password){
-  
-  // Hämtar användare som har rätt email och password
-  $sql = '
-    SELECT * FROM users
-    WHERE email = :email AND password = :password
-  ';
 
-  $statement = $this->dbconnect->prepare($sql);
-  $statement->bindParam(':email', $email);
-  $statement->bindParam(':password', $password);
-  $statement->execute();
-  return $statement->fetch();
-}
 
 // Skapa en användare
 public function addUser($array) {
@@ -133,6 +119,7 @@ public function updateUser($id, $array) {
     
     WHERE id = :id
     ";
+    
     $statement = $this->dbconnect->prepare($sql);
     $statement->bindParam(':id', $id);
     $statement->bindParam(':first_name', $array[0]);
