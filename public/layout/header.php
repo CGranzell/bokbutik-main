@@ -35,7 +35,7 @@
       {$loggedInUserName}
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='./logout-account.php'>Log out</a>
+      <a class='nav-link' href='./logout-account.php?logout'>Log out</a>
     </li>";
         } else { //Om användaren inte är inloggad
 
