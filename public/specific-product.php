@@ -40,7 +40,7 @@ $products = $stmt->fetchAll();
 <b> Description: </b> <?php echo $_GET["Description"]; ?><p>
 <b> Price: </b> <?php echo $_GET["Price"]; ?><p>
 <b> Stock: </b> <?php echo $_GET["Stock"]; ?><p>
-<b> Image: </b> <?php echo $GET["Stock"]; ?><p>
+
 
 <!-- Infoga en större bild här på produkten -->
 
