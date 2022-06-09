@@ -88,10 +88,13 @@ $products = $stmt->fetchAll();
 
   echo "<p>";
   echo "<p>";
+  $imgUrl   = "";
+  $error    = "";
+  $message = "";
 
   if (isset($_POST['uploadBtn'])) { 
     echo "<pre>";
-    print_r($_FILES);	/*Lyssnar efter de filer som skickats via FILES, 
+    print_r($_FILES['uploadedFile']);	/*Lyssnar efter de filer som skickats via FILES, 
     dvs. när jag  valt fil och laddat upp. 
     
      print_r($_FILES[uploadedFile]); Nu är förälderarrayen uploadedFile borta.*/ 
