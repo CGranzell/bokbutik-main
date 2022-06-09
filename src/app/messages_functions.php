@@ -38,6 +38,15 @@ function uppdateSucces($message){
 ';
   return $message;
 }
+// meddelande om borttagning av kontot lyckades
+function deleteSucces($message){
+  $message = '
+  <div class="alert alert-success message mx-auto">
+      Your account have been removed
+  </div>;
+';
+  return $message;
+}
 
 // felmeddelande om querystring har värdet invalidUser
 function invalidUser($message){

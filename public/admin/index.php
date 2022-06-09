@@ -4,32 +4,33 @@ require('../../src/dbconnect.php');
 //echo "<pre>";
 //print_r($_GET['productId']);
 //echo "</pre>";
+$imgUrl= "";
+$error = "";
+$messages = "";
 
-// if(isset($_POST['updateProductBtn'])) {
+if (isset($_POST['uploadBtn'])) {
+	echo "<pre>";
+	print_r($_FILES['uploadedFile']);
+	echo "</pre>";
 
+  if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
+    $fileName = $_FILES['uploadedFile']['name'];
+    $fileType = $_FILES['uploadedFile']['type'];
+    $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+    $path ="img/";
+    $newFilePath = $path . $fileName;
 
-//   $sql = "
-//   UPDATE products
-//   SET
-//     title  = :title,
-//     description   = :description,
-//     price       = :price,
-//     stock    = :stock,
-//     img_url       = :img_url,
+    
+    $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
+    if ($isTheFileUploaded) {
+        $imgUrl = $newFilePath;
+    } else {
 
-//   WHERE id = :id
-//   ";
-//   $statement = $dbconnect->prepare($sql);
-//   $statement->bindParam(':id', $_GET['productId']);
-//   $statement->bindParam(':title', $_POST['title']);
-//   $statement->bindParam(':description', $_POST['description']);
-//   $statement->bindParam(':price', $_POST['price']);
-//   $statement->bindParam(':stock', $_POST['stock']);
-//   $statement->bindParam(':img_url', $_POST['img_url']);
-//   $statement->execute();
+    }
 
-//  }
+  }
+}
 
 if (isset($_POST['deleteProductBtn'])) {
 
@@ -62,9 +63,9 @@ if (isset($_POST['addProductBtn'])) {
 
 $stmt       = $dbconnect->query("SELECT * FROM products");
 $products  = $stmt->fetchAll();
-echo "<pre>";
-print_r($products);
-echo "</pre>";
+//echo "<pre>";
+//print_r($products);
+//echo "</pre>";
 
 
 ?>
@@ -96,7 +97,7 @@ echo "</pre>";
 			   <th>Stock</th>
          <th>Img_url</th>
 
-
+<p>test</p>
 		   </tr>
 	   </thead>
 
@@ -138,7 +139,12 @@ echo "</pre>";
      <input type="text" name="img_url" placeholder="Img_url"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
+   <form action="" method="POST" enctype="multipart/form-data">
+	
+		<input type="file" name="uploadedFile"><br>
 
-
+		<input type="submit" value="upload" name="uploadBtn">
+	</form>
+  <img src="<?=$imgUrl?>">
 </body>
 </html>
