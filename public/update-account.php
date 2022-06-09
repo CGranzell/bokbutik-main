@@ -16,7 +16,7 @@ if(!isset($_GET['userID']) || !is_numeric($_GET['userID'])){
 $message = "";
 // Uppdatera användaruppgift
 if(isset($_POST['updateAccountBtn'])) {
-  if($_POST['password'] !== $_POST['confirmPassword']){
+  if(password_verify($_POST['password'], $_POST['confirmPassword'])){
     $message = noMatchPassword($message);
   } else {
        // skapar och fyller array med user info
