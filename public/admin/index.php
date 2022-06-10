@@ -8,7 +8,7 @@ $imgUrl= "";
 $error = "";
 $messages = "";
 
-if (isset($_POST['uploadBtn'])) {
+if (isset($_POST['uploadBtn'])) 
 	echo "<pre>";
 	print_r($_FILES['uploadedFile']);
 	echo "</pre>";
@@ -20,16 +20,48 @@ if (isset($_POST['uploadBtn'])) {
     $path ="img/";
     $newFilePath = $path . $fileName;
 
+    $allowedFileTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/gif',
+    ];
+    $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
     
+    if ($isFileTypeAllowed === false) {
+      $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
+    }
+
+    if ($_FILES < 1000000) {
+      $error .= 'Exceeded filesize limit.<br>';
+    }
+
+    $img_size = getimagesize($fileTempPath);
+
+    //echo "<pre>";
+    //print_r($img_size[0]);
+    //echo "</pre>";
+
+   // if (!$img_size[0] === 1000 && $img_size[1] === 200) {
+     // $error = "Only execpts images that are 
+     // 1000px wide and 200px in height ";
+    //}
+
+    if (empty($error)) {
+
+
     $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
     if ($isTheFileUploaded) {
         $imgUrl = $newFilePath;
+        $messages = "Upload success";
     } else {
-
+      $error = "Could not upload the file";
     }
 
-  }
+  } else {
+  $messages = $error;
+}
+if (empty($error)) {}
 }
 
 if (isset($_POST['deleteProductBtn'])) {
@@ -97,7 +129,7 @@ $products  = $stmt->fetchAll();
 			   <th>Stock</th>
          <th>Img_url</th>
 
-<p>test</p>
+
 		   </tr>
 	   </thead>
 
@@ -139,6 +171,7 @@ $products  = $stmt->fetchAll();
      <input type="text" name="img_url" placeholder="Img_url"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
+   <?=$messages?>
    <form action="" method="POST" enctype="multipart/form-data">
 	
 		<input type="file" name="uploadedFile"><br>
