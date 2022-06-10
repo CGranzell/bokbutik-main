@@ -15,12 +15,32 @@ public function fetchAllUsers() {
   $statement = $this->dbconnect->query($sql);
   return $statement->fetchAll();
 }
+// Hämtar alla products
+public function fetchAllProducts() {
+ 
+  $sql = "SELECT * FROM products";
+  $statement = $this->dbconnect->query($sql);
+  return $statement->fetchAll();
+}
 
 // Hämta en user 
 public function fetchOneUser($id){
  
 $sql = "
 SELECT * FROM users 
+WHERE id = :id
+";
+$statement = $this->dbconnect->prepare($sql);
+$statement->bindParam(':id', $id);
+$statement->execute();
+return $statement->fetch();
+
+}
+// Hämta en product 
+public function fetchOneProduct($id){
+ 
+$sql = "
+SELECT * FROM products 
 WHERE id = :id
 ";
 $statement = $this->dbconnect->prepare($sql);

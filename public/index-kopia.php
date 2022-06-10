@@ -1,91 +1,46 @@
 <?php
 require('../src/config.php');
-include('./layout/header.php');
+include(LAYOUT_PATH . 'header.php');
 
 //CONNECT TO READ-MORE BUTTON
 if (isset($_POST['Readmore'])) {
-    
-    
-  $sql = "
-      SELECT * FROM products
-      WHERE id= :id;
-  ";
-  $stmt = $pdo->prepare($sql); 
-  $stmt->bindParam(":id", $_POST['id']); 
-  $stmt->execute(); 
+ $userDbHandler->fetchOneProduct($_POST['id']);
 } 
-
-
 //READ 
-
-$stmt = $dbconnect->query("SELECT * FROM products"); 	
-$products = $stmt->fetchAll(); 	
+$products = $userDbHandler->fetchAllProducts();
 ?>
 
-	
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-	<link rel="stylesheet" href="css/style.css">
-  <title>All products</title>
-	
-</head>
-<body>
-
-    <p>
-	<h1 class="fredriks-huvudrubrik">Shop page</h1>
-	<p>
-
-	<table id="fredriks-tbl" class="fredriks-centrering">
-     
-            <tr><thead> 
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-				        <th>Price</th>
-				        <th>Stock</th>
-                <th> Image </th>
 
 
-		      	</tr>
-        </thead>
-		<tbody>
-	<?php foreach ($products as $product) : ?>
-                <tr>
-                    <td><?=htmlentities($product['id']) ?></td>
-                    <td><?=htmlentities($product['title']) ?></td>
-                    <td><?=htmlentities($product['description']) ?></td> 
-                    <td><?=htmlentities($product['price']) ?></td>
-                    <td><?=htmlentities($product['stock']) ?>
-                   
-                  <form action="specific-product.php" method="GET">
-			            <input type="hidden" name="Title" value="<?=$product['title']?>">
-			            <input type="hidden" name="Description" value="<?=$product['description']?>">
-			          <input type="hidden" name="Price" value="<?=$product['price']?>">
-		          	<input type="hidden" name="Stock" value="<?=$product['stock']?>">
-                <input type="hidden" name="Image" value="<?=$product['img_url']?>">
-		           <input type="submit" name="Readmore" value="Specific product">
-                </form>
-              </td>
-              <td> <?=htmlentities($product['img_url']) ?> </td>
-                       
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </table>
+	<h1 class="fredriks-huvudrubrik">Welcome to the Bok Store</h1>
+	<h3 class="fredriks-huvudrubrik">Our selection</h3>
+   <!-- Container rows -->
+   <?php foreach ($products as $product) : ?>
+    <div class="container-index">
+		
+      <div class="card  card-index" style="width: 18rem;">
+        <img src="<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
+        <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
+        <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
+        <div class="description-wrapper">
+          <p class="card-text">About the book: <br> "<?= substr( htmlentities($product['description']), 0, 100) ?>"</p>
+
+        </div>
+
+				<form action="specific-product-kopia.php" method="GET">
+        <input type="submit" value="Read more" class="btn btn-primary">
+        <input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach ?>
 
 
         <!--Bildhantering nedan-->
         <?php
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
 
 $imgUrl   = "";
 $error    = "";
@@ -190,9 +145,6 @@ if (isset($_POST['uploadBtn'])) {
     
     <p>
     
-
-    
-  
-	
-</body>
-</html>
+		<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>
