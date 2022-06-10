@@ -50,7 +50,25 @@ $products = $stmt->fetchAll();
 <p>
 <a href="index.php"> Till Shop page </a>
 </div>
+<p>
+<p>
+<h1> Infogar datan i en tabell för att testa återkopplingen från M </h1>
+ 
+<table id="fredriks-tbl" class="fredriks-centrering">
+     
+            <tr><thead> 
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+				        <th>Price</th>
+				        <th>Stock</th>
+                <th> Image </th>
 
 
+		      	</tr>
+        </thead>
+		<tbody>
+</table>
+	                
 </body>
 </html>
