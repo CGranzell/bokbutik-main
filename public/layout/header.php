@@ -17,35 +17,41 @@
 
   <nav class="navbar-light" style="background-color: #e3f2fd;">
     <ul class="nav justify-content-center">
+      
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <a class="nav-link" href="./index.php">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./index.php">Index</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
+      
       <div class="login-nav">
         <!-- Om användaren är inloggad -->
         <?php
         if (isset($_SESSION['email'])) {
           $loggedInUserName = htmlentities($_SESSION['email']);
-          $loggedinNav = "<li class='nav-item nav-link'>
-      {$loggedInUserName}
-    </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='./logout-account.php?logout'>Log out</a>
-    </li>";
+          $loggedinNav = "
+          <li class='nav-item'>
+            <a class='nav-link' href='./admin/index.php'>Admin</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='./admin/users.php'>Users</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='./my-account.php'>{$loggedInUserName}</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='./logout-account.php?logout'>Log out</a>
+          </li>
+          
+          ";
         } else { //Om användaren inte är inloggad
 
           $loggedinNav = "
-      <li class='nav-item'>
-        <a class='nav-link' href='./register-account.php'>Register</a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link' href='./login-account.php'>Login</a>
-      </li>";
+          <li class='nav-item'>
+            <a class='nav-link' href='./register-account.php'>Register</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='./login-account.php'>Login</a>
+          </li>
+          ";
         }
 
         echo $loggedinNav;

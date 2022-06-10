@@ -42,18 +42,22 @@ $user = $userDbHandler->fetchOneUser($_SESSION['id']);
       <p class="card-text"><?= htmlentities($user['city']) ?></p>
       <p class="card-text"><?= htmlentities($user['country']) ?></p>
       <p class="card-text"><?= htmlentities($user['create_date']) ?></p>
-   
-    <!-- Delete knapp -->
+
+
+      <div class="btn-group float-end">
+      <!-- Delete knapp -->
       <form action="" method="POST">
         <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
         <input type="submit" name="deleteAccountBtn" value="Delete" class="btn btn-primary">
       </form>
+ 
+   
     <!-- Uppdatera knapp -->
-      <form action="update-account.php" method="GET">
+    <form action="update-account.php" method="GET">
         <input type="submit" value="Update" class="btn btn-primary">
         <input type="hidden" name="userID" value="<?= htmlentities($user['id']) ?>">
       </form>
-      
+    </div>
   </div>
 </div>
 

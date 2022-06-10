@@ -1,12 +1,15 @@
 /* Christoffer CSS */
+/* header */
+
+/* formulär */
 .form {
-	width: 50%;
+	width: 60%;
 	}
 	.btn-form {
 	margin-left: 70%;
 	}
 	.message{
-		width: 50%;
+		width: 60%;
 	}
 	/* Login-account */
 	.login-nav{
@@ -37,12 +40,14 @@
 		text-align: center;
 		width: 100%;
 	}
-	/* My account */
-	.wrapper-btns{
-		height: 30px;
-		width: 30px;
-		border: 1px solid black;
+	.message-register{
+		width: 100%;
 	}
+	/* My account */
+	.btn-primary{
+		margin-right: 1em;
+	}
+
 	
 	
 	 /* Fredriks css */
@@ -72,14 +77,13 @@
 		text-align: center;
 		} 
 
-	.fredriks-body {
-		margin: auto;
-		width: 40%;
-		height: 40%;
-
-
-	}
-	
+		
 	.tabell{
 		text-align: center;
 	}
+
+	.fredriks-centrering  {
+		margin-left:auto; 
+    	margin-right:auto;
+  }
+	

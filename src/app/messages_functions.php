@@ -14,7 +14,7 @@ function noMatchPassword($message){
 // felmeddelande om textfält är tomt 
 function errorRequiredField($name){
    $name = "
-  <div class='alert alert-danger message mx-auto'>
+  <div class='alert alert-danger message-register mx-auto'>
      {$name} is required
   </div>
 ";
