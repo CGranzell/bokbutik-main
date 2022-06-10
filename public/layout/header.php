@@ -21,6 +21,12 @@
       <li class="nav-item">
         <a class="nav-link" href="./index.php">Home</a>
       </li>
+
+      <li class='nav-item'>
+            <a class='nav-link' href='./admin/index.php'>Admin</a>
+          </li>
+
+
       
       <div class="login-nav">
         <!-- Om användaren är inloggad -->
