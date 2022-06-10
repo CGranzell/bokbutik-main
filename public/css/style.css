@@ -38,11 +38,10 @@
 		width: 100%;
 	}
 	/* My account */
-	.wrapper-btns{
-		height: 30px;
-		width: 30px;
-		border: 1px solid black;
+	.btn-primary{
+		margin-right: 1em;
 	}
+
 	
 	
 	 /* Fredriks css */
