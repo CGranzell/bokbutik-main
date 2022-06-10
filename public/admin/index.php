@@ -9,9 +9,9 @@ $error = "";
 $messages = "";
 
 if (isset($_POST['uploadBtn'])) 
-	echo "<pre>";
-	print_r($_FILES['uploadedFile']);
-	echo "</pre>";
+	//echo "<pre>";
+	//print_r($_FILES['uploadedFile']);
+	//echo "</pre>";
 
   if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
     $fileName = $_FILES['uploadedFile']['name'];
