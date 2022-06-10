@@ -32,7 +32,7 @@ $products = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
 	<link rel="stylesheet" href="css/style.css">
-  <title>All products</title>
+  <title>All products shown here</title>
 	
 </head>
 <body>
