@@ -37,6 +37,9 @@
 		text-align: center;
 		width: 100%;
 	}
+	.message-register{
+		width: 100%;
+	}
 	/* My account */
 	.btn-primary{
 		margin-right: 1em;
