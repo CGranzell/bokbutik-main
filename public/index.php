@@ -91,7 +91,7 @@ $imgUrl   = "";
 $error    = "";
 $message = "";
 if (isset($_POST['uploadBtn'])) { 
-//*Snappar upp de filer som skickats via FILES när jag trycker på uppdatera, 
+//*Snappar upp de filer som skickats via FILES när jag trycker på upload, 
  //  dvs. den fil som jag  valt och laddat upp.
 	echo "<pre>";
 	print_r($_FILES['uploadedFile']);	
