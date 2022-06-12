@@ -10,6 +10,8 @@
 $stmt = $dbconnect->query("SELECT * FROM products");
 $products = $stmt->fetchAll();
 
+  
+
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +38,11 @@ $products = $stmt->fetchAll();
 
 
 <div class="tabell">
-<b> Title: </b>: <?php echo $_GET["Title"]; ?> <p> <p> <p>
-<b> Description: </b> <?php echo $_GET["Description"]; ?><p>
-<b> Price: </b> <?php echo $_GET["Price"]; ?><p>
-<b> Stock: </b> <?php echo $_GET["Stock"]; ?><p>
-<b> Image: </b> <?php echo $_GET["Stock"]; ?><p> 
+<b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
+<b> Description: </b> <?php echo $_POST["Description"]; ?><p>
+<b> Price: </b> <?php echo $_POST["Price"]; ?><p>
+<b> Stock: </b> <?php echo $_POST["Stock"]; ?><p>
+<b> Image: </b> <img src="img/roger.jpg">
 
 
 <!-- Infoga en större bild här på produkten -->
