@@ -52,6 +52,18 @@ if (isset($_POST['uploadBtn'])) {
 		$stmt->bindParam(":id", $_POST['id']); 
 		$stmt->execute(); 
 	} 
+
+	if (isset($_POST['GetImage'])) {
+    
+    
+		$sql = "
+			SELECT * FROM products 
+			WHERE id= :id;
+		";
+		$stmt = $pdo->prepare($sql); 
+		$stmt->bindParam(":id", $_POST['id']); 
+		$stmt->execute(); 
+	} 
 	
 	$stmt = $dbconnect->query("SELECT * FROM `products` "); 	
 	$products = $stmt->fetchAll(); 	//Hämtar produkterna
@@ -99,7 +111,7 @@ if (isset($_POST['uploadBtn'])) {
 			        <input type="hidden" name="Description" value="<?=$product['description']?>">
 			        <input type="hidden" name="Price" value="<?=$product['price']?>">
 		          	<input type="hidden" name="Stock" value="<?=$product['stock']?>">
-					<input type="hidden" name="Image" img src="<?=$imgUrl?>">
+					<input type="hidden" name="Image" img src="img/roger.jpg">
 		            <input type="submit" name="Readmore" value="Specific product">
                     </form>
 					</td>
@@ -107,8 +119,11 @@ if (isset($_POST['uploadBtn'])) {
 				    <td><?=htmlentities($product['description']) ?></td>
                     <td><?=htmlentities($product['price']) ?></td>
                     <td><?=htmlentities($product['stock']) ?></td>
-                   
-					<td>  <img src="<?=$imgUrl?>"> </td>
+                    <td> <img src="<?=$imgUrl?>"> </td>
+					
+				
+				
+				
                        
                 </tr>
             <?php endforeach; ?>
