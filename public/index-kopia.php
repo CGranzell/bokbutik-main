@@ -8,8 +8,91 @@ if (isset($_POST['Readmore'])) {
 } 
 //READ 
 $products = $userDbHandler->fetchAllProducts();
-?>
 
+// Felmeddelande sätts till tomma
+$imgUrl 	= "";
+$error 		= "";
+$messages = "";
+
+// debug($_POST);
+
+if(isset($_POST['uploadBtn'])) {
+	// debug($_FILES['uploadedFile']);
+}
+
+
+// Hela denna if sats är hantering av filen, kan brytas ut?
+if(is_uploaded_file($_FILES['uploadedFile']['tmp_name'])){
+			// This is the actual name of the file
+		$fileName 		= $_FILES['uploadedFile']['name'];
+		$fileType 		= $_FILES['uploadedFile']['type'];
+		$fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+		$path 				= "../../bokbutik-main/public/img/";
+		$newFilePath  = $path . $fileName;
+
+		// File size error handling
+		// Kan göras till konstant
+		$allowedFileTypes = [
+			'image/png',
+			'image/jpeg',
+			'image/gif',
+		];
+
+
+		
+		$isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
+
+		// Kan brytas ut till funktioner
+		if($isFileTypeAllowed == false) {
+			$error .= 'The file type is invalid, Allowed types are pnj, jpeg and gif <br>';
+		} 
+		// Kan brytas ut till funktioner
+		// File size error handling
+		if($_FILES['uploadedFile']['size'] > 1000000 ){ // 1 MB
+			$error .= 'Exceede filesize limit';
+		}
+
+
+		// Images dimension error handling
+		$img_size = getimagesize($fileTempPath);
+		// debug($img_size[0]);
+
+		if($isFileTypeAllowed 
+					&& !$img_size[0] === 1000 
+					&& $img_size[1] === 200) {
+						$error = "Only execepts images that are 1000px wide and 200 px in height";
+		}
+
+
+			if(empty($error)) {
+
+				$isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
+				if($isTheFileUploaded) {
+						// Succes, the file is uploaded
+						$imgUrl = $newFilePath;
+					
+				} else {
+						// Could not upload the file
+						$messages = 'Could not upload the file';
+				}
+			} 
+
+			// Handle the rest of the form and save accordingly in DB
+			// Validerar product title osv 
+			// if all is validated , error is empty still, then perform the DB request
+			if(empty($error)){
+					// prepare-statement osv INSERT INTO / eller UPDATE
+				
+
+					$messages = 'Form was succesfully submitted';
+				} else {
+					$messages = $error;
+				}
+
+	
+}
+
+?>
 
 
 	<h1 class="fredriks-huvudrubrik">Welcome to the Bok Store</h1>
@@ -19,7 +102,8 @@ $products = $userDbHandler->fetchAllProducts();
     <div class="container-index">
 		
       <div class="card  card-index" style="width: 18rem;">
-        <img src="<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+        <!-- <img src="<?=htmlentities($product['$imgUrl']) ?>" class="card-img-top" alt="..."> -->
+        <!-- <img src="<?=$imgUrl?>" class="card-img-top" alt="..."> -->
       <div class="card-body">
         <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
         <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
@@ -38,113 +122,15 @@ $products = $userDbHandler->fetchAllProducts();
 </div>
 <?php endforeach ?>
 
+<form action="" method="POST" enctype="multipart/form-data">
+		<!-- <label> ProductTitle:</label>
+			<input type="text" name="productTitle"> -->
 
-        <!--Bildhantering nedan-->
-        <?php
-
-$imgUrl   = "";
-$error    = "";
-$message = "";
-if (isset($_POST['uploadBtn'])) { 
-//*Snappar upp de filer som skickats via FILES när jag trycker på uppdatera, 
- //  dvs. den fil som jag  valt och laddat upp.
-	echo "<pre>";
-	print_r($_FILES['uploadedFile']);	
-	echo "</pre>";
-
-	// [uploadedFile] => Array
-    //     (
-    //         [name] => dummy-profile.png
-    //         [type] => image/png
-    //         [tmp_name] => /Applications/MAMP/tmp/php/phpke9Trg   Filen laddades upp på ett ställe, men sparas nu temporärt
-    //         [error] => 0
-    //         [size] => 15076
-    //     )
-	//  print_r($_FILES[uploadedFile])= Nu är förälderarrayen uploadedFile borta.
-
-	if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) { //Har filen laddats upp?
-	//uploadedFile är förälderarrayen, tmp_name är barnarrayen
-		
-		$fileName 	    = $_FILES['uploadedFile']['name'];
-		$fileType 	    = $_FILES['uploadedFile']['type'];
-		$fileTempPath   = $_FILES['uploadedFile']['tmp_name'];
-		$path 		    = "img/";
-		// uploads/dummy-profile.png
-		$newFilePath = $path . $fileName; //sökvägen och namnet
-//Nu har filen flyttats från den temporära platsen till mappen uploads. 
-
-
-		/**
-		 * File type error handling
-		 */
-		$allowedFileTypes = [
-			'image/png',
-			'image/jpeg',
-			'image/gif',
-		];
-		
-		$isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true); //image/png, den nya sökvägen
-		if ($isFileTypeAllowed === false) {
-			$error .= "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
-		}
-
-
-
-		/** 
-		 * File size error handling
-		 */
-		if ($_FILES['uploadedFile']['size'] > 1000000) {  // Allows only files under 1 mbyte, 1 miljon byte
-			$error .= 'Exceeded filesize limit.<br>';  
-		}
-
-
-
-
-
-		/**
-		 * Image dimension error handling
-		 */
-		
-
-
-		if (empty($error)) { //Har filen laddats upp till mappen uploads från den temporära platsen?
-			$isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);  
-	
-			if ($isTheFileUploaded) {
-				// Success the file is uploaded
-				$imgUrl = $newFilePath;
-			} else {
-				// Could not upload the file
-				$error = "Could not upload the file";
-			}
-		}
-	}
-  if (empty($error)) { //om något av felen $error inträffat ovan
-		// INSERT INTO/ UPDATE
-
-		$message = "Form was successfully submitted";
-	} else {
-		$message = $error;
-	}
-}
-?>
-
-        
-
-
-      <h1> File upload </h1>
-      <?=$message?>
-        <p>
-        <form action="" method="POST" enctype="multipart/form-data"> <!--enctype för att $_FILES ska funka -->
-        <label>File:</label> 
-		  <input type="file" name="uploadedFile"><br> <!-- Type=file gör att man får en fil-knapp-->
-		  <input type="submit" value="upload" name="uploadBtn">
-	  </form>
-    <p>
-    <img src="<?=$imgUrl?>">
-    
-    <p>
-    
+	<label>File: </label>
+		<input type="file" name="uploadedFile">
+		<input type="submit" value="upload" name="uploadBtn">
+</form>
+    <?=$messages?>
 		<?php 
 include(LAYOUT_PATH . 'footer.php');
 ?>

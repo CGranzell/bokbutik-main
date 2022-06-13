@@ -121,6 +121,41 @@ public function addUser($array) {
   $statement->execute();
 }
 
+// Skapa en produkt
+public function addProduct($array) {
+ 
+  $sql = "
+  INSERT INTO users 
+   (
+    id, 
+    title,
+    description,
+    price,
+    stock,
+    img_url
+   )
+   VALUES 
+   (
+    :id,
+    :title,
+    :description,
+    :price,
+    :stock,
+    :img_url
+   )
+  ";
+ 
+  $statement = $this->dbconnect->prepare($sql);
+  $statement->bindParam(':id', $array[0]);
+  $statement->bindParam(':title', $array[1]);
+  $statement->bindParam(':description', $array[2]);
+  $statement->bindParam(':price', $array[3]);
+  $statement->bindParam(':stock', $array[4]);
+  $statement->bindParam(':img_url', $array[5]);
+  $statement->execute();
+}
+
+
 // Uppdaterar en användare
 public function updateUser($id, $array) {
  
