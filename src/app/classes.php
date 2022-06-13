@@ -8,51 +8,30 @@ public function __construct($dbconnect)
   $this->dbconnect = $dbconnect;
 }
 
-// Hämtar alla users
+
+// --------- Användare -------
+// Hämtar alla användare
 public function fetchAllUsers() {
  
   $sql = "SELECT * FROM users";
   $statement = $this->dbconnect->query($sql);
   return $statement->fetchAll();
 }
-// Hämtar alla products
-public function fetchAllProducts() {
- 
-  $sql = "SELECT * FROM products";
-  $statement = $this->dbconnect->query($sql);
-  return $statement->fetchAll();
-}
-
-// Hämta en user 
+// Hämta en användare
 public function fetchOneUser($id){
  
-$sql = "
-SELECT * FROM users 
-WHERE id = :id
-";
-$statement = $this->dbconnect->prepare($sql);
-$statement->bindParam(':id', $id);
-$statement->execute();
-return $statement->fetch();
+  $sql = "
+  SELECT * FROM users 
+  WHERE id = :id
+  ";
+  $statement = $this->dbconnect->prepare($sql);
+  $statement->bindParam(':id', $id);
+  $statement->execute();
+  return $statement->fetch();
+  
+  }
 
-}
-// Hämta en product 
-public function fetchOneProduct($id){
- 
-$sql = "
-SELECT * FROM products 
-WHERE id = :id
-";
-$statement = $this->dbconnect->prepare($sql);
-$statement->bindParam(':id', $id);
-$statement->execute();
-return $statement->fetch();
-
-}
-
-
-
-// Tar bort user 
+  // Tar bort användare 
 public function deleteUser(){
  
   $sql = "
@@ -67,14 +46,14 @@ public function deleteUser(){
 // Hämta användare efter email
 public function fetchUserByEmail($email){
   
-   $sql = '
-   SELECT * FROM users
-   WHERE email = :email
- ';
- $statement = $this->dbconnect->prepare($sql);
- $statement->bindParam(':email', $email);
- $statement->execute();
- return $statement->fetch();
+  $sql = '
+  SELECT * FROM users
+  WHERE email = :email
+';
+$statement = $this->dbconnect->prepare($sql);
+$statement->bindParam(':email', $email);
+$statement->execute();
+return $statement->fetch();
 }
 
 
@@ -121,41 +100,6 @@ public function addUser($array) {
   $statement->execute();
 }
 
-// Skapa en produkt
-public function addProduct($array) {
- 
-  $sql = "
-  INSERT INTO users 
-   (
-    id, 
-    title,
-    description,
-    price,
-    stock,
-    img_url
-   )
-   VALUES 
-   (
-    :id,
-    :title,
-    :description,
-    :price,
-    :stock,
-    :img_url
-   )
-  ";
- 
-  $statement = $this->dbconnect->prepare($sql);
-  $statement->bindParam(':id', $array[0]);
-  $statement->bindParam(':title', $array[1]);
-  $statement->bindParam(':description', $array[2]);
-  $statement->bindParam(':price', $array[3]);
-  $statement->bindParam(':stock', $array[4]);
-  $statement->bindParam(':img_url', $array[5]);
-  $statement->execute();
-}
-
-
 // Uppdaterar en användare
 public function updateUser($id, $array) {
  
@@ -188,5 +132,72 @@ public function updateUser($id, $array) {
     $statement->bindParam(':country', $array[8]);
     $statement->execute();
 }
+
+// --------- Produkter -------
+
+// Hämtar alla products
+public function fetchAllProducts() {
+ 
+  $sql = "SELECT * FROM products";
+  $statement = $this->dbconnect->query($sql);
+  return $statement->fetchAll();
+}
+
+// Hämta en product 
+public function fetchOneProduct($id){
+ 
+  $sql = "
+  SELECT * FROM products 
+  WHERE id = :id
+  ";
+  $statement = $this->dbconnect->prepare($sql);
+  $statement->bindParam(':id', $id);
+  $statement->execute();
+  return $statement->fetch();
+  
+  }
+
+// Skapa en produkt
+public function addProduct($array) {
+ 
+  $sql = "
+  INSERT INTO products 
+   ( 
+    title,
+    description,
+    price,
+    stock,
+    img_url
+   )
+   VALUES 
+   (
+    :title,
+    :description,
+    :price,
+    :stock,
+    :img_url
+   )
+  ";
+ 
+  $statement = $this->dbconnect->prepare($sql);
+  $statement->bindParam(':title', $array[0]);
+  $statement->bindParam(':description', $array[1]);
+  $statement->bindParam(':price', $array[2]);
+  $statement->bindParam(':stock', $array[3]);
+  $statement->bindParam(':img_url', $array[4]);
+  $statement->execute();
+}
+
+  // Tar bort produkt 
+  public function deleteProduct(){
+ 
+    $sql = "
+    DELETE FROM products 
+    WHERE id = :id;
+    ";
+    $statement = $this->dbconnect->prepare($sql);
+    $statement->bindParam(':id', $_POST['productId']);
+    $statement->execute();
+  }
 
 }

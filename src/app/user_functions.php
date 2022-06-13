@@ -2,7 +2,6 @@
 
 
 
-
 // Hämtar alla users
 function fetchAllUsers() {
   global $dbconnect;
@@ -40,7 +39,7 @@ function deleteUser(){
 }
 
 // Hämta användare efter email
-function fetchUserByEmail($email){
+function fetchUserByEmail($email) {
    global $dbconnect;
    $sql = '
    SELECT * FROM users
@@ -52,7 +51,7 @@ function fetchUserByEmail($email){
  return $statement->fetch();
 }
 // Hämta användare efter email OCH password
-function fetchUserByEmailAndPassword($email, $password){
+function fetchUserByEmailAndPassword($email, $password) {
    global $dbconnect;
   // Hämtar användare som har rätt email och password
   $sql = '
