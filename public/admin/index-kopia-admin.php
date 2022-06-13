@@ -13,7 +13,8 @@ if (isset($_POST['uploadBtn']))
     $fileName = $_FILES['uploadedFile']['name'];
     $fileType = $_FILES['uploadedFile']['type'];
     $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
-    $path = IMG_PATH . 'img/';
+   
+    $path = '../../../img/';
     // $path ="img/";
     $newFilePath = $path . $fileName;
 
@@ -21,6 +22,7 @@ if (isset($_POST['uploadBtn']))
       'image/png',
       'image/jpeg',
       'image/gif',
+      'image/jpg',
     ];
     $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
     
@@ -62,6 +64,7 @@ if (empty($error)) {
     ];
     // Lägger till produkt
     $userDbHandler->addProduct($productInfo);
+    
 }
 }
 
