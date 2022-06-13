@@ -8,76 +8,22 @@
  //READ PRODUCT
 
  $product = $userDbHandler->fetchOneProduct($_GET['productID']);
-
-  // Felmeddelande sätts till tomma
-$imgUrl 	= "";
-$error 		= "";
-$messages = "";
-
-
-
-
-
-
+  
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="<?=CSS_PATH . 'style.css'?>">
-  <title>Specific product</title>
-
-</head>
-
-
-<body>
-
-
-        <p>
-      <h1 class="fredriks-huvudrubrik">Shop page</h1>
-      <h2 class="fredriks-underrubrik"> Specific product </h2>
-        <p>
-
-
-<div class="tabell">
-<b> Title: </b>: <?php echo $_POST["Title"]; ?> <p> <p> <p>
-<b> Description: </b> <?php echo $_POST["Description"]; ?><p>
-<b> Price: </b> <?php echo $_POST["Price"]; ?><p>
-<b> Stock: </b> <?php echo $_POST["Stock"]; ?><p>
-<b> Image: </b> <img src="img/roger.jpg">
-
-
-<!-- Infoga en större bild här på produkten -->
-
-
-<p>
-<p>
-<a href="index.php"> Till Shop page </a>
+<div class="card card-specific mx-auto" style="width: 58rem;">
+			<img src="<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><?= htmlentities($product['title']) ?></h5>
+    <p class="card-text"><?= htmlentities($product['price']) ?></p>
+    <p class="card-text"><?= htmlentities($product['stock']) ?></p>
+    <p class="card-text"><?= htmlentities($product['description']) ?></p>
+    <a href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
 </div>
-<p>
-<p>
-<h1> Infogar datan i en tabell för att testa återkopplingen från M </h1>
- 
-<table id="fredriks-tbl" class="fredriks-centrering">
-     
-            <tr><thead> 
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-				        <th>Price</th>
-				        <th>Stock</th>
-                <th> Image </th>
 
 
-		      	</tr>
-        </thead>
-		<tbody>
-</table>
-	                
-</body>
-</html>
+
+<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>
