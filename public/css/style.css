@@ -113,3 +113,17 @@
     	margin-right:auto;
   }
 	
+  #products-tbl { 
+	border-collapse: collapse; 
+	margin-bottom: 40px;
+	text-align: center;
+
+}
+
+#products-tbl tr,
+#products-tbl td,
+#products-tbl th {
+	border: 1px solid blue;
+	padding: 10px;
+	text-align: center;
+}

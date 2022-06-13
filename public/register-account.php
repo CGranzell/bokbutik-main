@@ -30,12 +30,7 @@ if(isset($_POST['createUserBtn'])) {
     $postalcode = trim($_POST['postal_code']),
     $city       = trim($_POST['city']),
     $country    = trim($_POST['country']),
-    // $encryptedPassword = password_hash($password, PASSWORD_BCRYPT),
-
-    
-
-    
-    // password_verify($password, $encryptedPassword),
+  
   ];
     // Kollar om email är upptagen
     $emailExist = $userDbHandler->fetchUserByEmail($email);

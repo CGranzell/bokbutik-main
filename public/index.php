@@ -69,7 +69,7 @@ if (isset($_POST['uploadBtn'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Den publika sidan</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="C:\MAMP\htdocs\bokbutik-main\public\css\style.css">
 </head>
 <body>
 

@@ -95,8 +95,8 @@ $product = $statement->fetch();
     </div>
 
     <div class="mb-3">
-      <label for="img_url" class="form-label">Img_url</label>
-      <input type="img_url" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
+      <label for="img_url" class="form-label"></label>
+      <input type="hidden" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
     </div>
 
 
