@@ -5,12 +5,19 @@
  include('./layout/header.php');
 
 
- //READ PRODUCTS
+ //READ PRODUCT
 
-$stmt = $dbconnect->query("SELECT * FROM products");
-$products = $stmt->fetchAll();
+ $product = $userDbHandler->fetchOneProduct($_GET['productID']);
 
-  
+  // Felmeddelande sätts till tomma
+$imgUrl 	= "";
+$error 		= "";
+$messages = "";
+
+
+
+
+
 
 ?>
 
