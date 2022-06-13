@@ -5,7 +5,7 @@ include('./layout/header.php');
 
 <?php
 
-	$imgUrl   = "";
+	/*$imgUrl   = "";
 	$error    = "";
 	$messages = "";
 	
@@ -22,6 +22,8 @@ if (isset($_POST['uploadBtn'])) {
 	$newFilePath = $path . $fileName; //sökvägen och namnet
 	}
 
+	
+	
 	if ($_FILES['uploadedFile']['size'] > 2000000) {  // Allows only files under 2 mbyte, 2 miljon byte
 			$error .= 'Exceeded filesize limit.<br>';  
 		}
@@ -38,7 +40,7 @@ if (isset($_POST['uploadBtn'])) {
 			}
 		}
 	
-	} //HÄR SLUTAR BILDHANTERINGEN
+	} *///HÄR SLUTAR BILDHANTERINGEN
 
 
 	if (isset($_POST['Readmore'])) {
@@ -53,17 +55,7 @@ if (isset($_POST['uploadBtn'])) {
 		$stmt->execute(); 
 	} 
 
-	if (isset($_POST['GetImage'])) {
-    
-    
-		$sql = "
-			SELECT * FROM products 
-			WHERE id= :id;
-		";
-		$stmt = $pdo->prepare($sql); 
-		$stmt->bindParam(":id", $_POST['id']); 
-		$stmt->execute(); 
-	} 
+	
 	
 	$stmt = $dbconnect->query("SELECT * FROM `products` "); 	
 	$products = $stmt->fetchAll(); 	//Hämtar produkterna
@@ -106,14 +98,10 @@ if (isset($_POST['uploadBtn'])) {
                     <td><?=htmlentities($product['title']) ?>
 					
 					
-					<form action="specific-product.php" method="POST">
-			    	<input type="hidden" name="Title" value="<?=$product['title']?>">
-			        <input type="hidden" name="Description" value="<?=$product['description']?>">
-			        <input type="hidden" name="Price" value="<?=$product['price']?>">
-		          	<input type="hidden" name="Stock" value="<?=$product['stock']?>">
-					<input type="hidden" name="Image" img src="img/roger.jpg">
-		            <input type="submit" name="Readmore" value="Specific product">
-                    </form>
+					<form action="specific-product.php" method="GET">
+        			<input type="submit" value="Read more" class="btn btn-primary">
+        			<input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
+      				</form>
 					</td>
 
 				    <td><?=htmlentities($product['description']) ?></td>
@@ -129,14 +117,11 @@ if (isset($_POST['uploadBtn'])) {
             <?php endforeach; ?>
         </tbody>
         </table>
-
-		<form action="" method="POST" enctype="multipart/form-data"> <!--enctype för att $_FILES ska funka -->
+		<!--
+		<form action="" method="POST" enctype="multipart/form-data"> 
         <label>File:</label> 
-		  <input type="file" name="uploadedFile"><br> <!-- Type=file gör att man får en fil-knapp-->
-		  <input type="submit" value="upload" name="uploadBtn"> <!--Uppladdningsknappen-->
-	  </form>
-	  <p>
-	  <img src="<?=$imgUrl?>">
-
+		  <input type="file" name="uploadedFile"><br> 
+		  <input type="submit" value="upload" name="uploadBtn"> 
+	  </form> -->
 </body>
 </html>
