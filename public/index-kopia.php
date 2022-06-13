@@ -10,6 +10,7 @@ if (isset($_POST['Readmore'])) {
 $products = $userDbHandler->fetchAllProducts();
 
 
+
 ?>
 
 
@@ -28,7 +29,7 @@ $products = $userDbHandler->fetchAllProducts();
         <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
         <div class="description-wrapper">
           <p class="card-text">About the book: <br> "<?= substr( htmlentities($product['description']), 0, 100) ?>"</p>
-
+          
         </div>
 
 				<form action="specific-product-kopia.php" method="GET">
@@ -38,6 +39,7 @@ $products = $userDbHandler->fetchAllProducts();
     </div>
   </div>
 </div>
+
 <?php endforeach ?>
 
 

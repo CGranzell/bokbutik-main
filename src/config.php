@@ -11,7 +11,7 @@ define('CSS_PATH', '../public/css/');          // path to "css"-folder
 define('CSS_PATH_ADMIN', '../../public/css/');          // path to "css"-folder
 define('LAYOUT_PATH', '../public/layout/');          // path to "layout"-folder
 define('LAYOUT_PATH_ADMIN', '../../public/layout/');          // path to "layout"-folder
-define('IMG_PATH', '../../public/');          // path to "layout"-folder
+define('IMG_PATH', '../../public/');          // path to "img"-folder
 
  //print(ROOT_PATH);
 
@@ -21,7 +21,7 @@ define('IMG_PATH', '../../public/');          // path to "layout"-folder
 // print_r(ROOT_PATH);
 // print_r(SRC_PATH);
 // print_r(CSS_PATH . 'style.css');
-// print_r(LAYOUT_PATH . 'footer.php');
+// print_r(IMG_PATH . 'img/');
 
 
 // path till dbconnect
