@@ -8,7 +8,10 @@ session_start();
 define('ROOT_PATH', '..' . __DIR__ . '/'); // path to 'bokbutik-main/'
 define('SRC_PATH',  __DIR__ . '/'); // path to 'bokbutik-main/src/'
 define('CSS_PATH', '../public/css/');          // path to "css"-folder
+define('CSS_PATH_ADMIN', '../../public/css/');          // path to "css"-folder
 define('LAYOUT_PATH', '../public/layout/');          // path to "layout"-folder
+define('LAYOUT_PATH_ADMIN', '../../public/layout/');          // path to "layout"-folder
+define('IMG_PATH', '../../public/');          // path to "layout"-folder
 
  //print(ROOT_PATH);
 
