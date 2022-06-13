@@ -1,6 +1,7 @@
 <?php
 //require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
 require('../../src/dbconnect.php');
+
 //echo "<pre>";
 //print_r($_GET['productId']);
 //echo "</pre>";
@@ -143,7 +144,7 @@ $products  = $stmt->fetchAll();
               <td><?=htmlentities($product['description']) ?></td>
               <td><?=htmlentities($product['price']) ?></td>
               <td><?=htmlentities($product['stock']) ?></td>
-              <td> <img src="<?=$imgUrl?>"> ?></td>
+              <td> <img src="<?=$imgUrl?>"> </td>
 
 
               <td>
@@ -156,6 +157,7 @@ $products  = $stmt->fetchAll();
             <form action="update-product.php" method="GET">
                 <input type="submit" value="Update">
                 <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
+                
             </form>
           </td>
         </tr>
@@ -163,22 +165,23 @@ $products  = $stmt->fetchAll();
   </tbody>
 </table>
 
-   <form action="" method="POST">
+   <form action="" method="POST" enctype="multipart/form-data">
 	   <input type="text" name="title" placeholder="Title"><br>
 	   <input type="text" name="description" placeholder="Description"><br>
 	   <input type="text" name="price" placeholder="Price"><br>
 	   <input type="text" name="stock" placeholder="Stock"><br>
-     <input type="text" name="img_url" placeholder="Image"><br>
-	   <input type="submit" name="addProductBtn" value="Add product"><br>
-   </form>
-   <?=$messages?>
-   <form action="" method="POST" enctype="multipart/form-data">
+     <form action="" method="POST" enctype="multipart/form-data">
 	
 		<input type="file" name="uploadedFile"><br>
 
 		<input type="submit" value="upload" name="uploadBtn">
+     <input type="hidden" name="img_url"><br>
+	   <input type="submit" name="addProductBtn" value="Add product"><br>
+   </form>
+   <?=$messages?>
+   
     
-	</form>
-  <img src="<?=$imgUrl?>">
+	
+  
 </body>
 </html>
