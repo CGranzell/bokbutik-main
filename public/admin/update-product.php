@@ -62,6 +62,7 @@ $product = $statement->fetch();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/css.css">
 </head>
 
 <body>
@@ -96,7 +97,7 @@ $product = $statement->fetch();
 
     <div class="mb-3">
       <label for="img_url" class="form-label"></label>
-      <input type="hidden" class="form-control" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>">
+      <td> <img src="<?=$imgUrl?>"> </td>
     </div>
 
 

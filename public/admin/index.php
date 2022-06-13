@@ -9,7 +9,7 @@ $imgUrl= "";
 $error = "";
 $messages = "";
 
-if (isset($_POST['uploadBtn'])) 
+if (isset($_POST['addProductBtn'])) 
 	//echo "<pre>";
 	//print_r($_FILES['uploadedFile']);
 	//echo "</pre>";
@@ -174,7 +174,7 @@ $products  = $stmt->fetchAll();
 	
 		<input type="file" name="uploadedFile"><br>
 
-		<input type="submit" value="upload" name="uploadBtn">
+		
      <input type="hidden" name="img_url"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
