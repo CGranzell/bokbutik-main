@@ -41,87 +41,43 @@ if (isset($_POST['uploadBtn'])) {
 		}
 	
 	} *///HÄR SLUTAR BILDHANTERINGEN
-
-
-	if (isset($_POST['Readmore'])) {
-    
-    
-		$sql = "
-			SELECT * FROM products 
-			WHERE id= :id;
-		";
-		$stmt = $pdo->prepare($sql); 
-		$stmt->bindParam(":id", $_POST['id']); 
-		$stmt->execute(); 
-	} 
-
-	
-	
-	$stmt = $dbconnect->query("SELECT * FROM `products` "); 	
-	$products = $stmt->fetchAll(); 	//Hämtar produkterna
-	
+	$products = $userDbHandler->fetchAllProducts();
 	?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Den publika sidan</title>
-    <link rel="stylesheet" href="C:\MAMP\htdocs\bokbutik-main\public\css\style.css">
-</head>
-<body>
+<h1 class="fredriks-huvudrubrik">Welcome to the Bok Store</h1>
+	<h3 class="fredriks-huvudrubrik">Our selection</h3>
+   <!-- Container rows -->
+   <?php foreach ($products as $product) : ?>
+    <div class="container-index">
+		
+      <div class="card  card-index" style="width: 18rem;">
+      <img src="<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+       
+      <div class="card-body">
+        <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
+        <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
+        <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
+        <div class="description-wrapper">
+        <p class="card-text">About the book: <br> "<?= substr( htmlentities($product['description']), 0, 100) ?>"</p>
+
+        </div>
+
+		<form action="specific-product.php" method="GET">
+        <input type="submit" value="Read more" class="btn btn-primary">
+        <input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach ?>
 
 
-<p>
-<h1 class="fredriks-huvudrubrik">Shop page</h1>
-	<p>
-
-	<table id="fredriks-tbl" class="fredriks-centrering">
-     
-            <tr><thead> 
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-				<th>Price</th>
-			    <th>Stock</th>
-                <th> Image </th>
+   
+		<?php 
+include(LAYOUT_PATH . 'footer.php');
+?>
 
 
-		      	</tr>
-        </thead>
-		<tbody>
-	<?php foreach ($products as $product) : ?>
-                <tr>
-                    <td><?=htmlentities($product['id']) ?></td>
-                    <td><?=htmlentities($product['title']) ?>
-					
-					
-					<form action="specific-product.php" method="GET">
-        			<input type="submit" value="Read more" class="btn btn-primary">
-        			<input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
-      				</form>
-					</td>
+	
 
-				    <td><?=htmlentities($product['description']) ?></td>
-                    <td><?=htmlentities($product['price']) ?></td>
-                    <td><?=htmlentities($product['stock']) ?></td>
-                    <td> <img src="<?=$imgUrl?>"> </td>
-					
-				
-				
-				
-                       
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </table>
-		<!--
-		<form action="" method="POST" enctype="multipart/form-data"> 
-        <label>File:</label> 
-		  <input type="file" name="uploadedFile"><br> 
-		  <input type="submit" value="upload" name="uploadBtn"> 
-	  </form> -->
-</body>
-</html>
+
