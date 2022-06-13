@@ -112,7 +112,7 @@ $products  = $stmt->fetchAll();
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>ADMIN</title>
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
 
@@ -127,7 +127,7 @@ $products  = $stmt->fetchAll();
 			   <th>Description</th>
 			   <th>Price</th>
 			   <th>Stock</th>
-         <th>Img_url</th>
+         <th>Image</th>
 
 
 		   </tr>
@@ -143,7 +143,7 @@ $products  = $stmt->fetchAll();
               <td><?=htmlentities($product['description']) ?></td>
               <td><?=htmlentities($product['price']) ?></td>
               <td><?=htmlentities($product['stock']) ?></td>
-              <td><?=htmlentities($product['img_url']) ?></td>
+              <td> <img src="<?=$imgUrl?>"> ?></td>
 
 
               <td>
@@ -168,7 +168,7 @@ $products  = $stmt->fetchAll();
 	   <input type="text" name="description" placeholder="Description"><br>
 	   <input type="text" name="price" placeholder="Price"><br>
 	   <input type="text" name="stock" placeholder="Stock"><br>
-     <input type="text" name="img_url" placeholder="Img_url"><br>
+     <input type="text" name="img_url" placeholder="Image"><br>
 	   <input type="submit" name="addProductBtn" value="Add product"><br>
    </form>
    <?=$messages?>
@@ -177,6 +177,7 @@ $products  = $stmt->fetchAll();
 		<input type="file" name="uploadedFile"><br>
 
 		<input type="submit" value="upload" name="uploadBtn">
+    
 	</form>
   <img src="<?=$imgUrl?>">
 </body>
