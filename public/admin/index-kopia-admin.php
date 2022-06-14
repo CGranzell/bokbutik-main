@@ -104,7 +104,7 @@ $products = $userDbHandler->fetchAllProducts();
               <input type="hidden" name="productId" value="<?=$product['id'] ?>">
               <input type="submit" name="deleteProductBtn" value="Delete" class="btn btn-primary"><br>
             </form>
-            <form action="update-product.php" method="GET">
+            <form action="update-product-kopia.php" method="GET">
                 <input type="submit" value="Update" class="btn btn-primary">
                 <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
             </form>      

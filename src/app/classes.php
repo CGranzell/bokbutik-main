@@ -200,4 +200,31 @@ public function addProduct($array) {
     $statement->execute();
   }
 
+
+
+  // Uppdaterar en product
+public function updateProduct($id, $array) {
+ 
+  $sql = "
+  UPDATE products
+  SET
+    title       = :title,
+    description = :description,
+    price       = :price,
+    stock       = :stock,
+    img_url     = :img_url
+
+    WHERE id    = :id
+    ";
+ 
+    $statement = $this->dbconnect->prepare($sql);
+    $statement->bindParam(':id', $id);
+    $statement->bindParam(':title', $array[0]);
+    $statement->bindParam(':description', $array[1]);
+    $statement->bindParam(':price', $array[2]);
+    $statement->bindParam(':stock', $array[3]);
+    $statement->bindParam(':img_url', $array[4]);
+    $statement->execute();
+}
+
 }
