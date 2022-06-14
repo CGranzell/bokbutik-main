@@ -77,63 +77,67 @@ if (isset($_POST['deleteProductBtn'])) {
 $products = $userDbHandler->fetchAllProducts();
 ?>
 
-
-
-<h1>Admin</h1>
-
-
-   <table id="products-tbl">
-	   <thead>
-		   <tr>
-			   <th>Title</th>
-			   <th>Description</th>
-			   <th>Price</th>
-			   <th>Stock</th>
-         <th>Img_url</th>
-
-
-		   </tr>
-	   </thead>
-
-	   <tbody>
-		   <?php
-
-          foreach ($products as $product) { ?>
-          <tr>
-
-              <td><?=htmlentities($product['title']) ?></td>
-              <td><?=htmlentities($product['description']) ?></td>
-              <td><?=htmlentities($product['price']) ?></td>
-              <td><?=htmlentities($product['stock']) ?></td>
-              <td><?=htmlentities($product['img_url']) ?></td>
-                  
-
-              <td>
-              <form action="" method="POST">
-                      <input type="hidden" name="productId" value="<?=$product['id'] ?>">
-                      <input type="submit" name="deleteProductBtn" value="Delete"><br></form>
-
-
-
-            <form action="update-product.php" method="GET">
-                <input type="submit" value="Update">
-                <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
+<div class="mt-5 container">
+  <br />
+  <br />
+  <table class="table border p-2">
+    <thead>
+      <tr>             
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Img url</th>
+        <th scope="col"> Actions </th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($products as $product) { ?>
+        <tr>
+          <td scope="row"><?=htmlentities($product['title']) ?></td>
+          <td><?=htmlentities($product['description']) ?></td>
+          <td><?=htmlentities($product['price']) ?></td>
+          <td><?=htmlentities($product['stock']) ?></td>
+          <td><?=htmlentities($product['img_url']) ?></td>
+          <td> 
+            <form action="" method="POST">
+              <input type="hidden" name="productId" value="<?=$product['id'] ?>">
+              <input type="submit" name="deleteProductBtn" value="Delete" class="btn btn-primary"><br>
             </form>
+            <form action="update-product.php" method="GET">
+                <input type="submit" value="Update" class="btn btn-primary">
+                <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
+            </form>      
           </td>
         </tr>
-        <?php }?>
-  </tbody>
-</table>
+      <?php } ?>
+    </tbody>
+  </table>
+  
+  <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
+		  <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+		  <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+      </div>
+		  <div class="mb-3">
+        <label for="price" class="form-label">price</label>
+        <input type="text" class="form-control" id="price" name="price">
+      </div>
+		  <div class="mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="text" class="form-control" id="stock" name="stock">
+      </div>
+		  <div class="mb-3" id="inputBtn">
+        <input type="file" name="uploadedFile" ><br>
+        <input type="submit" value="Add Product" name="uploadBtn" class="btn btn-primary">
+    </form>
+  </div>
+</div>
 
-   <form action="" method="POST" enctype="multipart/form-data">
-	   <input type="text" name="title" placeholder="Title"><br>
-	   <input type="text" name="description" placeholder="Description"><br>
-	   <input type="text" name="price" placeholder="Price"><br>
-	   <input type="text" name="stock" placeholder="Stock"><br>
-     <input type="file" name="uploadedFile"><br>
-
-		<input type="submit" value="Add Product" name="uploadBtn">
-   </form>
 
    <?=$messages?>
 
