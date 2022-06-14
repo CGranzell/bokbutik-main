@@ -1,72 +1,33 @@
 <?php
-//require('C:\MAMP\htdocs\bokbutik-main\src\dbconnect.php');
-require('../../src/dbconnect.php');
+require('../../src/config.php');
+include(LAYOUT_PATH_ADMIN . 'header.php');
+
+if(isset($_POST['updateAccountBtn'])) {
 
 
-$productId = $_GET['productId'];
-// Felmeddelande sätts till tomt
-// Uppdatera användaruppgift
-if (array_key_exists('updateAccountBtn', $_POST)) {
+    // skapar och fyller array med product info
+    $productInfo = [
+      //Tar bort mellanslag före och efter textsträng
+      $title       = trim($_POST['title']),
+      $description = trim($_POST['description']),
+      $price       = trim($_POST['price']),
+      $stock       = trim($_POST['stock']),
+      $img_url     = trim($_POST['img_url']),
+    ];
+
+    $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
+
+    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
 
-  $sql = "
-    UPDATE products
-    SET
-      title=:title,
-      description=:description,
-      price=:price,
-      stock=:stock,
-      img_url=:img_url
-    WHERE id =:id
-    ";
-  $statement = $dbconnect->prepare($sql);
-  $statement->bindParam(':id', $productId);
-  $statement->bindParam(':title', $_POST['title']);
-  $statement->bindParam(':price', $_POST['price']);
-  $statement->bindParam(':description', $_POST['description']);
-  $statement->bindParam(':stock', $_POST['stock']);
-  $statement->bindParam(':img_url', $_POST['img_url']);
-  $statement->execute();
+  redirect("index", "updateSucces");
 
-  if ($sql) header('Location: http://localhost/bokbutik-main/public/admin/index.php') ;
+  
 }
 
 
-
-
-
-
-// Hämtar en användaruppgift
-$sql = "
-      SELECT * FROM products
-      WHERE id = :id
-";
-$statement = $dbconnect->prepare($sql);
-$statement->bindParam(':id', $_GET['productId']);
-$statement->execute();
-$product = $statement->fetch();
-
-//echo "Product";
-//echo "<pre>";
-//print_r($product);
-//echo "</pre>";
-
-
-
+$product = $userDbHandler->fetchOneProduct($_GET['productId']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/css.css">
-</head>
-
-<body>
-
 
 
   <div class="wrapper-register">
@@ -96,16 +57,16 @@ $product = $statement->fetch();
     </div>
 
     <div class="mb-3">
-      <label for="img_url" class="form-label"></label>
-      <td> <img src="<?=$imgUrl?>"> </td>
+      <label for="img_url" class="form-label">Image</label>
+      <input type="file" class="form-control" id="img_url" name="img_url"> <img src="<?=($product['img_url'])?>">
     </div>
-
+    
 
     <!-- Update Btn -->
     <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
   </form>
 
-</body>
-
-</html>
+  <?php 
+include(LAYOUT_PATH_ADMIN . 'footer.php');
+?>
