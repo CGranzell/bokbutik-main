@@ -4,25 +4,89 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
 if(isset($_POST['updateAccountBtn'])) {
 
+  if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
+    $fileName = $_FILES['uploadedFile']['name'];
+    $fileType = $_FILES['uploadedFile']['type'];
+    $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+
+    $path = 'img/';
+    // $path ="img/";
+    $newFilePath = $path . $fileName;
+
+    $allowedFileTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/gif',
+      'image/jpg',
+    ];
+    $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
+
+
+    if ($isFileTypeAllowed === false) {
+      $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
+    }
+
+    if ($_FILES['uploadedFile']['size'] > 1000000) {
+      $error .= 'Exceeded filesize limit.<br>';
+    }
+
+    if (empty($error)) {
+
+
+      $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
+
+      if ($isTheFileUploaded) {
+        $imgUrl = $newFilePath;
+        $messages = "Upload success";
+      } else {
+        $error = "Could not upload the file";
+      }
+    } else {
+      $messages = $error;
+    }
+
+    if (empty($error)) {
+
+      // skapar och fyller array med product info
+
+      //Tar bort mellanslag före och efter textsträng
+
+      $productInfo = [
+        $title       = trim($_POST['title']),
+        $description = trim($_POST['description']),
+        $price       = trim($_POST['price']),
+        $stock       = trim($_POST['stock']),
+        $img_url     = trim($imgUrl)
+
+      ];
+
+      $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
+
+        $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+
+      redirect("index", "updateSucces");
+
+    }
+  }
+
+
+
+
+
+
 
     // skapar och fyller array med product info
-    $productInfo = [
-      //Tar bort mellanslag före och efter textsträng
-      $title       = trim($_POST['title']),
-      $description = trim($_POST['description']),
-      $price       = trim($_POST['price']),
-      $stock       = trim($_POST['stock']),
-      $img_url     = trim($_POST['img_url']), 
-    ];
-
-    $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
-
-    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+    // $productInfo = [
+    //   //Tar bort mellanslag före och efter textsträng
+    //   $title       = trim($_POST['title']),
+    //   $description = trim($_POST['description']),
+    //   $price       = trim($_POST['price']),
+    //   $stock       = trim($_POST['stock']),
+    //   $img_url     = trim($_POST['img_url']),
+    // ];
 
 
-  redirect("index", "updateSucces");
 
-  
 }
 
 
@@ -61,16 +125,14 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
       <input type="hidden" id="img_url" name="img_url"> <img src="<?=($product['img_url'])?>">
       <div class="mb-3" id="inputBtn">
         <input type="file" name="uploadedFile" ><br>
-        <input type="submit" value="Add File" name="uploadBtn" class="btn btn-primary">
-        
     </div>
-    
+
 
     <!-- Update Btn -->
     <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
   </form>
 
-  <?php 
+  <?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
 ?>
