@@ -1,6 +1,6 @@
 <?php
 require('../src/config.php');
-include('./layout/header.php');
+include(LAYOUT_PATH . 'header-public.php');
 ?>
 
 <?php

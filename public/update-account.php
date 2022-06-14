@@ -1,6 +1,6 @@
 <?php
 require('../src/config.php');
-include(LAYOUT_PATH . 'header.php');
+include(LAYOUT_PATH . 'header-public.php');
 
 
 // Lösenordsskyddad, om SESSION inte är satt från login kan användaren inte komma åt sidan

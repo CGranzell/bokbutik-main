@@ -1,7 +1,6 @@
 <?php
-
-require('../../src/dbconnect.php');
-include('../layout/header.php');
+require('../../src/config.php');
+include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
 $stmt = $pdo->query('SELECT * FROM users');
 $users = $stmt->fetchAll();

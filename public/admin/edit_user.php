@@ -1,6 +1,6 @@
 <?php
-require('../../src/dbconnect.php');
-
+require('../../src/config.php');
+include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 $user_id = htmlspecialchars($_GET['id']);
 $message = '';
 
