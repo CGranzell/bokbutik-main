@@ -130,3 +130,4 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
   <?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
 ?>
+
