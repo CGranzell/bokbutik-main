@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
@@ -73,9 +70,6 @@ if (isset($_POST['uploadBtn']))
         $img_url     = trim($imgUrl)
 
       ];
-
-
-      print_r($imgUrl);
 
 
       // Lägger till produkt

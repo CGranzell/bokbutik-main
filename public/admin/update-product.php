@@ -2,8 +2,16 @@
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
+
+$imgUrl = "";
+$error = "";
+$messages = "";
+
+
 if(isset($_POST['updateAccountBtn'])) {
 
+
+// If they upload a new file
   if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
     $fileName = $_FILES['uploadedFile']['name'];
     $fileType = $_FILES['uploadedFile']['type'];
@@ -45,47 +53,33 @@ if(isset($_POST['updateAccountBtn'])) {
       $messages = $error;
     }
 
-    if (empty($error)) {
+    $productInfo = [
+      $title       = trim($_POST['title']),
+      $description = trim($_POST['description']),
+      $price       = trim($_POST['price']),
+      $stock       = trim($_POST['stock']),
+      $img_url     = trim($imgUrl)
 
-      // skapar och fyller array med product info
+    ];
+    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-      //Tar bort mellanslag före och efter textsträng
+  } else {
 
-      $productInfo = [
-        $title       = trim($_POST['title']),
-        $description = trim($_POST['description']),
-        $price       = trim($_POST['price']),
-        $stock       = trim($_POST['stock']),
-        $img_url     = trim($imgUrl)
+    // If they dont upload a new file
 
-      ];
+    $productInfo = [
+      $title       = trim($_POST['title']),
+      $description = trim($_POST['description']),
+      $price       = trim($_POST['price']),
+      $stock       = trim($_POST['stock']),
+      $img_url     =trim($_POST['img_url']),
 
-      $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
+    ];
+    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-        $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
-
-      redirect("index", "updateSucces");
-
-    }
   }
 
-
-
-
-
-
-
-    // skapar och fyller array med product info
-    // $productInfo = [
-    //   //Tar bort mellanslag före och efter textsträng
-    //   $title       = trim($_POST['title']),
-    //   $description = trim($_POST['description']),
-    //   $price       = trim($_POST['price']),
-    //   $stock       = trim($_POST['stock']),
-    //   $img_url     = trim($_POST['img_url']),
-    // ];
-
-
+      redirect("index", "updateSucces");
 
 }
 
@@ -122,7 +116,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
 
     <div class="mb-3">
       <label for="img_url" class="form-label">Image</label><br>
-      <input type="hidden" id="img_url" name="img_url"> <img src="<?=($product['img_url'])?>">
+      <input type="hidden" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>"> <img src="<?=($product['img_url'])?>">
       <div class="mb-3" id="inputBtn">
         <input type="file" name="uploadedFile" ><br>
     </div>
