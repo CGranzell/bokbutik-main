@@ -49,9 +49,9 @@ if (isset($_POST['uploadBtn'])) {
    <!-- Container rows -->
    <?php foreach ($products as $product) : ?>
     <div class="container-index">
-		
+	
       <div class="card  card-index" style="width: 18rem;">
-      <img src="<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+      <img src="<?=($product['img_url'])?>" class="card-img-top" alt="...">
        
       <div class="card-body">
         <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
