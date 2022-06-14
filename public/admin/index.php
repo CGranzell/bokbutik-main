@@ -1,22 +1,25 @@
 <?php
+
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
-$imgUrl= "";
+$imgUrl = "";
 $error = "";
 $messages = "";
 
-if (isset($_POST['uploadBtn'])) 
-
+if (isset($_POST['uploadBtn']))
 
   if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
     $fileName = $_FILES['uploadedFile']['name'];
     $fileType = $_FILES['uploadedFile']['type'];
     $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
-   
+
     $path = 'img/';
     // $path ="img/";
     $newFilePath = $path . $fileName;
+
+
+
 
     $allowedFileTypes = [
       'image/png',
@@ -25,48 +28,55 @@ if (isset($_POST['uploadBtn']))
       'image/jpg',
     ];
     $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
-    
+
+
     if ($isFileTypeAllowed === false) {
       $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
     }
 
-    if ($_FILES < 1000000) {
+    if ($_FILES['uploadedFile']['size'] > 1000000) {
       $error .= 'Exceeded filesize limit.<br>';
     }
 
-    $img_size = getimagesize($fileTempPath);
+    // not used
+    // $img_size = getimagesize($fileTempPath);
 
     if (empty($error)) {
 
 
-    $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
+      $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
-    if ($isTheFileUploaded) {
+      if ($isTheFileUploaded) {
         $imgUrl = $newFilePath;
         $messages = "Upload success";
+      } else {
+        $error = "Could not upload the file";
+      }
     } else {
-      $error = "Could not upload the file";
+      $messages = $error;
     }
 
-  } else {
-  $messages = $error;
-}
-if (empty($error)) {
+    if (empty($error)) {
 
-    // skapar och fyller array med product info
-    $productInfo = [
+      // skapar och fyller array med product info
+
       //Tar bort mellanslag före och efter textsträng
-      $title       = trim($_POST['title']),
-      $description = trim($_POST['description']),
-      $price       = trim($_POST['price']),
-      $stock       = trim($_POST['stock']),
-      $img_url     = trim($imgUrl),
-    ];
-    // Lägger till produkt
-    $userDbHandler->addProduct($productInfo);
-    
-}
-}
+
+      $productInfo = [
+        $title       = trim($_POST['title']),
+        $description = trim($_POST['description']),
+        $price       = trim($_POST['price']),
+        $stock       = trim($_POST['stock']),
+        $img_url     = trim($imgUrl)
+
+      ];
+
+
+      // Lägger till produkt
+       $userDbHandler->addProduct($productInfo);
+
+    }
+  }
 
 if (isset($_POST['deleteProductBtn'])) {
   // Tar bort en produkt
@@ -82,7 +92,7 @@ $products = $userDbHandler->fetchAllProducts();
   <br />
   <table class="table border p-2">
     <thead>
-      <tr>             
+      <tr>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
         <th scope="col">Price</th>
@@ -94,55 +104,56 @@ $products = $userDbHandler->fetchAllProducts();
     <tbody>
       <?php foreach ($products as $product) { ?>
         <tr>
-          <td scope="row"><?=htmlentities($product['title']) ?></td>
-          <td><?=htmlentities($product['description']) ?></td>
-          <td><?=htmlentities($product['price']) ?></td>
-          <td><?=htmlentities($product['stock']) ?></td>
-          
-          <td><img src="<?=($product['img_url'])?>"></td>
-          <td> 
+          <td scope="row"><?= htmlentities($product['title']) ?></td>
+          <td><?= htmlentities($product['description']) ?></td>
+          <td><?= htmlentities($product['price']) ?></td>
+          <td><?= htmlentities($product['stock']) ?></td>
+
+          <td><img src="<?= ($product['img_url']) ?>"></td>
+          <td>
             <form action="" method="POST">
-              <input type="hidden" name="productId" value="<?=$product['id'] ?>">
+              <input type="hidden" name="productId" value="<?= $product['id'] ?>">
               <input type="submit" name="deleteProductBtn" value="Delete" class="btn btn-primary"><br>
             </form>
             <form action="update-product.php" method="GET">
-                <input type="submit" value="Update" class="btn btn-primary">
-                <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
-            </form>      
+              <input type="submit" value="Update" class="btn btn-primary">
+              <input type="hidden" name="productId" value="<?= htmlentities($product['id']) ?>">
+            </form>
           </td>
         </tr>
       <?php } ?>
     </tbody>
   </table>
-  
+
+  <?php echo $error; ?>
+
   <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
-		  <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
-      </div>
-		  <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
-      </div>
-		  <div class="mb-3">
-        <label for="price" class="form-label">price</label>
-        <input type="text" class="form-control" id="price" name="price">
-      </div>
-		  <div class="mb-3">
-        <label for="stock" class="form-label">Stock</label>
-        <input type="text" class="form-control" id="stock" name="stock">
-      </div>
-		  <div class="mb-3" id="inputBtn">
-        <input type="file" name="uploadedFile" ><br>
-        <input type="submit" value="Add Product" name="uploadBtn" class="btn btn-primary">
-    </form>
-  </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">price</label>
+      <input type="text" class="form-control" id="price" name="price">
+    </div>
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="text" class="form-control" id="stock" name="stock">
+    </div>
+    <div class="mb-3" id="inputBtn">
+      <input type="file" name="uploadedFile"><br>
+      <input type="submit" value="Add Product" name="uploadBtn" class="btn btn-primary">
+  </form>
+</div>
 </div>
 
 
-   <?=$messages?>
+<?= $messages ?>
 
-		<?php 
+<?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
 ?>
-
