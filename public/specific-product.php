@@ -1,9 +1,6 @@
 <?php
-
- // require('C:\MAMP\htdocs\eshop\bokbutik-main\src\dbconnect.php');
- require('../src/config.php');  //hänvisar till mappen ovanför'
- include('./layout/header.php');
-
+require('../src/config.php');
+include(LAYOUT_PATH . 'header-public.php');
 
  //READ PRODUCT
 

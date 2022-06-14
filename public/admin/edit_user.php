@@ -1,10 +1,10 @@
 <?php
-require('../../src/dbconnect.php');
-
+require('../../src/config.php');
+include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 $user_id = htmlspecialchars($_GET['id']);
 $message = '';
 
-$sql = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+$sql = $dbconnect->prepare('SELECT * FROM users WHERE id = :id');
 $sql->execute(['id' => $user_id]);
 $the_user = $sql->fetch();
 
@@ -23,7 +23,7 @@ if (array_key_exists('submitBtn', $_POST)) {
 
     if ($first_name || $last_name || $password || $street || $postal_code || $country || $city || $email || $password || $phone) {
 
-        $sql = $pdo->prepare(' UPDATE users SET first_name=:first_name, last_name=:last_name, email=:email, password=:password, phone=:phone, street=:street, postal_code=:postal_code, city=:city, country=:country WHERE id=:id ')->execute([
+        $sql = $dbconnect->prepare(' UPDATE users SET first_name=:first_name, last_name=:last_name, email=:email, password=:password, phone=:phone, street=:street, postal_code=:postal_code, city=:city, country=:country WHERE id=:id ')->execute([
             'id' => $user_id,
             'first_name' => $first_name,
             'last_name' => $last_name,

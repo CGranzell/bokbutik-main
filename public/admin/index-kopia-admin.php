@@ -1,6 +1,7 @@
 <?php
 require('../../src/config.php');
-include(LAYOUT_PATH_ADMIN . 'header.php');
+include(LAYOUT_PATH_ADMIN . 'header-admin.php');
+
 
 $imgUrl= "";
 $error = "";

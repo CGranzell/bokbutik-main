@@ -1,6 +1,6 @@
 <?php
-require('../../src/dbconnect.php');
-
+require('../../src/config.php');
+include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 $message = '';
 $error = '';
 
@@ -22,7 +22,7 @@ if (array_key_exists('submitBtn', $_POST)) {
     VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country );
      ";
 
-        $stmt = $pdo->prepare($sql);
+        $stmt = $dbconnect->prepare($sql);
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':email', $email);
