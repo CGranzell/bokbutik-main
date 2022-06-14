@@ -62,6 +62,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
       <div class="mb-3" id="inputBtn">
         <input type="file" name="uploadedFile" ><br>
         <input type="submit" value="Add File" name="uploadBtn" class="btn btn-primary">
+        <img src="<?=(['/img'])?>">
         
     </div>
     
