@@ -12,7 +12,7 @@ if(isset($_POST['updateAccountBtn'])) {
       $description = trim($_POST['description']),
       $price       = trim($_POST['price']),
       $stock       = trim($_POST['stock']),
-      $img_url     = trim($_POST['img_url']),
+      $img_url     = trim($_POST['img_url']), 
     ];
 
     $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
@@ -35,7 +35,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
   </div>
 
 
-  <form method="POST" class="form mx-auto">
+  <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
 
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
@@ -57,8 +57,12 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
     </div>
 
     <div class="mb-3">
-      <label for="img_url" class="form-label">Image</label>
-      <input type="file" class="form-control" id="img_url" name="img_url"> <img src="<?=($product['img_url'])?>">
+      <label for="img_url" class="form-label">Image</label><br>
+      <input type="hidden" id="img_url" name="img_url"> <img src="<?=($product['img_url'])?>">
+      <div class="mb-3" id="inputBtn">
+        <input type="file" name="uploadedFile" ><br>
+        <input type="submit" value="Add File" name="uploadBtn" class="btn btn-primary">
+        
     </div>
     
 
