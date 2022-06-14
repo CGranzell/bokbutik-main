@@ -119,9 +119,6 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
       <input type="hidden" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>"> <img src="<?=($product['img_url'])?>">
       <div class="mb-3" id="inputBtn">
         <input type="file" name="uploadedFile" ><br>
-        <input type="submit" value="Add File" name="uploadBtn" class="btn btn-primary">
-        <img src="<?=(['/img'])?>">
-        
     </div>
 
 
@@ -133,3 +130,4 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
   <?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
 ?>
+
