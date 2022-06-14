@@ -1,15 +1,18 @@
 <?php
 
 require('../../src/dbconnect.php');
-include('../layout/header.php');
 
-$stmt = $pdo->query('SELECT * FROM users');
+// not working and breaking the script
+//include('../layout/header.php');
+
+
+$stmt = $dbconnect->query('SELECT * FROM users');
 $users = $stmt->fetchAll();
 
 if (array_key_exists('deleteBtn', $_POST)) {
 
     $id = $_POST['deleteBtn'];
-    $sql = $pdo->prepare('DELETE FROM users WHERE id = :id')->execute(['id' => $id]);
+    $sql = $dbconnect->prepare('DELETE FROM users WHERE id = :id')->execute(['id' => $id]);
 
     if ($sql) header("Refresh:0");
 }

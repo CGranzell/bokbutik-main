@@ -5,7 +5,7 @@ require('../src/dbconnect.php');
 if (array_key_exists('getProduct', $_POST)) {
 
   $product = $_POST['product'];
-  $sql = $pdo->prepare('SELECT * FROM products WHERE title LIKE :keyword OR description LIKE :keyword ORDER BY title');
+  $sql = $dbconnect->prepare('SELECT * FROM products WHERE title LIKE :keyword OR description LIKE :keyword ORDER BY title');
   $sql->bindValue(':keyword', '%' . $product . '%', PDO::PARAM_STR);
   $sql->execute();
   $result = $sql->fetchAll();
