@@ -15,7 +15,7 @@ if (isset($_POST['uploadBtn']))
     $fileType = $_FILES['uploadedFile']['type'];
     $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
    
-    $path = '../../../img/';
+    $path = 'img/';
     // $path ="img/";
     $newFilePath = $path . $fileName;
 
