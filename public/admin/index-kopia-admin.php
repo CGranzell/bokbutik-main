@@ -15,7 +15,7 @@ if (isset($_POST['uploadBtn']))
     $fileType = $_FILES['uploadedFile']['type'];
     $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
    
-    $path = '../../../img/';
+    $path = 'img/';
     // $path ="img/";
     $newFilePath = $path . $fileName;
 
@@ -89,7 +89,7 @@ $products = $userDbHandler->fetchAllProducts();
         <th scope="col">Price</th>
         <th scope="col">Stock</th>
         <th scope="col">Img url</th>
-        <th scope="col"> Actions </th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
