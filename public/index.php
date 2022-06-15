@@ -36,7 +36,7 @@ if (isset($_POST['uploadBtn'])) {
 				$imgUrl = $newFilePath;
 			} else {
 				// Could not upload the file...
-				$error = "Could not upload the file";bbb
+				$error = "Could not upload the file";---
 			}
 		}
 	
