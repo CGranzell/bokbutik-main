@@ -2,14 +2,50 @@
 
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
+ 
+ 
+  $imgUrl = "";
+  $error = "";
+  $messages = "";
+  $errorMessageTitle  = "";
+  $errorMessageDescription   = "";
+  $errorMessagePrice      = "";
+  $errorMessageStock = "";
+ 
+  $message                = "";
 
-$imgUrl = "";
-$error = "";
-$messages = "";
+  if (isset($_POST['uploadBtn']))
+  $productInfo = [
+    //Tar bort mellanslag före och efter textsträng
+    $title  = trim($_POST['title']),
+    $description   = trim($_POST['description']),
+    $price      = trim($_POST['price']),
+    $stock   = trim($_POST['stock']),
+  ];
 
-if (isset($_POST['uploadBtn']))
 
-  if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
+  
+    
+    if (empty($title)) {
+      $errorMessageTitle = errorRequiredField("Title");
+    }
+    
+    if (empty($description)) {
+      $errorMessageDescription = errorRequiredField("Description");
+    }
+    
+    if (empty($price)) {
+      $errorMessagePrice = errorRequiredField("Price");
+    }
+    
+    if (empty($stock)) {
+      $errorMessageStock = errorRequiredField("Stock");
+    }
+  
+  
+  {
+
+  if (isset($_FILES['uploadedFile'])) {
     $fileName = $_FILES['uploadedFile']['name'];
     $fileType = $_FILES['uploadedFile']['type'];
     $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
@@ -18,9 +54,6 @@ if (isset($_POST['uploadBtn']))
     // $path ="img/";
     //$path = '../img/';  Bilden hamnar nu  i public/img
     $newFilePath = $path . $fileName;
-
-
-
 
     $allowedFileTypes = [
       'image/png',
@@ -77,7 +110,7 @@ if (isset($_POST['uploadBtn']))
        $userDbHandler->addProduct($productInfo);
 
     }
-  }
+  }}
 
 if (isset($_POST['deleteProductBtn'])) {
   // Tar bort en produkt
@@ -127,22 +160,26 @@ $products = $userDbHandler->fetchAllProducts();
   </table>
 
   <?php echo $error; ?>
-
+  
   <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
+      <?=$errorMessageTitle  ?>
       <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
+      <?=$errorMessageDescription  ?>
       <textarea class="form-control" id="description" rows="3" name="description"></textarea>
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">price</label>
+      <?=$errorMessagePrice  ?>
       <input type="text" class="form-control" id="price" name="price">
     </div>
     <div class="mb-3">
       <label for="stock" class="form-label">Stock</label>
+      <?=$errorMessageStock  ?>
       <input type="text" class="form-control" id="stock" name="stock">
     </div>
     <div class="mb-3" id="inputBtn">
@@ -153,7 +190,7 @@ $products = $userDbHandler->fetchAllProducts();
 </div>
 
 
-<?= $messages ?>
+
 
 <?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
