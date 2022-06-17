@@ -7,7 +7,7 @@ if(empty($_SESSION['cartItems'])) {
   exit;
 }
 $cartItems = $_SESSION['cartItems'];
-// unset($_SESSION['cartItems']);
+unset($_SESSION['cartItems']);
 // Om det finns något i varukorgen
 $totalSum = 0;
 foreach ($cartItems as $cartId => $cartItem){

@@ -121,7 +121,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
 </table>
 
 <?php endforeach; ?>
-<a href="../checkout-chris.php">Checkout</a>
+<a href="../checkout-chris.php" class="btn btn-primary">Checkout</a>
   </ul>
 </div>
         <!-- Dropdown slut -->
