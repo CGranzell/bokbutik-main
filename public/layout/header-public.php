@@ -1,3 +1,21 @@
+<?php
+
+// Om sesion inte är satt
+if(!isset($_SESSION['cartItems'])){
+  $_SESSION['cartItems'] = [];
+  }
+
+// Om det finns något i varukorgen
+$cartItemCount = count($_SESSION['cartItems']);
+$cartTotalSum = 0;
+foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
+  $cartTotalSum += $cartItem['price'] * $cartItem['quantity'];
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +79,51 @@
 
         echo $loggedinNav;
         ?>
+
+        <!-- Dropdown  -->
+            
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <b>Cart</b>
+    <span><?=$cartItemCount?></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  <div class="float-end">
+<p><b> Total:</b> <?=$cartTotalSum?></p>
+</div>
+    <?php foreach ($_SESSION['cartItems'] as $cartId => $cartItem) : ?>
+
+  
+  <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Book</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="admin/<?=htmlentities($cartItem['img_url']) ?>" alt="..." width="100" 
+     height="100">
+      </td>
+      <th><?=$cartItem['title']?></th>
+      <td><?=$cartItem['price']?></td>
+      <td><?=$cartItem['quantity']?></td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<?php endforeach; ?>
+<a href="checkout-chris.php">Checkout</a>
+  </ul>
+</div>
+        <!-- Dropdown slut -->
 
       </div>
 

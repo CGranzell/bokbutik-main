@@ -7,8 +7,11 @@ require('../src/app/common_functions.php');
 
 // Förstör sessionen och loggar ut användaren och skickar till logga in igen
 session_start();
-$_SESSION = [];
-session_destroy();
+// $_SESSION = [];
+// session_destroy();
+unset($_SESSION["email"]);
+unset($_SESSION["id"]);
+
 
 // Om användaren har raderat sitt konto
 if(isset($_GET['succesDelete'])){
