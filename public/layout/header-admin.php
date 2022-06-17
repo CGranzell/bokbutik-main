@@ -29,7 +29,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
   <link rel="stylesheet" href="<?=CSS_PATH_ADMIN . 'style.css'?>">
 
 
-  <title>Header</title>
+  <title>Bokbutiken</title>
 </head>
 
 <body>
