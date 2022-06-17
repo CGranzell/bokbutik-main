@@ -35,9 +35,7 @@ if(isset($_POST['createUserBtn'])) {
     // Kollar om email är upptagen
     $emailExist = $userDbHandler->fetchUserByEmail($email);
  
-  if($emailExist){
-    $errorTakenEmail  = emailAlreadyTaken($errorTakenEmail);
-  } else if($_POST['password'] !== $_POST['confirmPassword']) {
+   if($_POST['password'] !== $_POST['confirmPassword']) {
     $message = noMatchPassword($message);
   }
  
@@ -91,9 +89,16 @@ if(isset($_POST['createUserBtn'])) {
     if (empty($country)) {
       $errorMessageCountry  = errorRequiredField("Country");
     }
+    
   } else {
-    $userDbHandler->addUser($userInfo);
-    redirect("login-account", "registerSuccess");   
+    if($emailExist){
+      $errorTakenEmail  = emailAlreadyTaken($errorTakenEmail);
+    } else {
+
+      $userDbHandler->addUser($userInfo);
+      redirect("login-account", "registerSuccess");   
+    }
+    
     }
   }
 }
