@@ -36,6 +36,12 @@ $products = $userDbHandler->fetchAllProducts();
         <input type="submit" value="Read more" class="btn btn-primary">
         <input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
       </form>
+				<!-- <form action="cart-chris.php" method="GET">
+        <input type="submit" value="Add to cart" class="btn btn-primary">
+        <input type="number" name="quantity" value="1">
+        <input type="hidden" name="productID" value="<?= htmlentities($product['id']) ?>">
+      </form> -->
+      
     </div>
   </div>
 </div>
