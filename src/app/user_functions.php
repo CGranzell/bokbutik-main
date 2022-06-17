@@ -1,7 +1,5 @@
 <?php
 
-
-
 // Hämtar alla users
 function fetchAllUsers() {
   global $dbconnect;
@@ -10,11 +8,11 @@ function fetchAllUsers() {
   return $statement->fetchAll();
 }
 
-// Hämta en user 
+// Hämta en user
 function fetchOneUser($id){
   global $dbconnect;
 $sql = "
-SELECT * FROM users 
+SELECT * FROM users
 WHERE id = :id
 ";
 $statement = $dbconnect->prepare($sql);
@@ -26,11 +24,11 @@ return $statement->fetch();
 
 
 
-// Tar bort user 
+// Tar bort user
 function deleteUser(){
   global $dbconnect;
   $sql = "
-  DELETE FROM users 
+  DELETE FROM users
   WHERE id = :id;
   ";
   $statement = $dbconnect->prepare($sql);
@@ -70,9 +68,9 @@ function fetchUserByEmailAndPassword($email, $password) {
 function addUser($array) {
   global $dbconnect;
   $sql = "
-  INSERT INTO users 
+  INSERT INTO users
    (
-    first_name, 
+    first_name,
     last_name,
     email,
     password,
@@ -82,7 +80,7 @@ function addUser($array) {
     city,
     country
    )
-   VALUES 
+   VALUES
    (
     :first_name,
     :last_name,
@@ -112,8 +110,8 @@ function addUser($array) {
 function updateUser($id, $array) {
   global $dbconnect;
   $sql = "
-    UPDATE users 
-    SET 
+    UPDATE users
+    SET
       first_name  = :first_name,
       last_name   = :last_name,
       email       = :email,
@@ -123,7 +121,7 @@ function updateUser($id, $array) {
       postal_code = :postal_code,
       city        = :city,
       country     = :country
-    
+
     WHERE id = :id
     ";
     $statement = $dbconnect->prepare($sql);

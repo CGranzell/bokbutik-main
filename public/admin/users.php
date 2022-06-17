@@ -2,10 +2,6 @@
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
-// not working and breaking the script
-//include('../layout/header.php');
-
-
 $stmt = $dbconnect->query('SELECT * FROM users');
 $users = $stmt->fetchAll();
 
@@ -34,14 +30,11 @@ if (array_key_exists('deleteBtn', $_POST)) {
 </head>
 
 <body>
-    <div class="mt-5 container">
-        <div>
+    <div class="container">
+        <div class="my-5">
             <a class="btn btn-primary" href="create_user.php" role="button"> Create new user </a>
         </div>
 
-
-        <br />
-        <br />
 
         <table class="table border p-2">
             <thead>

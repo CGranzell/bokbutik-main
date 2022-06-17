@@ -1,47 +1,6 @@
 <?php
 require('../../src/config.php');
 include(LAYOUT_PATH_ADMIN . 'header-admin.php');
-$message = '';
-$error = '';
-
-if (array_key_exists('submitBtn', $_POST)) {
-
-    $first_name = trim($_POST['firstname']);
-    $last_name = trim($_POST['lastname']);
-    $phone = trim($_POST['phone']);
-    $street = trim($_POST['street']);
-    $postal_code = trim($_POST['postalcode']);
-    $country = trim($_POST['country']);
-    $city = trim($_POST['city']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    if ($first_name && $last_name && $password && $street && $postal_code && $country && $city && $email && $password && $phone) {
-
-        $sql = "INSERT INTO users (first_name, last_name, email, password, phone, street, postal_code, city, country )
-    VALUES (:first_name, :last_name, :email, :password, :phone, :street, :postal_code, :city, :country );
-     ";
-
-        $stmt = $dbconnect->prepare($sql);
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', password_hash($password, PASSWORD_BCRYPT));
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':street', $street);
-        $stmt->bindParam(':postal_code', $postal_code);
-        $stmt->bindParam(':city', $city);
-        $stmt->bindParam(':country', $country);
-        $stmt->execute();
-
-        if($sql) $message = 'One user has been created';
-
-    } else {
-        $error = 'All fields must be filled';
-    }
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -53,23 +12,42 @@ if (array_key_exists('submitBtn', $_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+   <script>
+
+        // Jquery code
+
+        $(document).ready(function() {
+            $('#myForm').submit(async function(e) {
+                e.preventDefault();
+                const formdata = new FormData(e.target);
+                formdata.set('submitBtn', true);
+                try {
+                    const response = await fetch('add_user.php', {
+                        method: 'POST',
+                        body: formdata
+                    });
+                    const data = await response.json();
+                    $('.text-success').html(data);
+                } catch (error) {
+                    $('.text-danger').html(error);
+                }
+
+            })
+        })
+    </script>
 </head>
 
 <body>
-
-
     <div class="container">
-        <br />
-        <br />
-        <div>
+
+        <div class="my-5">
             <a class="btn btn-primary" href="users.php" role="button"> Admin dashboard </a>
         </div>
 
-        <br />
-        <br />
 
-        <form method="POST">
+        <form id="myForm" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
@@ -137,19 +115,8 @@ if (array_key_exists('submitBtn', $_POST)) {
             <button type="submit" name="submitBtn" class="btn btn-primary">Submit</button>
         </form>
         <div class="mt-5">
-        <?php
-            if ($message) {
-                echo "<p class='text-success'>
-                     $message
-                </p> ";
-            };
-
-            if ($error) {
-                echo "  <p class='text-danger'>
-                     $error
-                </p>";
-            }
-            ?>
+            <p class='text-success'> </p>
+            <p class='text-danger'></p>
         </div>
     </div>
 
