@@ -2,7 +2,6 @@
 require('../src/config.php');
 include(LAYOUT_PATH . 'header-public.php');
 
-// debug($_SESSION['cartItems']);
 
 $cartItemCount = count($_SESSION['cartItems']);
 $cartTotalSum = 0;
