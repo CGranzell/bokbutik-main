@@ -7,7 +7,12 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
   $imgUrl = "";
   $error = "";
   $messages = "";
-  
+  $errorMessageTitle  = "";
+  $errorMessageDescription   = "";
+  $errorMessagePrice      = "";
+  $errorMessageStock = "";
+ 
+  $message                = "";
 
   if (isset($_POST['uploadBtn']))
   $productInfo = [
@@ -18,28 +23,25 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
     $stock   = trim($_POST['stock']),
   ];
 
+
+  
+    
     if (empty($title)) {
-      $error .= "Title is required <br>";
+      $errorMessageTitle = errorRequiredField("Title");
     }
     
     if (empty($description)) {
-      $error .= "Description is required <br>";
+      $errorMessageDescription = errorRequiredField("Description");
     }
     
     if (empty($price)) {
-      $error .= "Price is required <br>";
+      $errorMessagePrice = errorRequiredField("Price");
     }
     
     if (empty($stock)) {
-      $error .= "Stock <br>";
+      $errorMessageStock = errorRequiredField("Stock");
     }
-    if ($error) {
-      $message = "
-      <div class='error_msg'>
-        {$error}
-        </div>
-        ";
-    }
+  
   
   {
 
@@ -141,8 +143,8 @@ $products = $userDbHandler->fetchAllProducts();
           <td><?= htmlentities($product['price']) ?></td>
           <td><?= htmlentities($product['stock']) ?></td>
 
-          <td><img src="<?= ($product['img_url']) ?>"alt="..." width="150" 
-     height="150"></td>
+          <td><img src="<?= ($product['img_url']) ?>"alt="..." width="100" 
+     height="100"></td>
           <td>
             <form action="" method="POST">
               <input type="hidden" name="productId" value="<?= $product['id'] ?>">
@@ -154,31 +156,33 @@ $products = $userDbHandler->fetchAllProducts();
             </form>
           </td>
         </tr>
+
+        
       <?php } ?>
     </tbody>
   </table>
 
   <?php echo $error; ?>
-  <?=$message  ?>
+  
   <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      
+      <?=$errorMessageTitle  ?>
       <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      
+      <?=$errorMessageDescription  ?>
       <textarea class="form-control" id="description" rows="3" name="description"></textarea>
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">price</label>
-      
+      <?=$errorMessagePrice  ?>
       <input type="text" class="form-control" id="price" name="price">
     </div>
     <div class="mb-3">
       <label for="stock" class="form-label">Stock</label>
-      
+      <?=$errorMessageStock  ?>
       <input type="text" class="form-control" id="stock" name="stock">
     </div>
     <div class="mb-3" id="inputBtn">
