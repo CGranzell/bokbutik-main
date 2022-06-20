@@ -38,7 +38,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
     <ul class="nav justify-content-center">
       
       <li class="nav-item">
-        <a class="nav-link" href="../index.php">Home</a>
+        <a class="nav-link" href="../index-kopia.php">Home</a>
       </li>
 
       <li class='nav-item'>
@@ -121,7 +121,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
 </table>
 
 <?php endforeach; ?>
-<a href="../checkout-chris.php" class="btn btn-primary">Checkout</a>
+<a href="../checkout.php" class="btn btn-primary">Checkout</a>
   </ul>
 </div>
         <!-- Dropdown slut -->

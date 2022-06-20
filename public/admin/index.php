@@ -11,6 +11,10 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
   $errorMessageDescription   = "";
   $errorMessagePrice      = "";
   $errorMessageStock = "";
+  $title = "errorRequiredField";
+  $description = "errorRequiredField";
+  $price = "errorRequiredField";
+  $stock = "errorRequiredField";
  
   $message                = "";
 
@@ -26,19 +30,19 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
   
     
-    if (empty($title)) {
+    if (($title === "")) {
       $errorMessageTitle = errorRequiredField("Title");
     }
     
-    if (empty($description)) {
+    if (($description === "")) {
       $errorMessageDescription = errorRequiredField("Description");
     }
     
-    if (empty($price)) {
+    if (($price === "")) {
       $errorMessagePrice = errorRequiredField("Price");
     }
     
-    if (empty($stock)) {
+    if (($stock === "")) {
       $errorMessageStock = errorRequiredField("Stock");
     }
   
@@ -143,8 +147,8 @@ $products = $userDbHandler->fetchAllProducts();
           <td><?= htmlentities($product['price']) ?></td>
           <td><?= htmlentities($product['stock']) ?></td>
 
-          <td><img src="<?= ($product['img_url']) ?>"
-          width="50" height="50"></td>
+          <td><img src="<?= ($product['img_url']) ?>"alt="..." width="100" 
+     height="100"></td>
           <td>
             <form action="" method="POST">
               <input type="hidden" name="productId" value="<?= $product['id'] ?>">
@@ -156,6 +160,8 @@ $products = $userDbHandler->fetchAllProducts();
             </form>
           </td>
         </tr>
+
+        
       <?php } ?>
     </tbody>
   </table>
