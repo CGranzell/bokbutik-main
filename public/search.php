@@ -1,7 +1,3 @@
-<?php
-require('../src/config.php');
-include(LAYOUT_PATH . 'header-public.php');
-?>
 
 <!DOCTYPE html>
 <html lang="en">

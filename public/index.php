@@ -8,12 +8,12 @@ include(LAYOUT_PATH . 'header-public.php');
 	/*$imgUrl   = "";
 	$error    = "";
 	$messages = "";
-	
+
 if (isset($_POST['uploadBtn'])) {
-	
+
 	if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) { //Har filen laddats upp?
-	
-		
+
+
 		$fileName 	    = $_FILES['uploadedFile']['name'];
 		$fileType 	    = $_FILES['uploadedFile']['type'];
 		$fileTempPath   = $_FILES['uploadedFile']['tmp_name'];
@@ -22,15 +22,15 @@ if (isset($_POST['uploadBtn'])) {
 	$newFilePath = $path . $fileName; //sökvägen och namnet
 	}
 
-	
-	
+
+
 	if ($_FILES['uploadedFile']['size'] > 2000000) {  // Allows only files under 2 mbyte, 2 miljon byte
-			$error .= 'Exceeded filesize limit.<br>';  
+			$error .= 'Exceeded filesize limit.<br>';
 		}
-		
+
 		if (empty($error)) {
 			$isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
-	
+
 			if ($isTheFileUploaded) {
 				// Success the file is uploaded
 				$imgUrl = $newFilePath;
@@ -39,20 +39,22 @@ if (isset($_POST['uploadBtn'])) {
 				$error = "Could not upload the file";---
 			}
 		}
-	
+
 	} *///HÄR SLUTAR BILDHANTERINGEN
 	$products = $userDbHandler->fetchAllProducts();
 	?>
 
 <h1 class="fredriks-huvudrubrik">Welcome to the Bok Store</h1>
 	<h3 class="fredriks-huvudrubrik">Our selection</h3>
-   <!-- Container rows -->
+
+
+	<!-- Container rows -->
    <?php foreach ($products as $product) : ?>
     <div class="container-index">
-	
+
       <div class="card  card-index" style="width: 18rem;">
       <img src="admin/<?=($product['img_url'])?>" class="card-img-top" alt="...">
-       
+
       <div class="card-body">
         <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
         <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
@@ -72,12 +74,7 @@ if (isset($_POST['uploadBtn'])) {
 <?php endforeach ?>
 
 
-   
-		<?php 
+
+		<?php
 include(LAYOUT_PATH . 'footer.php');
 ?>
-
-
-	
-
-

@@ -14,8 +14,7 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-   <script>
-
+    <script>
         // Jquery code
 
         $(document).ready(function() {
@@ -23,17 +22,34 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
                 e.preventDefault();
                 const formdata = new FormData(e.target);
                 formdata.set('submitBtn', true);
-                try {
-                    const response = await fetch('add_user.php', {
-                        method: 'POST',
-                        body: formdata
-                    });
-                    const data = await response.json();
-                    $('.text-success').html(data);
-                } catch (error) {
-                    $('.text-danger').html(error);
-                }
+                if (formdata.get('firstname') && formdata.get('lastname') && formdata.get('email') && formdata.get('password') && formdata.get('street') && formdata.get('postalcode') && formdata.get('city') && formdata.get('country')) {
 
+                    if (isNaN(formdata.get('phone')) || isNaN(formdata.get('postalcode'))) {
+                        $('.alert-success').html('').addClass('d-none');
+                        $('.alert-danger').html('Phone number and Postal Code must be numbers').removeClass('d-none');
+
+                    } else {
+                        $('.alert-danger').html('').addClass('d-none');
+                        try {
+                            const response = await fetch('add_user.php', {
+                                method: 'POST',
+                                body: formdata
+                            });
+                            const data = await response.json();
+                            if (data[0] === 500) {
+                                $('.alert-danger').html(data[1]).removeClass('d-none');
+                            } else {
+                                $('.alert-success').html(data).removeClass('d-none');
+                            }
+                        } catch (error) {
+                            $('.alert-danger').html(error).removeClass('d-none');
+                        }
+                    }
+
+                } else {
+                    $('.alert-danger').html('All fields must be filled').removeClass('d-none');
+
+                }
             })
         })
     </script>
@@ -47,7 +63,7 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
         </div>
 
 
-        <form id="myForm" method="POST">
+        <form id="myForm" method="POST" class="border rounded p-3">
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
@@ -115,8 +131,8 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
             <button type="submit" name="submitBtn" class="btn btn-primary">Submit</button>
         </form>
         <div class="mt-5">
-            <p class='text-success'> </p>
-            <p class='text-danger'></p>
+            <p class='d-none alert alert-success mx-auto'> </p>
+            <p class='d-none alert alert-danger mx-auto'></p>
         </div>
     </div>
 
