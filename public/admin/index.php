@@ -7,12 +7,7 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
   $imgUrl = "";
   $error = "";
   $messages = "";
-  $errorMessageTitle  = "";
-  $errorMessageDescription   = "";
-  $errorMessagePrice      = "";
-  $errorMessageStock = "";
- 
-  $message                = "";
+  
 
   if (isset($_POST['uploadBtn']))
   $productInfo = [
@@ -23,25 +18,28 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
     $stock   = trim($_POST['stock']),
   ];
 
-
-  
-    
     if (empty($title)) {
-      $errorMessageTitle = errorRequiredField("Title");
+      $error .= "Title is required <br>";
     }
     
     if (empty($description)) {
-      $errorMessageDescription = errorRequiredField("Description");
+      $error .= "Description is required <br>";
     }
     
     if (empty($price)) {
-      $errorMessagePrice = errorRequiredField("Price");
+      $error .= "Price is required <br>";
     }
     
     if (empty($stock)) {
-      $errorMessageStock = errorRequiredField("Stock");
+      $error .= "Stock <br>";
     }
-  
+    if ($error) {
+      $message = "
+      <div class='error_msg'>
+        {$error}
+        </div>
+        ";
+    }
   
   {
 
@@ -161,26 +159,26 @@ $products = $userDbHandler->fetchAllProducts();
   </table>
 
   <?php echo $error; ?>
-  
+  <?=$message  ?>
   <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <?=$errorMessageTitle  ?>
+      
       <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <?=$errorMessageDescription  ?>
+      
       <textarea class="form-control" id="description" rows="3" name="description"></textarea>
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">price</label>
-      <?=$errorMessagePrice  ?>
+      
       <input type="text" class="form-control" id="price" name="price">
     </div>
     <div class="mb-3">
       <label for="stock" class="form-label">Stock</label>
-      <?=$errorMessageStock  ?>
+      
       <input type="text" class="form-control" id="stock" name="stock">
     </div>
     <div class="mb-3" id="inputBtn">
