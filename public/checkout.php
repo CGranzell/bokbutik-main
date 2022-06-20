@@ -40,11 +40,11 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
       <td><?=$cartItem['price']?></td>
       <td><?=$cartItem['quantity']?></td>
       <td>
-      <form action="delete-cart-item-chris.php" method="POST">
+      <form action="delete-cart-item.php" method="POST">
         <input type="hidden" name="cartId" value="<?=$cartId?>">
         <input type="submit" value="Delete">
       </form>
-      <form action="update-cart-item-chris.php" method="POST" class="update-cart-form">
+      <form action="update-cart-item.php" method="POST" class="update-cart-form">
         <input type="hidden" name="cartId" value="<?=$cartId?>">
         <input type="number" name="quantity" value="<?=$cartItem['quantity']?>" min="0">
       </form>
@@ -58,7 +58,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
 
 <h3>Handle payment</h3>
 	<!-- Registrerings formulär -->
-  <form method="POST" action="create-order-chris.php" class="form mx-auto">
+  <form method="POST" action="create-order.php" class="form mx-auto">
     <input type="hidden" name="cartTotalSum" value="<?=$cartTotalSum?>">
 		<!-- First Name -->
 		<div class="mb-3">
