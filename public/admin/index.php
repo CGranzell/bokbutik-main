@@ -143,8 +143,8 @@ $products = $userDbHandler->fetchAllProducts();
           <td><?= htmlentities($product['price']) ?></td>
           <td><?= htmlentities($product['stock']) ?></td>
 
-          <td><img src="<?= ($product['img_url']) ?>"
-          width="50" height="50"></td>
+          <td><img src="<?= ($product['img_url']) ?>"alt="..." width="150" 
+     height="150"></td>
           <td>
             <form action="" method="POST">
               <input type="hidden" name="productId" value="<?= $product['id'] ?>">
