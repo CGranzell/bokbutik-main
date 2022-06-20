@@ -36,7 +36,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
     <ul class="nav justify-content-center">
       
       <li class="nav-item">
-        <a class="nav-link" href="./index.php">Home</a>
+        <a class="nav-link" href="./index-kopia.php">Home</a>
       </li>
 
       <li class='nav-item'>
