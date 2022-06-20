@@ -227,4 +227,76 @@ public function updateProduct($id, $array) {
     $statement->execute();
 }
 
+
+//---------------- Orders ----------------
+
+// Skapa en order
+public function addOrder($userId, $array) {
+ 
+  $sql = "
+  INSERT INTO orders 
+  (
+   user_id, 
+   total_price,
+   billing_full_name,
+   billing_street,
+   billing_postal_code,
+   billing_city,
+   billing_country
+  )
+  VALUES 
+  (
+   :user_id,
+   :total_price,
+   :billing_full_name,
+   :billing_street,
+   :billing_postal_code,
+   :billing_city,
+   :billing_country
+  )
+";
+$stmt = $this->dbconnect->prepare($sql);
+$stmt->bindValue(':user_id', $userId);
+$stmt->bindValue(':total_price', $array[9]);
+$stmt->bindValue(':billing_full_name', $array[0] . " " . $array[1]);
+$stmt->bindValue(':billing_street', $array[5]);
+$stmt->bindValue(':billing_postal_code', $array[6]);
+$stmt->bindValue(':billing_city', $array[7]);
+$stmt->bindValue(':billing_country', $array[8]);
+$stmt->execute();
+}
+
+// Skapa en order item
+public function addOrderItem ($orderId, $array) {
+  
+  foreach($array as  $item) {
+  $sql = "
+  INSERT INTO order_items 
+  (
+  order_id,
+  product_id,
+  product_title,
+  quantity,
+  unit_price
+  )
+  VALUES 
+  (
+  :order_id,
+  :product_id,
+  :product_title,
+  :quantity,
+  :unit_price
+  )
+";
+
+$stmt = $this->dbconnect->prepare($sql);
+$stmt->bindValue(':order_id', $orderId);
+$stmt->bindValue(':product_id', $item['id']);
+$stmt->bindValue(':product_title', $item['title']);
+$stmt->bindValue(':quantity', $item['quantity']);
+$stmt->bindValue(':unit_price',$item['price']);
+$stmt->execute();
+}
+}
+
 }
