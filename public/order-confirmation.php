@@ -3,7 +3,7 @@ require('../src/config.php');
 include(LAYOUT_PATH . 'header-public.php');
 
 if(empty($_SESSION['cartItems'])) {
-  header('Location: checkout-chris.php');
+  header('Location: checkout.php');
   exit;
 }
 $cartItems = $_SESSION['cartItems'];
