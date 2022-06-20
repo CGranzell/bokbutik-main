@@ -11,6 +11,10 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
   $errorMessageDescription   = "";
   $errorMessagePrice      = "";
   $errorMessageStock = "";
+  $title = "errorRequiredField";
+  $description = "errorRequiredField";
+  $price = "errorRequiredField";
+  $stock = "errorRequiredField";
  
   $message                = "";
 
@@ -26,19 +30,19 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
   
     
-    if (empty($title)) {
+    if (($title === "")) {
       $errorMessageTitle = errorRequiredField("Title");
     }
     
-    if (empty($description)) {
+    if (($description === "")) {
       $errorMessageDescription = errorRequiredField("Description");
     }
     
-    if (empty($price)) {
+    if (($price === "")) {
       $errorMessagePrice = errorRequiredField("Price");
     }
     
-    if (empty($stock)) {
+    if (($stock === "")) {
       $errorMessageStock = errorRequiredField("Stock");
     }
   
