@@ -145,7 +145,7 @@ $stmt->execute();
 
 }
 
-  header('Location: order-confirmation-chris.php');
+  header('Location: order-confirmation.php');
   exit;
 
 
@@ -153,7 +153,7 @@ $stmt->execute();
 
 }
 
-header('Location: checkout-chris.php');
+header('Location: checkout.php');
 exit;
 
 
