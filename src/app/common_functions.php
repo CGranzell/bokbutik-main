@@ -16,9 +16,14 @@ print_r($value);
 echo"</pre>";
 }
 
-// Hanterar redirect
+// Hanterar redirect, med url meddelande
 function redirect($path, $urlMessage){
   header("Location: {$path}.php?{$urlMessage}");
+  exit;
+}
+// Hanterar redirect, utan url meddelande
+function redirectNoMessage($path){
+  header("Location: {$path}.php");
   exit;
 }
 
