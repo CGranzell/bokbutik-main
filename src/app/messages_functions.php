@@ -11,7 +11,7 @@ function noMatchPassword($message){
 }
 
 
-// felmeddelande om textfält är tomt 
+// felmeddelande om textfält är tomt
 function errorRequiredField($name){
    $name = "
   <div class='alert alert-danger message-register mx-auto'>
@@ -26,7 +26,7 @@ function emailAlreadyTaken($message){
   <div class="alert alert-danger message mx-auto">
       Email Already taken
   </div>
-  ';
+  '; 
   return $message;
 }
 // meddelande om uppdatering lyckades
@@ -75,7 +75,7 @@ function isLoggedOut($message){
   ';
   return $message;
 }
-// Om användaren lyckades registrera 
+// Om användaren lyckades registrera
 function registerSucces($message){
   $message  = '
   <div class="alert alert-success message mx-auto">
@@ -93,4 +93,3 @@ function userNotExists($message){
   ';
   return $message;
 }
-

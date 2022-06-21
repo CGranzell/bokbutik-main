@@ -1,8 +1,10 @@
 <?php
 // Turn on/off error reporting
-error_reporting(-1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Start session 
+// Start session
 session_start();
 
 define('ROOT_PATH', '..' . __DIR__ . '/'); // path to 'bokbutik-main/'
@@ -35,4 +37,3 @@ require(SRC_PATH . 'app/user_functions.php');
 // path till classes
 require(SRC_PATH . 'app/classes.php');
 $userDbHandler = new UserDbHandler($dbconnect);
-
