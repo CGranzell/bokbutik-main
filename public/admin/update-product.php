@@ -22,7 +22,7 @@ if(isset($_POST['updateAccountBtn'])) {
     $description   = trim($_POST['description']),
     $price      = trim($_POST['price']),
     $stock   = trim($_POST['stock']),
-    $imgurl   = trim($_POST['img_url'])
+    $img_url   = trim($_POST['img_url'])
   ];
   $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
   //debug($productId);
@@ -55,8 +55,8 @@ if(isset($_POST['updateAccountBtn'])) {
   } else {
     $userDbHandler->updateProduct($_GET['productId'], $productInfo);
     redirect("index", "UpdateSuccess");
+  
   }
-{
 
 //If they upload a new file
   if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
@@ -65,7 +65,7 @@ if(isset($_POST['updateAccountBtn'])) {
    $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
 
    $path = 'img/';
-    $path ="img/";
+    
    $newFilePath = $path . $fileName;
 
     $allowedFileTypes = [
@@ -100,35 +100,19 @@ if(isset($_POST['updateAccountBtn'])) {
       $messages = $error;
     }
 
-    $productInfo = [
-      $title       = trim($_POST['title']),
-      $description = trim($_POST['description']),
-      $price       = trim($_POST['price']),
-     $stock       = trim($_POST['stock']),
-     $img_url     = trim($imgUrl)
-
-    ];
+    if (empty($error)) {
+      $productInfo = [
+        $title       = trim($_POST['title']),
+        $description = trim($_POST['description']),
+        $price       = trim($_POST['price']),
+        $stock       = trim($_POST['stock']),
+        $img_url     = trim($imgUrl)
+      ];
+    
     $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-  } //else {
+  } 
   }}
-    //If they dont upload a new file
-
-//     $productInfo = [
-//      $title       = trim($_POST['title']),
-//      $description = trim($_POST['description']),
-//      $price       = trim($_POST['price']),
-//      $stock       = trim($_POST['stock']),
-//      $img_url     =trim($_POST['img_url']),
-
-//     ];
-//     $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
-
-//   }
-
-//       redirect("index", "updateSucces");
-
- //}
 
 
 $product = $userDbHandler->fetchOneProduct($_GET['productId']);
