@@ -16,7 +16,7 @@
 
         <footer id="footer" class=" mt-auto  footer">
 
-        <p class='fs-7 text-center' > Bokbutik &copy; <?= date('Y') ?>  </p>
+        <p class='fs-7 text-center' > The Bookstore &copy; <?= date('Y') ?>  </p>
 
         </footer>
     </div>
