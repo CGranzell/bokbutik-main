@@ -16,7 +16,6 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
   $price = "errorRequiredField";
   $stock = "errorRequiredField";
  
-  $message                = "";
 
   if (isset($_POST['uploadBtn']))
   $productInfo = [
@@ -27,9 +26,6 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
     $stock   = trim($_POST['stock']),
   ];
 
-
-  
-    
     if (($title === "")) {
       $errorMessageTitle = errorRequiredField("Title");
     }
