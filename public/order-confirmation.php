@@ -16,9 +16,12 @@ foreach ($cartItems as $cartId => $cartItem){
 
 
 ?>
-<H3>Tack för din order!</H3>
+<div class="text-center mt-4">
 
-<div>
+  <H3>Thank you for your order </H3>
+</div>
+
+<div class="w-75 mx-auto mt-4">
 <?php foreach ($cartItems as $item) : ?>
 
   
@@ -39,7 +42,7 @@ foreach ($cartItems as $cartId => $cartItem){
       <img src="admin/<?=htmlentities($item['img_url']) ?>" alt="..." width="100" 
    height="100">
     </td>
-    <th><?=$item['description']?></th>
+    <th><?=$item['title']?></th>
     <td><?=$item['quantity']?></td>
     <td><?=$item['price']?></td>
   </tr>
@@ -48,7 +51,7 @@ foreach ($cartItems as $cartId => $cartItem){
 </table>
 
 <?php endforeach; ?>
-<p><b> Total:</b> <?=$totalSum?></p>
+<p class="float-end"><b> Total:</b> <?=$totalSum?></p>
 </div>
 
 <?php 
