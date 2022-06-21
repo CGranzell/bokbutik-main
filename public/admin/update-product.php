@@ -6,20 +6,67 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 $imgUrl = "";
 $error = "";
 $messages = "";
-
+$errorMessageTitle  = "";
+$errorMessageDescription   = "";
+$errorMessagePrice      = "";
+$errorMessageStock = "";
+$title = "errorRequiredField";
+$description = "errorRequiredField";
+$price = "errorRequiredField";
+$stock = "errorRequiredField";
 
 if(isset($_POST['updateAccountBtn'])) {
+  $productInfo = [
+    
+    $title  = trim($_POST['title']),
+    $description   = trim($_POST['description']),
+    $price      = trim($_POST['price']),
+    $stock   = trim($_POST['stock']),
+    $imgurl   = trim($_POST['img_url'])
+  ];
+  $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
+  //debug($productId);
 
+  if(
+    $title === "" ||
+    $description  === ""  ||
+    $price  === ""  ||
+    $stock  === ""    
+    
+  ) {
+    if (empty($title)) {
+      $errorMessageTitle = errorRequiredField("Title");
+    }
+    
+    if (empty($description)) {
+      $errorMessageDescription = errorRequiredField("Description");
+    }
+    
+    if (empty($price)) {
+      $errorMessagePrice = errorRequiredField("Price");
+    }
+    
+    if (empty($stock)) {
+      $errorMessageStock = errorRequiredField("Stock");
+    }
+  
+  
+  
+  } else {
+    $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+    redirect("index", "UpdateSuccess");
+  }
+{
 
-// If they upload a new file
+//If they upload a new file
   if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
-    $fileName = $_FILES['uploadedFile']['name'];
-    $fileType = $_FILES['uploadedFile']['type'];
-    $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+   $fileName = $_FILES['uploadedFile']['name'];
+   $fileType = $_FILES['uploadedFile']['type'];
+   $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
 
-    $path = 'img/';
-    // $path ="img/";
-    $newFilePath = $path . $fileName;
+   $path = 'img/';
+    $path ="img/";
+   $newFilePath = $path . $fileName;
 
     $allowedFileTypes = [
       'image/png',
@@ -57,31 +104,31 @@ if(isset($_POST['updateAccountBtn'])) {
       $title       = trim($_POST['title']),
       $description = trim($_POST['description']),
       $price       = trim($_POST['price']),
-      $stock       = trim($_POST['stock']),
-      $img_url     = trim($imgUrl)
+     $stock       = trim($_POST['stock']),
+     $img_url     = trim($imgUrl)
 
     ];
     $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-  } else {
+  } //else {
+  }}
+    //If they dont upload a new file
 
-    // If they dont upload a new file
+//     $productInfo = [
+//      $title       = trim($_POST['title']),
+//      $description = trim($_POST['description']),
+//      $price       = trim($_POST['price']),
+//      $stock       = trim($_POST['stock']),
+//      $img_url     =trim($_POST['img_url']),
 
-    $productInfo = [
-      $title       = trim($_POST['title']),
-      $description = trim($_POST['description']),
-      $price       = trim($_POST['price']),
-      $stock       = trim($_POST['stock']),
-      $img_url     =trim($_POST['img_url']),
+//     ];
+//     $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-    ];
-    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+//   }
 
-  }
+//       redirect("index", "updateSucces");
 
-      redirect("index", "updateSucces");
-
-}
+ //}
 
 
 $product = $userDbHandler->fetchOneProduct($_GET['productId']);
@@ -89,7 +136,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
 
 
   <div class="wrapper-register">
-    <h1>Uppdatera </h1>
+    <h1>Update </h1>
   </div>
 
 
@@ -97,20 +144,24 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
 
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
+      <?=$errorMessageTitle  ?>
       <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
+      <?=$errorMessageDescription  ?>
       <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
     </div>
 
     <div class="mb-3">
       <label for="price" class="form-label">Price</label>
+      <?=$errorMessagePrice  ?>
       <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
     </div>
 
     <div class="mb-3">
       <label for="stock" class="form-label">Stock</label>
+      <?=$errorMessageStock  ?>
       <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
     </div>
 
@@ -119,7 +170,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
       <input type="hidden" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>"> <img src="<?=($product['img_url'])?>">
       <div class="mb-3" id="inputBtn">
         <input type="file" name="uploadedFile" ><br>
-    </div>
+    </div> 
 
 
     <!-- Update Btn -->
