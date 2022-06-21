@@ -141,7 +141,8 @@
 	text-align: center;
 }
 
-.card-img-top{
-	width: 100px;
-	height: 100px;
+
+
+#numberId1, #numberId2  {
+	width: 4em;
 }
