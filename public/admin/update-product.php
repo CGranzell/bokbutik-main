@@ -15,154 +15,155 @@ $description = "errorRequiredField";
 $price = "errorRequiredField";
 $stock = "errorRequiredField";
 
-if(isset($_POST['updateAccountBtn'])) {
-  $productInfo = [
-    
-    $title  = trim($_POST['title']),
-    $description   = trim($_POST['description']),
-    $price      = trim($_POST['price']),
-    $stock   = trim($_POST['stock']),
-    $img_url   = trim($_POST['img_url'])
-  ];
-  $productId = $userDbHandler->fetchOneProduct($_GET['productId']);
+if (isset($_POST['updateAccountBtn'])) {
+  //$productId = $userDbHandler->fetchOneProduct($_GET['productId']);
   //debug($productId);
 
-  if(
-    $title === "" ||
-    $description  === ""  ||
-    $price  === ""  ||
-    $stock  === ""    
-    
+
+  if (
+    $_POST['title'] === "" ||
+    $_POST['description']  === ""  ||
+    $_POST['price']   === ""  ||
+    $_POST['stock']   === ""
+
   ) {
-    if (empty($title)) {
+    if (empty( $_POST['title'])) {
       $errorMessageTitle = errorRequiredField("Title");
     }
-    
-    if (empty($description)) {
+
+    if (empty( $_POST['description'] )) {
       $errorMessageDescription = errorRequiredField("Description");
     }
-    
-    if (empty($price)) {
+
+    if (empty($_POST['price'] )) {
       $errorMessagePrice = errorRequiredField("Price");
     }
-    
-    if (empty($stock)) {
+
+    if (empty( $_POST['stock'] )) {
       $errorMessageStock = errorRequiredField("Stock");
     }
-  
-  
-  
   } else {
-    $userDbHandler->updateProduct($_GET['productId'], $productInfo);
-    redirect("index", "UpdateSuccess");
-  
-  }
 
-//If they upload a new file
-  if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
-   $fileName = $_FILES['uploadedFile']['name'];
-   $fileType = $_FILES['uploadedFile']['type'];
-   $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
+    //If they upload a new file
+    if (is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) {
+      $fileName = $_FILES['uploadedFile']['name'];
+      $fileType = $_FILES['uploadedFile']['type'];
+      $fileTempPath = $_FILES['uploadedFile']['tmp_name'];
 
-   $path = 'img/';
-    
-   $newFilePath = $path . $fileName;
+      $path = 'img/';
 
-    $allowedFileTypes = [
-      'image/png',
-      'image/jpeg',
-      'image/gif',
-      'image/jpg',
-    ];
-    $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
+      $newFilePath = $path . $fileName;
+
+      $allowedFileTypes = [
+        'image/png',
+        'image/jpeg',
+        'image/gif',
+        'image/jpg',
+      ];
+      $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
 
 
-    if ($isFileTypeAllowed === false) {
-      $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
-    }
+      if ($isFileTypeAllowed === false) {
+        $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
+      }
 
-    if ($_FILES['uploadedFile']['size'] > 1000000) {
-      $error .= 'Exceeded filesize limit.<br>';
-    }
+      if ($_FILES['uploadedFile']['size'] > 1000000) {
+        $error .= 'Exceeded filesize limit.<br>';
+      }
 
-    if (empty($error)) {
+      if (empty($error)) {
 
 
-      $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
+        $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
-      if ($isTheFileUploaded) {
-        $imgUrl = $newFilePath;
-        $messages = "Upload success";
+        if ($isTheFileUploaded) {
+          $imgUrl = $newFilePath;
+          $messages = "Upload success";
+        } else {
+          $error = "Could not upload the file";
+        }
       } else {
-        $error = "Could not upload the file";
+        $messages = $error;
+      }
+
+      if (empty($error)) {
+        $productInfo = [
+          $title       = trim($_POST['title']),
+          $description = trim($_POST['description']),
+          $price       = trim($_POST['price']),
+          $stock       = trim($_POST['stock']),
+          $img_url     = trim($imgUrl)
+        ];
+
+        $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+
       }
     } else {
-      $messages = $error;
-    }
-
-    if (empty($error)) {
+      // if they dont upload a new file
       $productInfo = [
-        $title       = trim($_POST['title']),
-        $description = trim($_POST['description']),
-        $price       = trim($_POST['price']),
-        $stock       = trim($_POST['stock']),
-        $img_url     = trim($imgUrl)
-      ];
-    
-    $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
-  } 
-  }}
+        $title  = trim($_POST['title']),
+        $description   = trim($_POST['description']),
+        $price      = trim($_POST['price']),
+        $stock   = trim($_POST['stock']),
+        $img_url   = trim($_POST['img_url'])
+      ];
+
+      $userDbHandler->updateProduct($_GET['productId'], $productInfo);
+
+    }
+    redirect("index", "UpdateSuccess");
+  }
+}
 
 
 $product = $userDbHandler->fetchOneProduct($_GET['productId']);
 ?>
 
 
-  <div class="wrapper-register">
-    <h1>Update </h1>
+<div class="wrapper-register">
+  <h1>Update </h1>
+</div>
+
+
+<form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
+
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <?= $errorMessageTitle  ?>
+    <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <?= $errorMessageDescription  ?>
+    <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
   </div>
 
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <?= $errorMessagePrice  ?>
+    <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
+  </div>
 
-  <form method="POST" action="" enctype="multipart/form-data" class="form mx-auto">
+  <div class="mb-3">
+    <label for="stock" class="form-label">Stock</label>
+    <?= $errorMessageStock  ?>
+    <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
+  </div>
 
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <?=$errorMessageTitle  ?>
-      <input type="text" class="form-control" id="title" name="title" value="<?= htmlentities($product['title']) ?> ">
+  <div class="mb-3">
+    <label for="img_url" class="form-label">Image</label><br>
+    <input type="hidden" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>"> <img src="<?= ($product['img_url']) ?>">
+    <div class="mb-3" id="inputBtn">
+      <input type="file" name="uploadedFile"><br>
     </div>
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <?=$errorMessageDescription  ?>
-      <input type="description" class="form-control" id="description" name="description" value="<?= htmlentities($product['description']) ?>">
-    </div>
-
-    <div class="mb-3">
-      <label for="price" class="form-label">Price</label>
-      <?=$errorMessagePrice  ?>
-      <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($product['price']) ?>">
-    </div>
-
-    <div class="mb-3">
-      <label for="stock" class="form-label">Stock</label>
-      <?=$errorMessageStock  ?>
-      <input type="stock" class="form-control" name="stock" value="<?= htmlentities($product['stock']) ?>">
-    </div>
-
-    <div class="mb-3">
-      <label for="img_url" class="form-label">Image</label><br>
-      <input type="hidden" id="img_url" name="img_url" value="<?= htmlentities($product['img_url']) ?>"> <img src="<?=($product['img_url'])?>">
-      <div class="mb-3" id="inputBtn">
-        <input type="file" name="uploadedFile" ><br>
-    </div> 
 
 
     <!-- Update Btn -->
     <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
 
-  </form>
+</form>
 
-  <?php
+<?php
 include(LAYOUT_PATH_ADMIN . 'footer.php');
 ?>
-
