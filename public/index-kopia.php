@@ -18,7 +18,7 @@ $products = $userDbHandler->fetchAllProducts();
 	<h3 class="fredriks-huvudrubrik">Our selection</h3>
    <!-- Container rows -->
    <?php foreach ($products as $product) : ?>
-    <div class="container-index" style="margin-left: 4.5em">
+    <div class="container-index">
 		
       <div class="card  card-index" style="width: 18rem;">
         <img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="..." style="width: 240px; height: 300px">

@@ -19,13 +19,17 @@
 	min-height: 10em;
 	width: 500px;
 	border: 1px solid black;
+	margin-left: 2.5em; /*centrerar innehållet på den publika sidan*/
 }
 .card-specific {
-	margin-top: 3em;
+	margin-top: 3em; /*Skapar lite luft innan bilden*/
+	
 	height: 60em;
 	min-height: 30em;
 	width: 500px;
 	border: 1px solid black;
+	
+	
 }
 
 
