@@ -43,9 +43,9 @@ foreach ($cartItems as $cartId => $cartItem){
    height="100">
     </td>
     <th><?=$item['title']?></th>
-    <td><?=$item['quantity']?></td>
     <td><?=$item['price']?></td>
-  </tr>
+    <td><?=$item['quantity']?></td>
+    </tr>
   
 </tbody>
 </table>
