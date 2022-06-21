@@ -11,7 +11,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productID']);
       
 
       <div class="card card-specific mx-auto" style="width: 58rem;">
-			<img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+			<img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="..." style="width: 280px; height: 350px">
   <div class="card-body">
     <h5 class="card-title">Title: <?= htmlentities($product['title']) ?></h5>
     <p class="card-text">Price: <?= htmlentities($product['price']) ?></p>

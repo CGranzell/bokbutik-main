@@ -21,7 +21,7 @@ $products = $userDbHandler->fetchAllProducts();
     <div class="container-index">
 		
       <div class="card  card-index" style="width: 18rem;">
-        <img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="...">
+        <img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="..." style="width: 240px; height: 300px">
        
       <div class="card-body">
         <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
