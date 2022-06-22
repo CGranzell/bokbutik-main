@@ -25,8 +25,8 @@ $products = $userDbHandler->fetchAllProducts();
        
       <div class="card-body">
 
-      <form action="specific-product-kopia.php" method="GET">
-      <a href="specific-product-kopia.php" style="text-decoration: none"> <h5 class="card-title"><?=htmlentities($product['title']) ?></h5> </a>
+      
+       <h5 class="card-title"><?=htmlentities($product['title']) ?></h5> 
         <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
         <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
         <div class="description-wrapper">
