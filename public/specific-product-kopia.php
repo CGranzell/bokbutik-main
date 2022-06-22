@@ -14,7 +14,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productID']);
 			<img src="admin/<?=htmlentities($product['img_url']) ?>" class="card-img-top" alt="..." style="width: 280px; height: 350px">
   <div class="card-body">
     <h5 class="card-title"><?= htmlentities($product['title']) ?></h5>
-    <p class="card-text">Price: <?= htmlentities($product['price']) ?></p>
+    <p class="card-text">Price: <?= htmlentities($product['price']) ?> $</p>
     <p class="card-text">Stock: <?= htmlentities($product['stock']) ?></p>
     <p class="card-text">Description: <?= htmlentities($product['description']) ?></p>
     
