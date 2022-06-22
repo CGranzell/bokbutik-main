@@ -15,8 +15,8 @@ $product = $userDbHandler->fetchOneProduct($_GET['productID']);
   <div class="card-body">
     <h5 class="card-title"><?= htmlentities($product['title']) ?></h5>
     <p class="card-text">Price: <?= htmlentities($product['price']) ?> $</p>
-    <p class="card-text">Stock: <?= htmlentities($product['stock']) ?></p>
-    <p class="card-text">Description: <?= htmlentities($product['description']) ?></p>
+    <p class="card-text">In stock: <?= htmlentities($product['stock']) ?></p>
+    <p class="card-text">About the book: <?= htmlentities($product['description']) ?></p>
     
     <form action="add-cart-item.php" method="POST">
         <input type="submit" name="addToCart"value="Add to cart" class="btn btn-primary">
