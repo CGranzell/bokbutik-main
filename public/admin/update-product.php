@@ -4,8 +4,8 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 
 
 $imgUrl = "";
-$error = "";
-$messages = "";
+//$error = "";
+//$messages = "";
 $errorMessageTitle  = "";
 $errorMessageDescription   = "";
 $errorMessagePrice      = "";
@@ -18,7 +18,13 @@ $stock = "errorRequiredField";
 if (isset($_POST['updateAccountBtn'])) {
   //$productId = $userDbHandler->fetchOneProduct($_GET['productId']);
   //debug($productId);
-
+  $productInfo = [
+    //Tar bort mellanslag före och efter textsträng
+    $title  = trim($_POST['title']),
+    $description   = trim($_POST['description']),
+    $price      = trim($_POST['price']),
+    $stock   = trim($_POST['stock']),
+  ];
 
   if (
     $_POST['title'] === "" ||
@@ -62,31 +68,24 @@ if (isset($_POST['updateAccountBtn'])) {
       ];
       $isFileTypeAllowed = array_search($fileType, $allowedFileTypes, true);
 
-
-      if ($isFileTypeAllowed === false) {
-        $error = "The file type is invalid. Allowed types are jpeg, png, gif. <br>";
-      }
-
-      if ($_FILES['uploadedFile']['size'] > 1000000) {
-        $error .= 'Exceeded filesize limit.<br>';
-      }
-
-      if (empty($error)) {
+      //if (empty($error)) {
+        {
 
 
         $isTheFileUploaded = move_uploaded_file($fileTempPath, $newFilePath);
 
         if ($isTheFileUploaded) {
           $imgUrl = $newFilePath;
-          $messages = "Upload success";
-        } else {
-          $error = "Could not upload the file";
+         // $messages = "Upload success";
+        //} else {
+         // $error = "Could not upload the file";
         }
-      } else {
-        $messages = $error;
+      //} else {
+        //$messages = $error;
       }
 
-      if (empty($error)) {
+      //if (empty($error)) {
+        {
         $productInfo = [
           $title       = trim($_POST['title']),
           $description = trim($_POST['description']),
@@ -98,16 +97,16 @@ if (isset($_POST['updateAccountBtn'])) {
         $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
       }
-    } else {
-      // if they dont upload a new file
-      $productInfo = [
+    // } else {
+    //   // if they dont upload a new file
+    //   $productInfo = [
 
-        $title  = trim($_POST['title']),
-        $description   = trim($_POST['description']),
-        $price      = trim($_POST['price']),
-        $stock   = trim($_POST['stock']),
-        $img_url   = trim($_POST['img_url'])
-      ];
+    //     $title  = trim($_POST['title']),
+    //     $description   = trim($_POST['description']),
+    //     $price      = trim($_POST['price']),
+    //     $stock   = trim($_POST['stock']),
+    //     $img_url   = trim($_POST['img_url'])
+    //   ];
 
       $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
@@ -160,7 +159,7 @@ $product = $userDbHandler->fetchOneProduct($_GET['productId']);
 
 
     <!-- Update Btn -->
-    <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
+    <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Update">
 
 </form>
 
