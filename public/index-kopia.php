@@ -30,8 +30,8 @@ $products = $userDbHandler->fetchAllProducts();
 
       <div class="card-body">
 
-      
-       <h5 class="card-title"><?=htmlentities($product['title']) ?></h5> 
+
+       <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
         <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
         <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
         <div class="description-wrapper">

@@ -1,6 +1,6 @@
 <?php
 require('../src/config.php');
-include(LAYOUT_PATH . 'header-public.php');
+ include(LAYOUT_PATH . 'header-public.php');
 
 $cartItemCount = count($_SESSION['cartItems']);
 $cartTotalSum = 0;
@@ -16,8 +16,8 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <?php foreach ($_SESSION['cartItems'] as $cartId => $cartItem) : ?>
-      
-  
+
+
   <table class="table">
   <thead>
     <tr>
@@ -41,7 +41,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
       <?=$cartTotalSum?>
       </td>
     </tr>
-    
+
   </tbody>
 </table>
 
@@ -49,7 +49,6 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
   </ul>
 </div>
 
-<?php 
+<?php
 include(LAYOUT_PATH . 'footer.php');
 ?>
-
