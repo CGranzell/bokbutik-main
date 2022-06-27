@@ -33,7 +33,7 @@ $products = $userDbHandler->fetchAllProducts();
 
        <h5 class="card-title"><?=htmlentities($product['title']) ?></h5>
         <p class="card-text">Price: <?=htmlentities($product['price']) ?> $</p>
-        <p class="card-text">In stock: <i><?=htmlentities($product['stock']) ?></i></p>
+        <p class="card-text">In stock: <?=htmlentities($product['stock']) ?></p>
         <div class="description-wrapper">
           <p class="card-text">About the book: <br> "<?= substr( htmlentities($product['description']), 0, 100) ?>"</p>
 
