@@ -97,16 +97,16 @@ if (isset($_POST['updateAccountBtn'])) {
         $update = $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
       }
-    // } else {
-    //   // if they dont upload a new file
-    //   $productInfo = [
+    } else {
+      // if they dont upload a new file
+      $productInfo = [
 
-    //     $title  = trim($_POST['title']),
-    //     $description   = trim($_POST['description']),
-    //     $price      = trim($_POST['price']),
-    //     $stock   = trim($_POST['stock']),
-    //     $img_url   = trim($_POST['img_url'])
-    //   ];
+        $title  = trim($_POST['title']),
+        $description   = trim($_POST['description']),
+        $price      = trim($_POST['price']),
+        $stock   = trim($_POST['stock']),
+        $img_url   = trim($_POST['img_url'])
+      ];
 
       $userDbHandler->updateProduct($_GET['productId'], $productInfo);
 
