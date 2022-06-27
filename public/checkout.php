@@ -121,7 +121,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
       </form>
       <form action="update-cart-item.php" method="POST" class="update-cart-form mt-1" >
         <input type="hidden" name="cartId" value="<?=$cartId?>">
-        <input type="number" name="quantity" value="<?=$cartItem['quantity']?>" min="0">
+        <input type="number" style="width: 4em"  name="quantity" value="<?=$cartItem['quantity']?>" min="0">
       </form>
       </td>
     </tr>
