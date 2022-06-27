@@ -52,9 +52,6 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
           $loggedInUserName = htmlentities($_SESSION['email']);
           $loggedinNav = "
           <li class='nav-item'>
-            <a class='nav-link' href='./admin/index.php'>Admin</a>
-          </li>
-          <li class='nav-item'>
             <a class='nav-link' href='./admin/users.php'>Users</a>
           </li>
           <li class='nav-item'>
