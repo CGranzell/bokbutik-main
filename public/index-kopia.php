@@ -14,7 +14,7 @@ $products = $userDbHandler->fetchAllProducts();
 ?>
 
 
-	<h1 class="fredriks-huvudrubrik">Welcome to the Bok Store</h1>
+	<h1 class="fredriks-huvudrubrik">Welcome to the Book Store</h1>
 	<h3 class="fredriks-huvudrubrik">Our selection</h3>
 
   <!-- Search box -->
