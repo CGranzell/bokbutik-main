@@ -146,8 +146,8 @@
 }
 
 
-
-#numberId1, #numberId2  {
+/*Styla input-fälten på sidorna public/index-kopia.php och public/specific-product-kopia.php  */
+#numberId1, #numberId2   { 
 	width: 4em;
 }
 
