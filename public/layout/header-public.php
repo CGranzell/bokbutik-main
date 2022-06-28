@@ -86,7 +86,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
   <div class="float-end">
-<p><b> Total:</b> <?=$cartTotalSum?></p>
+<p><b> Total:</b> <?=$cartTotalSum?> $</p>
 </div>
     <?php foreach ($_SESSION['cartItems'] as $cartId => $cartItem) : ?>
 
@@ -109,7 +109,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
      height="100">
       </td>
       <th><?=$cartItem['title']?></th>
-      <td><?=$cartItem['price']?></td>
+      <td><?=$cartItem['price']?> $</td>
       <td><?=$cartItem['quantity']?></td>
     </tr>
     
