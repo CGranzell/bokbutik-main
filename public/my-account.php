@@ -17,7 +17,7 @@ if(isset($_GET['invalidUser'])){
 }
 // Tar bort användarkonto
 if(isset($_POST['deleteAccountBtn'])) {
-  $userDbHandler->deleteUser(); 
+  $userDbHandler->deleteUser($_SESSION['id']); 
   redirect("logout-account", "succesDelete");
 }
 // // Hämtar en användares uppgifter

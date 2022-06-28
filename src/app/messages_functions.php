@@ -43,7 +43,7 @@ function deleteSucces($message){
   $message = '
   <div class="alert alert-success message mx-auto">
       Your account have been removed
-  </div>;
+  </div>
 ';
   return $message;
 }
