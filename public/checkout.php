@@ -90,7 +90,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
 
 <div>
  
-<p class="float-end w-25 mt-4"><b> Total:</b> <?=$cartTotalSum?></p>
+<p class="float-end w-25 mt-4"><b> Total:</b> <?=$cartTotalSum?> $</p>
 </div>
     <?php foreach ($_SESSION['cartItems'] as $cartId => $cartItem) : ?>
 
@@ -112,7 +112,7 @@ foreach ($_SESSION['cartItems'] as $cartId => $cartItem){
      height="70">
       </td>
       <th><?=$cartItem['title']?></th>
-      <td><?=$cartItem['price']?></td>
+      <td><?=$cartItem['price']?> $</td>
       <td><?=$cartItem['quantity']?></td>
       <td>
       <form action="delete-cart-item.php" method="POST">
