@@ -25,14 +25,14 @@ $user = $userDbHandler->fetchOneUser($_SESSION['id']);
 ?>
  
 <div class="wrapper-register">
-  <h1>Mina sidor</h1>
+  <h1>My page</h1>
   </div>
   <?= $message ?>
   <?= $succesMessage ?>
 <!-- Visar Användarens uppgifter -->
   <div class="card form mx-auto">
   <div class="card-body">
-    <h5 class="card-title">Mina uppgifter</h5>
+    <h5 class="card-title">My information</h5>
     
       <p class="card-text"><?= htmlentities($user['first_name']) ?> <?= htmlentities($user['last_name']) ?></p>
       <p class="card-text"><?= htmlentities($user['email']) ?></p>
