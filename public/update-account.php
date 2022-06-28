@@ -45,7 +45,7 @@ $user = $userDbHandler->fetchOneUser($_GET['userID']);
 ?>
 
 <div class="wrapper-register">
-  <h1>Uppdatera mina sidor</h1>
+  <h1>Update Account</h1>
   </div>
   <?=$message ?>
 
@@ -97,7 +97,7 @@ $user = $userDbHandler->fetchOneUser($_GET['userID']);
     <input type="text" class="form-control" id="counrty" name="country" value="<?= htmlentities($user['country']) ?>">
   </div>
   <!-- Update Btn -->
-  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Uppdatera">
+  <input type="submit" class="btn btn-primary btn-form" name="updateAccountBtn" value="Update">
 
 </form>
 <?php 
