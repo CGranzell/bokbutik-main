@@ -43,7 +43,7 @@ foreach ($cartItems as $cartId => $cartItem){
    height="100">
     </td>
     <th><?=$item['title']?></th>
-    <td><?=$item['price']?></td>
+    <td><?=$item['price']?> $</td>
     <td><?=$item['quantity']?></td>
     </tr>
   
@@ -51,7 +51,7 @@ foreach ($cartItems as $cartId => $cartItem){
 </table>
 
 <?php endforeach; ?>
-<p class="float-end"><b> Total:</b> <?=$totalSum?></p>
+<p class="float-end"><b> Total:</b> <?=$totalSum?> $</p>
 </div>
 
 <?php 
