@@ -130,3 +130,7 @@ $the_user = $userDbHandler->fetchOneUser($user_id);
 </body>
 
 </html>
+
+<?php
+include(LAYOUT_PATH_ADMIN . 'footer.php');
+?>

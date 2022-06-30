@@ -140,3 +140,7 @@ include(LAYOUT_PATH_ADMIN . 'header-admin.php');
 </body>
 
 </html>
+
+<?php
+include(LAYOUT_PATH_ADMIN . 'footer.php');
+?>
