@@ -89,3 +89,7 @@ if (array_key_exists('deleteBtn', $_POST)) {
 </body>
 
 </html>
+
+<?php
+include(LAYOUT_PATH_ADMIN . 'footer.php');
+?>
